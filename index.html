@@ -1,495 +1,931 @@
-
 <!DOCTYPE html>
-<html lang="zh-Hans">
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#202020">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-  
-  
-    <meta name="keywords" content="undefined">
-  
-
-  
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
     <meta name="description" content="零落成泥碾作尘，只有香如故！">
-  
-  
-  
-  <link rel="icon" type="image/x-icon" href="/images/footer-logo.png">
-  
-  <title> [ Hanxd&#39;s Wiki ]Still waters run deep!</title>
-  
-    <!-- stylesheets list from config.yml -->
+    <meta name="author" content="形而上">
     
-      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    <title>
+        
+        Hanxd&#39;s Notes
+    </title>
     
-      <link rel="stylesheet" href="/css/xoxo.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
     
-  
-</head>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
-  <div class="nav-container">
-    <nav class="home-menu pure-menu pure-menu-horizontal">
-  <a class="pure-menu-heading" href="/">
-    
-    <span class="title" style="text-transform:none">Hanxd&#39;s Wiki</span>
-  </a>
-
-  <ul class="pure-menu-list clearfix">
-      
-          
-            
-              <li class="pure-menu-item"><a href="/" class="pure-menu-link">动态</a></li>
-            
-          
-      
-          
-            
-              <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            
-              <a href="#" id="post" class="pure-menu-link">文章</a>
-              <ul class="pure-menu-children">
-              
-                  
-                    <li class="pure-menu-item"><a href="/categories" style="color:#202020;" class="pure-menu-link">分类</a></li>
-                  
-              
-                  
-                    <li class="pure-menu-item"><a href="/archives" style="color:#202020;" class="pure-menu-link">归档</a></li>
-                  
-              
-                  
-                    <li class="pure-menu-item"><a href="/tags" style="color:#202020;" class="pure-menu-link">标签</a></li>
-                  
-              
-              </ul>
-            </li>
-          
-      
-          
-            
-              <li class="pure-menu-item"><a href="/study" class="pure-menu-link">研究</a></li>
-            
-          
-      
-          
-            
-              <li class="pure-menu-item"><a href="/project" class="pure-menu-link">项目</a></li>
-            
-          
-      
-          
-            
-              <li class="pure-menu-item"><a href="/search" class="pure-menu-link">搜索</a></li>
-            
-          
-      
-  </ul>
-   
-</nav>
-
-  </div>
-
-  <div class="container" id="content-outer">
-    <div class="inner" id="content-inner">
-      
-
-  <div class="recent-posts">
+<div class="progress-bar-container">
     
 
-      <article class="recent-post-item">
-        <a class="title" href="/2021/04/15/2021_04_16_lambda/"><h2>Lambda表达式和匿名内部类</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2021-04-15T10:00:00.000Z">
-            2021-04-15
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/java/">java</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/java8/">java8</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/lambda/">lambda</a></li></ul>
-          
+    
+</div>
 
+
+<main class="page-container">
+
+    
+        <div class="first-screen-container flex-center fade-in-down-animation">
+    <div class="content flex-center">
+        <div class="description">
+            Still waters run deep.
+        </div>
+        
+            <div class="s-icon-list">
+                
+                    
+                
+                    
+                        
+                            <span class="s-icon-item weixin">
+                                <a target="_blank" href="/images/qrcode.svg">
+                                    <i class="fab fa-weixin"></i>
+                                </a>
+                            </span>
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <span class="s-icon-item email">
+                                <a href="mailto:451367682@qq.com">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </span>
+                        
+                    
+                
+            </div>
+        
+    </div>
+</div>
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content has-first-screen">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
         </div>
 
-        
-          <div class="post-excerpt">
-            <p>Java Lambda表达式的一个重要用法是简化某些匿名内部类（<code>Anonymous Classes</code>）的写法。实际上Lambda表达式并不仅仅是匿名内部类的语法糖，JVM内部是通过<code>invokedynamic</code>指令来实现Lambda表达式的。具体原理之后会讲解。本节我们首先感受一下使用Lambda表达式带来的便利之处。<br>
-          </div>
-        
-        <a class="more" href="/2021/04/15/2021_04_16_lambda/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/07/03/java_thread/"><h2>JAVA线程总结</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-07-03T08:32:00.000Z">
-            2017-07-03
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/java/">java</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/同步/">同步</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/线程/">线程</a></li></ul>
-          
-
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
         </div>
-
-        
-        <a class="more" href="/2017/07/03/java_thread/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/05/12/distant_savior/"><h2>遥远的救世主</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-05-12T09:52:00.000Z">
-            2017-05-12
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/佳句/">佳句</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/读书/">读书</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/豆豆/">豆豆</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/遥远的救世主/">遥远的救世主</a></li></ul>
-          
-
-        </div>
-
-        
-        <a class="more" href="/2017/05/12/distant_savior/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/05/11/dream_of_red/"><h2>誓刷红楼，品味经典</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-05-11T08:08:00.000Z">
-            2017-05-11
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/佳句/">佳句</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/红楼梦/">红楼梦</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/读书/">读书</a></li></ul>
-          
-
-        </div>
-
-        
-        <a class="more" href="/2017/05/11/dream_of_red/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/05/11/to_son/"><h2>重温滕王阁</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-05-11T06:32:00.000Z">
-            2017-05-11
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/读书/">读书</a></li></ul>
-          
-
-        </div>
-
-        
-        <a class="more" href="/2017/05/11/to_son/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/04/15/to_son/"><h2>经典诫子书</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-04-15T08:20:00.000Z">
-            2017-04-15
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/励志/">励志</a></li></ul>
-          
-
-        </div>
-
-        
-        <a class="more" href="/2017/04/15/to_son/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/02/16/java_help_doc/"><h2>阿里巴巴Java开发手册</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-02-16T01:12:50.000Z">
-            2017-02-16
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/java/">java</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/阿里/">阿里</a></li></ul>
-          
-
-        </div>
-
-        
-          <div class="post-excerpt">
-            <p>2017年开春之际，诚意献上重磅大礼：阿里巴巴Java开发手册，首次公开阿里官方Java代码规范标准。这套Java统一规范标准将有助于提高行业编码规范化水平，帮助行业人员提高开发质量和效率、大大降低代码维护成本。<br><img src="/pic/javashouce.jpeg" alt><br>你是否曾因Java代码规范版本纷杂而无所适从？</p>
-<p>你是否想过代码规范能将系统故障率降低20%？</p>
-<p>你是否曾因团队代码风格迥异而协同困难？</p>
-<p>你是否正在review一些原本可以避免的故障？
-          </div>
-        
-        <a class="more" href="/2017/02/16/java_help_doc/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/01/15/oak/"><h2>爱的深沉</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-01-15T06:20:33.000Z">
-            2017-01-15
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/爱情/">爱情</a></li></ul>
-          
-
-        </div>
-
-        
-          <div class="post-excerpt">
-            <h2 id="第一篇："><a href="#第一篇：" class="headerlink" title="第一篇："></a>第一篇：</h2><p>&emsp;&emsp;今天下午在言谈之中，忽然想起一首诗——舒婷的《致橡树》，致橡树 读后感。虽然这不是一首纯粹描述爱情的诗句，但是许多人却从中看出了爱情该有的态度。记得以前最喜欢其中的一句“我必须是你近旁的一株木棉，做为树的形象和你站在一起。”正是这种努力成长为树的信念，让我一度动容。自古以来，女性的形象似乎就被设定为了柔情似水、若柳扶风，长久以来受到压迫的旧社会的妇女也习惯了依附男人而生。拥有与失去似乎向来不是由女性向导，而只是被动地承受。<br>&emsp;&emsp;也许真的存在那种耐心极好的男人，那就是极品了，不是你我轻易能够遇到的。男人的确喜欢温柔的女人，但是温柔不是软弱无力、不是悲泣啼哭，温柔的女人也可以拥有一个坚毅的灵魂。泪水也许会换来男人一时的柔情，但总怕终有一天，这个曾经给予你温暖的手也会因为疲倦而无力地垂下。我想我是不愿当这棵菟丝花的，那样只能努力地依附大树而生，
-          </div>
-        
-        <a class="more" href="/2017/01/15/oak/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/01/07/book/"><h2>以书为伴</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-01-07T08:29:54.000Z">
-            2017-01-07
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/读书/">读书</a></li></ul>
-          
-
-        </div>
-
-        
-          <div class="post-excerpt">
-            <p>&emsp;&emsp;通常看一个读些什么书就可知道他的为人，就像看他同什么人交往就可知道他的为人一样，因为有人以人为伴，也有人以书为伴。无论是书友还是朋友，我们都应该以最好的为伴。<br>&emsp;&emsp;好书就像是你最好的朋友。它始终不渝，过去如此，现在如此，将来也永远不变。它是最有耐心，最令人愉悦的伴侣。在我们穷愁潦倒，临危遭难时，它也不会抛弃我们，对我们总是一如既往地亲切。在我们年轻时，好书陶冶我们的性情，增长我们的知识；到我们年老时，它又给我们以慰藉和勉励。
-          </div>
-        
-        <a class="more" href="/2017/01/07/book/"> 阅读全文〉</a>
-      </article>
-    
-
-      <article class="recent-post-item">
-        <a class="title" href="/2017/01/06/youth/"><h2>Youth(青春)</h2></a>
-        <div class="post-meta">
-          
-          <time class="time" datetime="2017-01-06T06:20:33.000Z">
-            2017-01-06
-          </time>
-          
-          <span class="slash">/</span>
-          
-          <ul class="index-tag-list"><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/激情/">激情</a></li><li class="index-tag-list-item"><a class="index-tag-list-link" href="/tags/青春/">青春</a></li></ul>
-          
-
-        </div>
-
-        
-        <a class="more" href="/2017/01/06/youth/"> 阅读全文〉</a>
-      </article>
-    
-  </div>
-
-
-
     </div>
 
-    
-      <nav class="page-nav text-center">
-          <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">〉</a>
-      </nav>
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023_12_31_java/">
+                        Java 8 新特性一
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Java 现在发布的版本很快，每年两个，但是真正会被大规模使用的是 3 年一个的 LTS 版本。
+每 3 年发布一个 LTS（Long-Term Support），长期维护版本。意味着只有Java 8 ，Java 11， Java 17，Java 2...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 31 2023 00:00:00 GMT+0000">2023-12-31</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/java8/">java8</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023_12_31_java/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023_12_30_java/">
+                        Java 8 ~ Java 21 的新特性
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Java 现在发布的版本很快，每年两个，但是真正会被大规模使用的是 3 年一个的 LTS 版本。
+每 3 年发布一个 LTS（Long-Term Support），长期维护版本。意味着只有Java 8 ，Java 11， Java 17，Java 2...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Dec 30 2023 00:00:00 GMT+0000">2023-12-30</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/java/">java</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023_12_30_java/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023_12_28_es/">
+                        Elasticsearch总结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        结构化数据和非结构化数据
+结构化数据：也称作行数据，是由二维表结构来逻辑表达和实现的数据，严格地遵循数据格式与长度规范，主要通过关系型数据库进行存储和管理。指具有固定格式或有限长度的数据，如数据库，元数据等。
+
+非结构化数据：又可称为全文数据，不定长...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 28 2023 00:00:00 GMT+0000">2023-12-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/elasticsearch/">elasticsearch</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023_12_28_es/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023_12_27_go_scan_port/">
+                        Go实现端口扫描
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        端口扫描基本原理
+向目标主机的某个端口，发送建立链接的请求，如果对方开放了这个端口，就会响应；如果没有没开放，则不会响应。
+
+根据这个原理，向一些常用的端口逐个建立链接，就能知道对方开放了哪些端口。
+
+
+端口扫描方法TelnetWindows系统自带...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Dec 27 2023 00:00:00 GMT+0000">2023-12-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/go/">go</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023_12_27_go_scan_port/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023_12_26_docker_hexo/">
+                        Docker安装hexo编译环境
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        hexo编译打包静态页面需要依赖node，npm等环境，为了不污染本地环境，考虑用docker拉取ubuntu来搭建hexo编译环境，用来编译博客，以下记录详细过程。
+123456// 拉取镜像，运行镜像，并进入docker pull ubuntu:...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Dec 26 2023 00:00:00 GMT+0000">2023-12-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/docker/">docker</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023_12_26_docker_hexo/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022_06_18_springboot_actuator/">
+                        Springboot自定义指标并使用Prometheus监控预警
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        spring套件为我们提供了很多starter，其中spring-boot-starter-actuator支持指标采集，本文介绍使用Prometheus监控Spring Boot提供的默认指标，以及自定义业务指标，并使用Prometheus进行监控...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jun 18 2022 00:00:00 GMT+0000">2022-06-18</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/springboot/">springboot</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022_06_18_springboot_actuator/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022_06_02_go_channel/">
+                        Go channel和select
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        channel是指定类型的值的线程安全队列, channel的最大用途是goroutines之间进行通信。
+goroutines通信时使用ch&lt;-value将值写入channel,使用value&lt;-ch从channel中接收值。
+chan...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jun 02 2022 00:00:00 GMT+0000">2022-06-02</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/go/">go</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022_06_02_go_channel/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022_05_01_redis/">
+                        Redis总结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Redis是基于内存数据库，操作效率高，提供丰富的数据结构（Redis底层对数据结构还做了优化），可用作数据库，缓存，消息中间件等。本文从数据结构，到集群，到常见问题逐步深入了解Redis。
+高性能
+单线程模型
+
+基于内存操作
+
+epoll多路复用模...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 00:00:00 GMT+0000">2022-05-01</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/redis/">redis</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022_05_01_redis/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022_04_13_nginx/">
+                        Nginx总结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Nginx 是开源、高性能、高可靠的 Web 和反向代理服务器，而且支持热部署，几乎可以做到 7 * 24 小时不间断运行，即使运行几个月也不需要重新启动，还能在不间断服务的情况下对软件版本进行热更新。性能是 Nginx 最重要的考量，其占用内存少、...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Apr 13 2022 00:00:00 GMT+0000">2022-04-13</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/nginx/">nginx</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022_04_13_nginx/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022_04_12_java_singleton/">
+                        Java单例总结
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        单例模式（Singleton Pattern）是指确保一个类在任何情况下都绝对只有一个实例，并提供一个全局的访问点。
+隐藏其所有的构造方法。
+属于创建型模式。
+单例模式的适用场景确保任何情况下都绝对只有一个实例。
+ServletContext、Ser...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 12 2022 00:00:00 GMT+0000">2022-04-12</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/java/">java</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022_04_12_java_singleton/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
     
 
-  </div>
-  <footer class="footer text-center">
-    <div id="bottom-inner">
-        <a class="bottom-item" href="https://github.com/fooying" target="_blank">GitHub</a> |
-        <a class="bottom-item" href="/links">友情链接</a> |
-        <a class="bottom-item" href="https://hexo.io" target="_blank">Powered by hexo</a> |
-        <a class="bottom-item" href="https://github.com/fooying/hexo-theme-xoxo-plus" target="_blank">Theme xoxo-plus</a> |
-        <a class="bottom-item" href="/atom.xml">订阅</a>
+    
+        <a class="next btn"
+           href="/page/2/"
+        >下一页</a>
+    
+</div>
+
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
     </div>
 </footer>
 
-  
+        </div>
+    </div>
 
-<script>
-  (function(window, document, undefined) {
+    
 
-    var timer = null;
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
 
-    function returnTop() {
-      cancelAnimationFrame(timer);
-      timer = requestAnimationFrame(function fn() {
-        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
-        if (oTop > 0) {
-          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
-          timer = requestAnimationFrame(fn);
-        } else {
-          cancelAnimationFrame(timer);
-        }
-      });
-    }
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
 
-    var hearts = [];
-    window.requestAnimationFrame = (function() {
-      return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-        function(callback) {
-          setTimeout(callback, 1000 / 60);
-        }
-    })();
-    init();
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
 
-    function init() {
-      css(".heart{z-index:9999;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
-      attachEvent();
-      gameloop();
-      addMenuEvent();
-    }
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
 
-    function gameloop() {
-      for (var i = 0; i < hearts.length; i++) {
-        if (hearts[i].alpha <= 0) {
-          document.body.removeChild(hearts[i].el);
-          hearts.splice(i, 1);
-          continue;
-        }
-        hearts[i].y--;
-        hearts[i].scale += 0.004;
-        hearts[i].alpha -= 0.013;
-        hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color;
-      }
-      requestAnimationFrame(gameloop);
-    }
+        <!-- rss -->
+        
 
-    /**
-     * 给logo设置点击事件
-     * 
-     * - 回到顶部
-     * - 出现爱心
-     */
-    function attachEvent() {
-      var old = typeof window.onclick === "function" && window.onclick;
-      var logo = document.getElementById("logo");
-      if (logo) {
-        logo.onclick = function(event) {
-          returnTop();
-          old && old();
-          createHeart(event);
-        }
-      }
-      
-    }
+        
 
-    function createHeart(event) {
-      var d = document.createElement("div");
-      d.className = "heart";
-      hearts.push({
-        el: d,
-        x: event.clientX - 5,
-        y: event.clientY - 5,
-        scale: 1,
-        alpha: 1,
-        color: randomColor()
-      });
-      document.body.appendChild(d);
-    }
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
 
-    function css(css) {
-      var style = document.createElement("style");
-      style.type = "text/css";
-      try {
-        style.appendChild(document.createTextNode(css));
-      } catch (ex) {
-        style.styleSheet.cssText = css;
-      }
-      document.getElementsByTagName('head')[0].appendChild(style);
-    }
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
 
-    function randomColor() {
-      // return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
-      return "#F44336";
-    }
+    </div>
 
-    function addMenuEvent() {
-      var menu = document.getElementById('menu-main-post');
-      if (menu) {
-        var toc = document.getElementById('toc');
-        if (toc) {
-          menu.onclick = function() {
-            if (toc) {
-              if (toc.style.display == 'block') {
-                toc.style.display = 'none';
-              } else {
-                toc.style.display = 'block';
-              }
-            }
-          };
-        } else {
-          menu.style.display = 'none';
-        }
-      }
-    }
+    
 
-  })(window, document);
-</script>
+    <div class="image-viewer-container">
+    <img src="">
+</div>
 
-  
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
 
 
 
-  
-<script>
-  (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      if (curProtocol === 'https') {
-          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-      }
-      else {
-          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-  })();
-</script>
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
 
 
 </body>

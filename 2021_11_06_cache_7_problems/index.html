@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            缓存设计中七大经典问题总结 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">缓存设计中七大经典问题总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-11-06
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9/">缓存雪崩</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/">缓存穿透</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88/">缓存失效</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%80%E8%87%B4/">数据不一致</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%95%B0%E6%8D%AE%E5%B9%B6%E5%8F%91%E7%AB%9E%E4%BA%89/">数据并发竞争</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Hot-key/">Hot key</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Big-key/">Big key</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>6.4k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>22 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>在缓存系统的设计架构中，还有很多坑，很多的明枪暗箭，如果设计不当会导致很多严重的后果。设计不当，轻则请求变慢、性能降低，重则会数据不一致、系统可用性降低，甚至会导致缓存雪崩，整个系统无法对外提供服务</p>
+<p>接下来将对缓存设计中的7大经典问题，如下图，进行问题描述、原因分析，并给出日常研发中，可能会出现该问题的业务场景，最后给出这些经典问题的解决方案。本文先学习缓存失效、缓存穿透与缓存雪崩。</p>
+<p style="text-indent: 0em; white-space: normal; text-align: justify; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/94/CgotOV2kTKKAVD94AAIOd1w5wy8841.png"></p>
+
+<h1 id="缓存失效"><a href="#缓存失效" class="headerlink" title="缓存失效"></a>缓存失效</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>缓存第一个经典问题是缓存失效。上一课时讲到，服务系统查数据，首先会查缓存，如果缓存数据不存在，就进一步查DB，最后查到数据后回种到缓存并返回。缓存的性能比DB高50～100倍以上，所以我们希望数据查询尽可能命中缓存，这样系统负荷最小，性能最佳。缓存里的数据存储基本上都是以key为索引进行存储和获取的。业务访问时，如果大量的key同时过期，很多缓存数据访问都会miss，进而穿透到DB，DB的压力就会明显上升，由于DB的性能较差，只在缓存的1%～2%以下，这样请求的慢查率会明显上升。这就是缓存失效的问题。</p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>导致缓存失效，特别是很多key一起失效的原因，跟我们日常写缓存的过期时间息息相关。</p>
+<p>在写缓存时，我们一般会根据业务的访问特点，给每种业务数据预置一个过期时间，在写缓存时把这个过期时间带上，让缓存数据在这个固定的过期时间后被淘汰。一般情况下，因为缓存数据是逐步写入的，所以也是逐步过期被淘汰的。但在某些场景，一大批数据会被系统主动或被动从DB批量加载，然后写入缓存。这些数据写入缓存时，由于使用相同的过期时间，在经历这个过期时间之后，这批数据就会一起到期，从而被缓存淘汰。此时，对这批数据的所有请求，都会出现缓存失效，从而都穿透到DB，DB由于查询量太大，就很容易压力大增，请求变慢</p>
+<h2 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h2><p>很多业务场景，稍不注意，就出现大量的缓存失效，进而导致系统DB压力大、请求变慢的情况。比如同一批火车票、飞机票，当可以售卖时，系统会一次性加载到缓存，如果缓存写入时，过期时间按照预先设置的过期值，那过期时间到期后，系统就会因缓存失效出现变慢的问题。类似的业务场景还有很多，比如微博业务，会有后台离线系统，持续计算热门微博，每当计算结束，会将这批热门微博批量写入对应的缓存。还比如，很多业务，在部署新IDC或新业务上线时，会进行缓存预热，也会一次性加载大批热数据。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>对于批量key缓存失效的问题，原因既然是预置的固定过期时间，那解决方案也从这里入手。设计缓存的过期时间时，使用公式：过期时间&#x3D;baes时间+随机时间。即相同业务数据写缓存时，在基础过期时间之上，再加一个随机的过期时间，让数据在未来一段时间内慢慢过期，避免瞬时全部过期，对DB造成过大压力，如下图所示。</p>
+<p style="text-indent: 0em; white-space: normal; text-align: justify; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);"><img src="http://s0.lgstatic.com/i/image2/M01/99/74/CgoB5l2kTKKAVkTnAAFhcJtdQl0573.png"> </span></p> 
+
+<h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>第二个经典问题是缓存穿透。缓存穿透是一个很有意思的问题。因为缓存穿透发生的概率很低，所以一般很难被发现。但是，一旦你发现了，而且量还不小，你可能立即就会经历一个忙碌的夜晚。因为对于正常访问，访问的数据即便不在缓存，也可以通过DB加载回种到缓存。而缓存穿透，则意味着有特殊访客在查询一个不存在的key，导致每次查询都会穿透到DB，如果这个特殊访客再控制一批肉鸡机器，持续访问你系统里不存在的key，就会对DB产生很大的压力，从而影响正常服务。</p>
+<h2 id="原因分析-1"><a href="#原因分析-1" class="headerlink" title="原因分析"></a>原因分析</h2><p>缓存穿透存在的原因，就是因为我们在系统设计时，更多考虑的是正常访问路径，对特殊访问路径、异常访问路径考虑相对欠缺</p>
+<p>缓存访问设计的正常路径，是先访问cache，cache miss后查DB，DB查询到结果后，回种缓存返回。这对于正常的key访问是没有问题的，但是如果用户访问的是一个不存在的key，查DB返回空（即一个NULL），那就不会把这个空写回cache。那以后不管查询多少次这个不存在的key，都会cache miss，都会查询DB。整个系统就会退化成一个“前端+DB“的系统，由于DB的吞吐只在cache的1%~2%以下，如果有特殊访客，大量访问这些不存在的key，就会导致系统的性能严重退化，影响正常用户的访问。</p>
+<h2 id="业务场景-1"><a href="#业务场景-1" class="headerlink" title="业务场景"></a>业务场景</h2><p>缓存穿透的业务场景很多，比如通过不存在的UID访问用户，通过不存在的车次ID查看购票信息。用户输入错误，偶尔几个这种请求问题不大，但如果是大量这种请求，就会对系统影响非常大。</p>
+<h2 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h2><p>那么如何解决这种问题呢？如下图所示。</p>
+<ul>
+<li>第一种方案就是，查询这些不存在的数据时，第一次查DB，虽然没查到结果返回NULL，仍然记录这个key到缓存，只是这个key对应的value是一个特殊设置的值。</li>
+<li>第二种方案是，构建一个BloomFilter缓存过滤器，记录全量数据，这样访问数据时，可以直接通过BloomFilter判断这个key是否存在，如果不存在直接返回即可，根本无需查缓存和DB。</li>
+</ul>
+<p style="text-indent: 0em; white-space: normal; text-align: justify; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/94/CgotOV2kTKOAZcRHAAIFuQZE-no463.png"></p> 
+
+<p>不过这两种方案在设计时仍然有一些要注意的坑。</p>
+<ul>
+<li>对于方案一，如果特殊访客持续访问大量的不存在的key，这些key即便只存一个简单的默认值，也会占用大量的缓存空间，导致正常key的命中率下降。所以进一步的改进措施是，对这些不存在的key只存较短的时间，让它们尽快过期；或者将这些不存在的key存在一个独立的公共缓存，从缓存查找时，先查正常的缓存组件，如果miss，则查一下公共的非法key的缓存，如果后者命中，直接返回，否则穿透DB，如果查出来是空，则回种到非法key缓存，否则回种到正常缓存。</li>
+<li>对于方案二，BloomFilter要缓存全量的key，这就要求全量的key数量不大，10亿条数据以内最佳，因为10亿条数据大概要占用1.2GB的内存。也可以用BloomFilter缓存非法key，每次发现一个key是不存在的非法key，就记录到BloomFilter中，这种记录方案，会导致BloomFilter存储的key持续高速增长，为了避免记录key太多而导致误判率增大，需要定期清零处理。</li>
+</ul>
+<h2 id="BloomFilter"><a href="#BloomFilter" class="headerlink" title="BloomFilter"></a>BloomFilter</h2><p>BloomFilter是一个非常有意思的数据结构，不仅仅可以挡住非法key攻击，还可以低成本、高性能地对海量数据进行判断，比如一个系统有数亿用户和百亿级新闻feed，就可以用BloomFilter来判断某个用户是否阅读某条新闻feed。下面来对BloomFilter数据结构做一个分析，如下图所示。</p>
+<p style="text-indent: 0em; white-space: normal; text-align: justify; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);"><img src="http://s0.lgstatic.com/i/image2/M01/99/74/CgoB5l2kTKOABkQdAAFikFQHrgc863.png"> </span></p> 
+
+<p>BloomFilter的目的是检测一个元素是否存在于一个集合内。它的原理，是用bit数据组来表示一个集合，对一个key进行多次不同的Hash检测，如果所有Hash对应的bit位都是1，则表明key非常大概率存在，平均单记录占用1.2字节即可达到99%，只要有一次Hash对应的bit位是0，就说明这个key肯定不存在于这个集合内。</p>
+<p>BloomFilter的算法是，首先分配一块内存空间做bit数组，数组的bit位初始值全部设为0，加入元素时，采用k个相互独立的Hash函数计算，然后将元素Hash映射的K个位置全部设置为1。检测key时，仍然用这k个Hash函数计算出k个位置，如果位置全部为1，则表明key存在，否则不存在。</p>
+<p>BloomFilter的优势是，全内存操作，性能很高。另外空间效率非常高，要达到1%的误判率，平均单条记录占用1.2字节即可。而且，平均单条记录每增加0.6字节，还可让误判率继续变为之前的1&#x2F;10，即平均单条记录占用1.8字节，误判率可以达到1&#x2F;1000；平均单条记录占用2.4字节，误判率可以到1&#x2F;10000，以此类推。这里的误判率是指，BloomFilter判断某个key存在，但它实际不存在的概率，因为它存的是key的Hash值，而非key的值，所以有概率存在这样的key，它们内容不同，但多次Hash后的Hash值都相同。对于BloomFilter判断不存在的key ，则是100%不存在的，反证法，如果这个key存在，那它每次Hash后对应的Hash值位置肯定是1，而不会是0。</p>
+<h1 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>第三个经典问题是缓存雪崩。系统运行过程中，缓存雪崩是一个非常严重的问题。缓存雪崩是指部分缓存节点不可用，导致整个缓存体系甚至甚至服务系统不可用的情况。缓存雪崩按照缓存是否rehash（即是否漂移）分两种情况：</p>
+<ul>
+<li>缓存不支持rehash导致的系统雪崩不可</li>
+<li>缓存支持rehash导致的缓存雪崩不可用</li>
+</ul>
+<h2 id="原因分析-2"><a href="#原因分析-2" class="headerlink" title="原因分析"></a>原因分析</h2><p>在上述两种情况中，缓存不进行rehash时产生的雪崩，一般是由于较多缓存节点不可用，请求穿透导致DB也过载不可用，最终整个系统雪崩不可用的。而缓存支持rehash时产生的雪崩，则大多跟流量洪峰有关，流量洪峰到达，引发部分缓存节点过载Crash，然后因rehash扩散到其他缓存节点，最终整个缓存体系异常。</p>
+<p>第一种情况比较容易理解，缓存节点不支持rehash，较多缓存节点不可用时，大量Cache访问会失败，根据缓存读写模型，这些请求会进一步访问DB，而且DB可承载的访问量要远比缓存小的多，请求量过大，就很容易造成DB过载，大量慢查询，最终阻塞甚至Crash，从而导致服务异常。</p>
+<p>第二种情况是怎么回事呢？这是因为缓存分布设计时，很多同学会选择一致性Hash分布方式，同时在部分节点异常时，采用rehash策略，即把异常节点请求平均分散到其他缓存节点。在一般情况下，一致性Hash分布+rehash策略可以很好得运行，但在较大的流量洪峰到临之时，如果大流量key比较集中，正好在某1～2个缓存节点，很容易将这些缓存节点的内存、网卡过载，缓存节点异常Crash，然后这些异常节点下线，这些大流量key请求又被rehash到其他缓存节点，进而导致其他缓存节点也被过载Crash，缓存异常持续扩散，最终导致整个缓存体系异常，无法对外提供服务。</p>
+<h2 id="业务场景-2"><a href="#业务场景-2" class="headerlink" title="业务场景"></a>业务场景</h2><p>缓存雪崩的业务场景并不少见，微博、Twitter等系统在运行的最初若干年都遇到过很多次。比如，微博最初很多业务缓存采用一致性Hash+rehash策略，在突发洪水流量来临时，部分缓存节点过载Crash甚至宕机，然后这些异常节点的请求转到其他缓存节点，又导致其他缓存节点过载异常，最终整个缓存池过载。另外，机架断电，导致业务缓存多个节点宕机，大量请求直接打到DB，也导致DB过载而阻塞，整个系统异常。最后缓存机器复电后，DB重启，数据逐步加热后，系统才逐步恢复正常。</p>
+<h2 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h2><p>预防缓存雪崩，这里给出3个解决方案。</p>
+<ul>
+<li><p>方案一，对业务DB的访问增加读写开关，当发现DB请求变慢、阻塞，慢请求超过阀值时，就会关闭读开关，部分或所有读DB的请求进行failfast立即返回，待DB恢复后再打开读开关，如下图。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0em; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);">   <img src="http://s0.lgstatic.com/i/image2/M01/99/94/CgotOV2kTKOAX4H_AACZ92HqRoY447.png"></span></p> 
+</li>
+<li><p>方案二，对缓存增加多个副本，缓存异常或请求miss后，再读取其他缓存副本，而且多个缓存副本尽量部署在不同机架，从而确保在任何情况下，缓存系统都会正常对外提供服务。</p>
+</li>
+<li><p>方案三，对缓存体系进行实时监控，当请求访问的慢速比超过阀值时，及时报警，通过机器替换、服务替换进行及时恢复；也可以通过各种自动故障转移策略，自动关闭异常接口、停止边缘服务、停止部分非核心功能措施，确保在极端场景下，核心功能的正常运行。</p>
+</li>
+</ul>
+<p>实际上，微博平台系统，这三种方案都采用了，通过三管齐下，规避缓存雪崩的发生。</p>
+<h1 id="数据不一致"><a href="#数据不一致" class="headerlink" title="数据不一致"></a>数据不一致</h1><h2 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h2><p>七大缓存经典问题的第四个问题是数据不一致。同一份数据，可能会同时存在DB和缓存之中。那就有可能发生，DB和缓存的数据不一致。如果缓存有多个副本，多个缓存副本里的数据也可能会发生不一致现象</p>
+<h2 id="原因分析-3"><a href="#原因分析-3" class="headerlink" title="原因分析"></a>原因分析</h2><p>不一致的问题大多跟缓存更新异常有关。比如更新DB后，写缓存失败，从而导致缓存中存的是老数据。另外，如果系统采用一致性Hash分布，同时采用rehash自动漂移策略，在节点多次上下线之后，也会产生脏数据。缓存有多个副本时，更新某个副本失败，也会导致这个副本的数据是老数据。</p>
+<h2 id="业务场景-3"><a href="#业务场景-3" class="headerlink" title="业务场景"></a>业务场景</h2><p>导致数据不一致的场景也不少。如下图所示，在缓存机器的带宽被打满，或者机房网络出现波动时，缓存更新失败，新数据没有写入缓存，就会导致缓存和DB的数据不一致。缓存rehash时，某个缓存机器反复异常，多次上下线，更新请求多次rehash。这样，一份数据存在多个节点，且每次rehash只更新某个节点，导致一些缓存节点产生脏数据。</p>
+<p style="text-indent: 0em; white-space: normal; text-align: center; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/91/CgotOV2kSMqAD3YHAACfCilWo20043.png"></p>
+
+<h2 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h2><p>要尽量保证数据的一致性。这里也给出了3个方案，可以根据实际情况进行选择。</p>
+<ul>
+<li>第一个方案，cache更新失败后，可以进行重试，如果重试失败，则将失败的key写入队列机服务，待缓存访问恢复后，将这些key从缓存删除。这些key在再次被查询时，重新从DB加载，从而保证数据的一致性。</li>
+<li>第二个方案，缓存时间适当调短，让缓存数据及早过期后，然后从DB重新加载，确保数据的最终一致性。</li>
+<li>第三个方案，不采用rehash漂移策略，而采用缓存分层策略，尽量避免脏数据产生。</li>
+</ul>
+<p style="text-indent: 0em; white-space: normal; text-align: center; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/71/CgoB5l2kSMqANNv_AAClEDDnPXA676.png"></p>
+
+<h1 id="数据并发竞争"><a href="#数据并发竞争" class="headerlink" title="数据并发竞争"></a>数据并发竞争</h1><h2 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h2><p>第五个经典问题是数据并发竞争。互联网系统，线上流量较大，缓存访问中很容易出现数据并发竞争的现象。数据并发竞争，是指在高并发访问场景，一旦缓存访问没有找到数据，大量请求就会并发查询DB，导致DB压力大增的现象。</p>
+<p>数据并发竞争，主要是由于多个进程&#x2F;线程中，有大量并发请求获取相同的数据，而这个数据key因为正好过期、被剔除等各种原因在缓存中不存在，这些进程&#x2F;线程之间没有任何协调，然后一起并发查询DB，请求那个相同的key，最终导致DB压力大增，如下图。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0em; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: center; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/91/CgotOV2kSMuAGIj2AAC0Yxgja7M817.png"></p>
+
+<h2 id="业务场景-4"><a href="#业务场景-4" class="headerlink" title="业务场景"></a>业务场景</h2><p>数据并发竞争在大流量系统也比较常见，比如车票系统，如果某个火车车次缓存信息过期，但仍然有大量用户在查询该车次信息。又比如微博系统中，如果某条微博正好被缓存淘汰，但这条微博仍然有大量的转发、评论、赞。上述情况都会造成该车次信息、该条微博存在并发竞争读取的问题</p>
+<h2 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h2><p>要解决并发竞争，有2种方案。</p>
+<ul>
+<li>方案一是使用全局锁。如下图所示，即当缓存请求miss后，先尝试加全局锁，只有加全局锁成功的线程，才可以到DB去加载数据。其他进程&#x2F;线程在读取缓存数据miss时，如果发现这个key有全局锁，就进行等待，待之前的线程将数据从DB回种到缓存后，再从缓存获取。</li>
+</ul>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/99/91/CgotOV2kSMuAdSrvAAFZWFDAGz8863.png" style="text-align: justify; white-space: normal;"></p>
+
+<ul>
+<li>方案二是，对缓存数据保持多个备份，即便其中一个备份中的数据过期或被剔除了，还可以访问其他备份，从而减少数据并发竞争的情况，如下图。</li>
+</ul>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/99/71/CgoB5l2kSMuAaRY2AAC4IIqMZZQ216.png"></p>
+
+
+<h1 id="Hot-key"><a href="#Hot-key" class="headerlink" title="Hot key"></a>Hot key</h1><h2 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h2><p>第六个经典问题是Hot key。对于大多数互联网系统，数据是分冷热的。比如最近的新闻、新发表的微博被访问的频率最高，而比较久远的之前的新闻、微博被访问的频率就会小很多。而在突发事件发生时，大量用户同时去访问这个突发热点信息，访问这个Hot key，这个突发热点信息所在的缓存节点就很容易出现过载和卡顿现象，甚至会被Crash。</p>
+<h2 id="原因分析-4"><a href="#原因分析-4" class="headerlink" title="原因分析"></a>原因分析</h2><p>Hot key引发缓存系统异常，主要是因为突发热门事件发生时，超大量的请求访问热点事件对应的key，比如微博中数十万、数百万的用户同时去吃一个新瓜。数十万的访问请求同一个key，流量集中打在一个缓存节点机器，这个缓存机器很容易被打到物理网卡、带宽、CPU的极限，从而导致缓存访问变慢、卡顿。</p>
+<h2 id="业务场景-5"><a href="#业务场景-5" class="headerlink" title="业务场景"></a>业务场景</h2><p>引发Hot key的业务场景很多，比如明星结婚、离婚、出轨这种特殊突发事件，比如奥运、春节这些重大活动或节日，还比如秒杀、双12、618等线上促销活动，都很容易出现Hot key的情况。</p>
+<h2 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h2><p>要解决这种极热key的问题，首先要找出这些Hot key来。对于重要节假日、线上促销活动、集中推送这些提前已知的事情，可以提前评估出可能的热key来。而对于突发事件，无法提前评估，可以通过Spark，对应流任务进行实时分析，及时发现新发布的热点key。而对于之前已发出的事情，逐步发酵成为热key的，则可以通过Hadoop对批处理任务离线计算，找出最近历史数据中的高频热key。</p>
+<p>找到热key后，就有很多解决办法了。首先可以将这些热key进行分散处理，比如一个热key名字叫hotkey，可以被分散为hotkey#1、hotkey#2、hotkey#3，……hotkey#n，这n个key分散存在多个缓存节点，然后client端请求时，随机访问其中某个后缀的hotkey，这样就可以把热key的请求打散，避免一个缓存节点过载，如下图所示。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0em; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em;"><span style="color: rgb(63, 63, 63); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; text-align: center; text-indent: 0em; font-size: 16px;"><img src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaALnx3AADSQZPFHOM649.png" style="text-align: center; white-space: normal;"> </span></p>
+
+<p>其次，也可以key的名字不变，对缓存提前进行多副本+多级结合的缓存架构设计。</p>
+<p>再次，如果热key较多，还可以通过监控体系对缓存的SLA实时监控，通过快速扩容来减少热key的冲击。</p>
+<p>最后，业务端还可以使用本地缓存，将这些热key记录在本地缓存，来减少对远程缓存的冲击。</p>
+<h1 id="Big-key"><a href="#Big-key" class="headerlink" title="Big key"></a>Big key</h1><h2 id="问题描述-6"><a href="#问题描述-6" class="headerlink" title="问题描述"></a>问题描述</h2><p>最后一个经典问题是Big key，也就是大Key的问题。大key，是指在缓存访问时，部分Key的Value过大，读写、加载易超时的现象。</p>
+<h2 id="原因分析-5"><a href="#原因分析-5" class="headerlink" title="原因分析"></a>原因分析</h2><p>造成这些大key慢查询的原因很多。如果这些大key占总体数据的比例很小，存Mc，对应的slab较少，导致很容易被频繁剔除，DB反复加载，从而导致查询较慢。如果业务中这种大key很多，而这种key被大量访问，缓存组件的网卡、带宽很容易被打满，也会导致较多的大key慢查询。另外，如果大key缓存的字段较多，每个字段的变更都会引发对这个缓存数据的变更，同时这些key也会被频繁地读取，读写相互影响，也会导致慢查现象。最后，大key一旦被缓存淘汰，DB加载可能需要花费很多时间，这也会导致大key查询慢的问题。</p>
+<h2 id="业务场景-6"><a href="#业务场景-6" class="headerlink" title="业务场景"></a>业务场景</h2><p>大key的业务场景也比较常见。比如互联网系统中需要保存用户最新1万个粉丝的业务，比如一个用户个人信息缓存，包括基本资料、关系图谱计数、发feed统计等。微博的feed内容缓存也很容易出现，一般用户微博在140字以内，但很多用户也会发表1千字甚至更长的微博内容，这些长微博也就成了大key，如下图。</p>
+<p style="text-indent: 0em; white-space: normal; text-align: center; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);"><img src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAPcVbAAB3WSWtgpo221.png">  </span></p>
+
+<h2 id="解决方案-6"><a href="#解决方案-6" class="headerlink" title="解决方案"></a>解决方案</h2><p>对于大key，给出3种解决方案。</p>
+<ul>
+<li>第一种方案，如果数据存在Mc中，可以设计一个缓存阀值，当value的长度超过阀值，则对内容启用压缩，让KV尽量保持小的size，其次评估大key所占的比例，在Mc启动之初，就立即预写足够数据的大key，让Mc预先分配足够多的trunk size较大的slab。确保后面系统运行时，大key有足够的空间来进行缓存。</li>
+</ul>
+<p style="text-indent: 0em; white-space: normal; text-align: center; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmaAMET9AACrkN0JqFc011.png"></p>
+
+<ul>
+<li>第二种方案，如果数据存在Redis中，比如业务数据存set格式，大key对应的set结构有几千几万个元素，这种写入Redis时会消耗很长的时间，导致Redis卡顿。此时，可以扩展新的数据结构，同时让client在这些大key写缓存之前，进行序列化构建，然后通过restore一次性写入，如下图所示。</li>
+</ul>
+<p style="margin-top: 0pt; margin-bottom: 0pt; text-indent: 0em; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: center; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);"><img src="http://s0.lgstatic.com/i/image2/M01/99/92/CgotOV2kSmaAXnFGAAC1hm9Qofg743.png" style="text-align: center; white-space: normal;"></span></p>
+
+<ul>
+<li>第三种方案时，如下图所示，将大key分拆为多个key，尽量减少大key的存在。同时由于大key一旦穿透到DB，加载耗时很大，所以可以对这些大key进行特殊照顾，比如设置较长的过期时间，比如缓存内部在淘汰key时，同等条件下，尽量不淘汰这些大key。</li>
+</ul>
+<p style="text-indent: 0em; white-space: normal; text-align: center; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/99/72/CgoB5l2kSmeAeayMAAD0DTkVh1k994.png"></p>
+
+<p>至此，本文关于缓存的7大经典问题全部介绍完了。</p>
+<p>我们要认识到，对于互联网系统，由于实际业务场景复杂，数据量、访问量巨大，需要提前规避缓存使用中的各种坑。你可以通过提前熟悉Cache的经典问题，提前构建防御措施， 避免大量key同时失效，避免不存在key访问的穿透，减少大key、热key的缓存失效，对热key进行分流。你可以采取一系列措施，让访问尽量命中缓存，同时保持数据的一致性。另外，你还可以结合业务模型，提前规划cache系统的SLA，如QPS、响应分布、平均耗时等，实施监控，以方便运维及时应对。在遇到部分节点异常，或者遇到突发流量、极端事件时，也能通过分池分层策略、key分拆等策略，避免故障发生。</p>
+<p>最终，你能在各种复杂场景下，面对高并发、海量访问，面对突发事件和洪峰流量，面对各种网络或机器硬件故障，都能保持服务的高性能和高可用。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：缓存设计中七大经典问题总结</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2021-11-06 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2021_11_06_cache_7_problems/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021_12_01_effective_java/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">读《Effective Java》笔记</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021_11_05_cache_design/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">缓存设计考量点总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88"><span class="nav-text">缓存失效</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-1"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-1"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BloomFilter"><span class="nav-text">BloomFilter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-2"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-2"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="nav-text">数据不一致</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-3"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-3"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-3"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B6%E5%8F%91%E7%AB%9E%E4%BA%89"><span class="nav-text">数据并发竞争</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-4"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-4"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hot-key"><span class="nav-text">Hot key</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-5"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-4"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-5"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-5"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Big-key"><span class="nav-text">Big key</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-6"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-5"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF-6"><span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6"><span class="nav-text">解决方案</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

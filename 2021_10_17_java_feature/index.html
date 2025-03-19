@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            Java语言特性与设计模式总结 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Java语言特性与设计模式总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-10-17
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/java/">java</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>13 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="设计模式知识点"><a href="#设计模式知识点" class="headerlink" title="设计模式知识点"></a>设计模式知识点</h1><p>设计模式的考察点，一般有两个：</p>
+<ul>
+<li>常用设计模式的实现；</li>
+<li>设计模式的使用场景。</li>
+</ul>
+<p>设计模式分为3大类型共23种：</p>
+<ol>
+<li>创建型：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li>
+<li>结构型：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</li>
+<li>行为型：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</li>
+</ol>
+<p>最常见的设计模式有：单例模式、工厂模式、代理模式、构造者模式、责任链模式、适配器模式、观察者模式等，如下图所示。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/2D/CgotOV1412GAIvkDAAIBtlkYfqo038.png"></p>
+
+<p>对于设计模式，你应该明白不同的设计用来解决什么场景问题，对于常用的设计模式能够灵活运用。下面重点介绍几种常用的设计模式。</p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>首先是单例模式，这个模式在实际业务中会经常用到，也是设计模式中的主要考察点。这里介绍线程安全的单例模式实现方式。</p>
+<p>单例模式常见的实现方式有三种。</p>
+<ol>
+<li>第一种是静态初始化方式，也叫作饿汉方式。实现的思路就是在类初始化时完成单例实例的创建，因此不会产生并发问题，在这种方式下不管是否会使用到这个单例，都会创建这个单例。</li>
+<li>第二种实现方式是双重检查，也叫作懒汉方式，只有在真正用到这个单例实例的时候才会去创建，如果没有使用就不会创建。这个方式必然会面对多个线程同时使用实例时的并发问题。为了解决并发访问问题，通过synchronized或者lock进行双重检查，保证只有一个线程能够创建实例。这里要注意内存可见性引起的并发问题，必须使用volatile关键字修饰单例变量。</li>
+<li>第三种是单例注册表方式，Spring中Bean的单例模式就是通过单例注册表方式实现的。</li>
+</ol>
+<p>下面结合设计模式的实际应用，来介绍常用的设计模式，如下图所示。在面试时遇到类似问题，记得要将设计模式与实际业务场景进行结合，来体现对设计模式的理解和应用能力。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/10/CgoB5l142ISAAe_XAAISBI_gX4I754.png"></p>
+
+<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>工厂模式是创建不同类型实例时常用的方式，例如Spring中的各种Bean是有不同Bean工厂类进行创建的。</p>
+<h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);">代理模式，主要用在不适合或者不能直接引用另一个对象的场景，可以通过代理模式对被代理对象的访问行为进行控制。Java的代理模式分为静态代理和动态代理。静态代理指在编译时就已经创建好了代理类，例如在源代码中编写的类；动态代理指在JVM运行过程中动态创建的代理类，使用动态代理的方法有JDK动态代理、CGLIB、Javassist等。面试时遇到这个问题可以举个动态代理的例子，比如在Motan RPC中，是使用JDK的动态代理，通过反射把远程请求进行封装，使服务看上去就像在使用本地的方法。
+
+<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><p>责任链模式有点像工厂的流水线，链上每一个节点完成对对象的某一种处理，例如Netty框架在处理消息时使用的Pipeline就是一种责任链模式。</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247542857&idx=2&sn=a4ffa1841e5bede09acd20bab44f4d73&chksm=fbb1a1b7ccc628a1308a7a1f9984c0cf659cf5aa7f34d654f6044588ceeed4b0f80848a4895b&scene=27" >模式演进案例<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p>适配器模式，类似于我们常见的转接头，把两种不匹配的对象来进行适配，也可以起到对两个不同的对象进行解藕的作用。例如我们常用的日志处理框架SLF4J，如果我们使用了SLF4J就可以跟Log4j或者Logback等具体的日志实现框架进行解藕。通过不同适配器将SLF4J与Log4j等实现框架进行适配，完成日志功能的使用</p>
+<blockquote>
+<p>适配器模式和代理模式的一个显著差别：代理模式是方法名相同，一般实现同接口，适配器模式是方法名不同，一般用组合方式嵌入适配对象。</p>
+</blockquote>
+<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p>观察者模式也被称作发布订阅模式，适用于一个对象的某个行为需要触发一系列事件的场景，例如gRPC中的Stream流式请求的处理就是通过观察者模式实现的。</p>
+<h1 id="构造者模式"><a href="#构造者模式" class="headerlink" title="构造者模式"></a>构造者模式</h1><p>构造者模式，适用于一个对象有很多复杂的属性，需要根据不同情况创建不同的具体对象，例如创建一个PB对象时使用的builder方式。</p>
+<h1 id="Java语言特性知识点"><a href="#Java语言特性知识点" class="headerlink" title="Java语言特性知识点"></a>Java语言特性知识点</h1><p>Java语言特性的知识点汇总如下图所示。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/60/CgotOV13doqAUZwdAAJtuA27fL4326.png"></p>
+
+<p>常用集合类实现与Java并发工具包JUC是常见考点，JUC会在后面的多线程总结中进行详细讲解。</p>
+<p>Java的集合类中部分需要重点了解类的实现。例如，HashMap、TreeMap是如何实现的等。</p>
+<p>动态代理与反射是Java语言的特色，需要掌握动态代理与反射的使用场景，例如在ORM框架中会大量使用代理类。而RPC调用时会使用到反射机制调用实现类方法</p>
+<p>Java基础数据类型也常常会在面试中被问到，例如各种数据类型占用多大的内存空间、数据类型的自动转型与强制转型、基础数据类型与wrapper数据类型的自动装箱与拆箱等。</p>
+<p>Java对对象的引用分为强引用、软引用、弱引用、虚引用四种，这些引用在GC时的处理策略不同，强引用不会被GC回收；软引用内存空间不足时会被GC回收；弱引用则在每次GC时被回收；虚引用必须和引用队列联合使用，主要用于跟踪一个对象被垃圾回收的过程。</p>
+<p>Java的异常处理机制就是try-catch-finally机制，需要知道异常时在try catch中的处理流程；需要了解Error和Exception的区别。</p>
+<blockquote>
+<p>Error和Exception同实现自Throwable<br><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52188374/article/details/117521327" >异常分类区别<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>最后Java的注解机制和SPI扩展机制可以作为扩展点适当了解。</p>
+<h1 id="详解Map"><a href="#详解Map" class="headerlink" title="详解Map"></a>详解Map</h1><p>关于Java的基础知识重点讲解最常考察点HashMap和ConcurrentHashMap，以及Java的不同版本新技术特性，如下图所示。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1413iANCl1AAG3aLAzQ6M654.png"></p>
+
+<p>面试中，Map的实现这个题目能够考察到数据结构、Java基础实现以及对并发问题处理思路的掌握程度。</p>
+<ol>
+<li><p>HashMap</p>
+<ul>
+<li>先来看HashMap的实现，简单来说，Java的HashMap就是数组加链表实现的，数组中的每一项是一个链表。通过计算存入对象的HashCode，来计算对象在数组中要存入的位置，用链表来解决散列冲突，链表中的节点存储的是键值对。</li>
+<li>除了实现的方式，我们还需要知道填充因子的作用与Map扩容时的rehash机制，需要知道HashMap的容量都是2的幂次方，是因为可以通过按位与操作来计算余数，比求模要快。另外需要知道HashMap是非线程安全的，在多线程put的情况下，有可能在容量超过填充因子时进行rehash，因为HashMap为了避免尾部遍历，在链表插入元素时使用头插法，多线程的场景下有可能会产生死循环</li>
+</ul>
+</li>
+<li><p>ConcurrentHashMap</p>
+<ul>
+<li>从HashMap的非线程安全，面试官很自然地就会问到线程安全的ConcurrentHashMap。ConcurrentHashMap采用分段锁的思想来降低并发场景下的锁定发生频率，在JDK1.7与1.8中的实现差异非常大，1.7中使用Segment进行分段加锁，降低并发锁定；1.8中使用CAS自旋锁的乐观锁来提高性能，但是在并发度较高时性能会比较一般。另外1.8中的ConcurrentHashMap引入了红黑树来解决Hash冲突时链表顺序查找的问题。红黑树的启用条件与链表的长度和Map的总容量有关，默认是链表大于8且容量大于64时转为红黑树。这部分内容建议详细阅读源码进行学习。</li>
+</ul>
+</li>
+</ol>
+<h1 id="详解-Java-版本特性"><a href="#详解-Java-版本特性" class="headerlink" title="详解 Java 版本特性"></a>详解 Java 版本特性</h1><p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1414OAPPHoAAHK9xyeUdE686.png"></p>
+
+<p>Java近些年一改以往的版本发布风格，发布频率提高了很多。目前大部分公司的生产环境使用的还是1.8版本，一少部分升级到1.9或1.10 版本，Java的1.8版本是一个长期支持的版本，最新发布的1.11版本也是一个长期支持的版本，1.11版本中已经包含了1.9、1.10 版本的功能，所以1.8和1.11版本是我们要重点关注的版本</p>
+<p>在1.8版本中Java增加了对lambda表达式的支持，使Java代码的编写可以更简洁，也更方便支持并行计算。并且提供了很多Stream流式处理的API。1.8版本还支持了方法引用的能力，可以进一步简化lambda表达式的写法。</p>
+<p>在1.8版本中，接口可以提供默认方法了，这样可以简化一些简单的抽象类。最后在1.8版本中对方法区进行调整，使用Metaspace替换掉了PermGen的永久代。Metaspace与PermGen之间最大的区别在于：Metaspace并不在虚拟机中，而是使用本地内存。替换的目的一方面是可以提升对元数据的管理同时提升GC效率，另一方面是方便后续HotSpot与JRockit合并。</p>
+<p>在1.9、1.10版本中的主要特性是增加了模块系统，将G1设为默认垃圾回收器、支持局部变量推断等功能。这些功能都已经包含在1.11版本中。</p>
+<p>1.11版本是Java最新的长期支持版本，也将会是未来一段时间的主要版本，1.11版本中提供的最激动人心的功能是ZGC这个新的垃圾回收器，ZGC为大内存堆设计，有着非常强悍的性能，能够实现10ms以下的GC暂停时间。关于ZGC会在下一课中进一步介绍。除此之外，1.11版本对字符串处理API进行了增强，提供了字符复制等功能。1.11版本还内置了HttpClient</p>
+<h1 id="考察点"><a href="#考察点" class="headerlink" title="考察点"></a>考察点</h1><p>从面试官角度出发，总结本课时对于计算机基础和Java语言特性的考察点如下：</p>
+<ol>
+<li>第一考察点就是对基本概念和基本原理的考察。要求对这两项的理解必须是正确的，清晰的。例如网络协议的4&#x2F;7层模型的概念，TCP协议流量控制的实现原理等。</li>
+<li>第二个考察点是常用工具、模型的实现方式和使用姿势，例如HashMap在JDK 1.8中的实现方式是怎样的？单例模式有几种实现方式？什么场景下该使用懒汉式单例实现，什么场景下该使用饿汉式单例实现等。</li>
+<li>第三个考察点是经常使用到的一些知识点，例如你常用的Linux命令有哪些，都用来解决什么问题？</li>
+<li>第四个考察点是实际应用中容易犯错的点，例如&#x3D;&#x3D;与equals的区别，例如对象的强引用使用不当可能导致内存泄露，主要考察候选人对于不同对象引用方式的作用和理解。</li>
+<li>第五个考察点是与面试方向相关的知识点。例如面试的岗位是中间件研发，面试时可能会涉及更多的存储、网络相关的知识的考察。</li>
+</ol>
+<h2 id="加分项"><a href="#加分项" class="headerlink" title="加分项"></a>加分项</h2><p>前面提到的考察点是面试通过的必要条件，回答出问题并不一定能保证通过面试，所以如何做到比其他竞争者更优秀，给面试官留下更好的印象，是成功的关键。你需要一些buff。这些加分能力不仅仅针对这一课的内容，后续课程也有一定的通用性。<br>能将面试考察点与实际业务场景结合，或者与实际使用经验结合。</p>
+<p>这样能够更好的体现对知识点的理解，突出实践能力。例如，在回答 “你知道哪几种设计模式” 这个问题时，不但能说出几种设计模式，以及适合哪类场景，而且还能指出哪些著名的框架在处理什么问题时使用了哪种设计模式，或者自己在处理某个项目的什么场景时，使用了哪种设计模式，取得了什么效果，这样肯定会给面试官留下非常好的印象。</p>
+<ul>
+<li><p>用反例来描述在实际场景中，误用某些功能会带来的问题。</p>
+<ul>
+<li>例如，介绍反射机制时，除了介绍反射机制的实现方式、应用场景外，还可以提到大量使用反射会对性能产生影响，应避免滥用。</li>
+</ul>
+</li>
+<li><p>知道与考察知识点相关的优化点。</p>
+<ul>
+<li>例如在介绍TCP建连与断连时，最好能够指出线上如果出现大量time_wait时，可以通过调整系统参数加快连接的回收与复用</li>
+</ul>
+</li>
+<li><p>了解与知识点相关的最新技术趋势</p>
+<ul>
+<li>例如介绍ConcurrentHashMap的实现时，能够知道1.8版本的改进细节。或者在介绍HTTP时能够说出HTTP2和QUIC的特点与实现等</li>
+<li>回答面试问题时，在比较了解的前提下，尽量增加回答内容的深度。例如在介绍TCP的滑动窗口时，能讲到流量和拥塞控制，近一步能指出不同的解决拥塞的算法等</li>
+<li>这里要注意，面试官一般会沿着候选人的回答继续追问，如果对细节不太了解可能会适得其反。</li>
+</ul>
+</li>
+</ul>
+<h2 id="真题汇总"><a href="#真题汇总" class="headerlink" title="真题汇总"></a>真题汇总</h2><p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/2E/CgotOV1414uAQSHlAAH_rsNrJqI449.png"></p>
+
+<p>解题思路如下。</p>
+<ul>
+<li>第一题：线程、进程的区别和联系，主要从资源占用、切换效率、通信方式等方面进行解答；</li>
+<li>第二题：线程的切换过程主要考察上下文切换，需要保存寄存器、栈等现场，需要由用户态切换到内核态。最后通过vmstat命令查看上下文切换的情况；</li>
+<li>第三题：常用的Linux命令可以参考前面操作系统汇总提到的命令；</li>
+<li>第四题、第五题，知识点详解中已经介绍过了，务必要掌握；</li>
+<li>第六题：大致包括DNS解析、TCP建连、HTTP请求、HTTP响应等，实际回答时，可以画个简单的交互图来说明。</li>
+</ul>
+<p>再汇总一些真题，包括基础概念，以及前面介绍过的知识点，如下图所示。</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; text-align: center; font-size: 11pt; color: rgb(73, 73, 73); line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8B/0E/CgoB5l1415GALUZ6AAHoxTPQ0mw023.png"></p>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Java语言特性与设计模式总结</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2021-10-17 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2021_10_17_java_feature/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021_10_18_multity_thread/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Java并发与多线程总结</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021_10_16_os_net/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">操作系统与计算机网络总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">设计模式知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="nav-text">责任链模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">适配器模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-text">构造者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">Java语言特性知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3Map"><span class="nav-text">详解Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3-Java-%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-text">详解 Java 版本特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%80%83%E5%AF%9F%E7%82%B9"><span class="nav-text">考察点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="nav-text">加分项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%9F%E9%A2%98%E6%B1%87%E6%80%BB"><span class="nav-text">真题汇总</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

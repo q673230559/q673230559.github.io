@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            阿里巴巴Java开发手册 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">阿里巴巴Java开发手册</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2017-02-16
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/java/">java</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E9%98%BF%E9%87%8C/">阿里</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>2017年开春之际，诚意献上重磅大礼：阿里巴巴Java开发手册，首次公开阿里官方Java代码规范标准。这套Java统一规范标准将有助于提高行业编码规范化水平，帮助行业人员提高开发质量和效率、大大降低代码维护成本。<br><img src="/pic/javashouce.jpeg"><br>你是否曾因Java代码规范版本纷杂而无所适从？</p>
+<p>你是否想过代码规范能将系统故障率降低20%？</p>
+<p>你是否曾因团队代码风格迥异而协同困难？</p>
+<p>你是否正在review一些原本可以避免的故障？</p>
+<span id="more"></span>
+
+<p>你是否无法确定自己的代码足够健壮？ </p>
+<h3 id="码出高效，码出质量！"><a href="#码出高效，码出质量！" class="headerlink" title="码出高效，码出质量！"></a>码出高效，码出质量！</h3><p>相比C++代码规范业界已经达成共识，Java代码规范业界比较混乱，我们期待这次发布的Java代码规范能够给业界带来一个标准，促使整体行业代码规范水平得到提高，最终能够帮助企业和开发者提升代码质量和降低代码故障率。</p>
+<h3 id="阿里出品，质量保证！"><a href="#阿里出品，质量保证！" class="headerlink" title="阿里出品，质量保证！"></a>阿里出品，质量保证！</h3><p>阿里Java技术团队一手打造出Dubbo、JStorm、Fastjson等诸多流行开源框架，部分已成为Apache基金会孵化项目；</p>
+<p>阿里在Java后端领域支撑起全球访问量最大的服务器集群；</p>
+<p>Java代码构建的阿里双11业务系统订单处理能力达到17.5万笔&#x2F;秒；</p>
+<p>到目前已累计数亿行高并发、高稳定性的最佳Java代码实践；</p>
+<p>……</p>
+<p>此次首度公开的Java开发手册正是出自这样的团队，近万名阿里Java技术精英的经验总结，并经历了多次大规模一线实战检验及完善，铸就了这本高含金量的阿里Java开发手册。该手册以Java开发者为中心视角，划分为编程规约、异常日志规约、MYSQL规约、工程规约、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱和故障敏感性，规约依次分为强制、推荐、参考三大类。此套规范不仅能让代码一目了然， 更有助于加强团队分工与合作、真正提升效率。 </p>
+<h3 id="无规矩不成方圆-无规范不能协作"><a href="#无规矩不成方圆-无规范不能协作" class="headerlink" title="无规矩不成方圆 无规范不能协作"></a>无规矩不成方圆 无规范不能协作</h3><p>众所周知，制订交通法规表面上是要限制行车权，实际上是保障公众的人身安全。试想如果没有限速，没有红绿灯，没有规定靠右行驶，谁还敢上路行驶。 </p>
+<p>同理，对软件来说，适当的规范和标准绝不是消灭代码内容的创造性、优雅性，而是限制过度个性化，以一种普遍认可的方式一起做事，降低故障率，提升协作效率。开发手册详细列举如何开发更加高效，更加容错，更加有协作性，力求知其然，更知其不然，结合正反例，提高代码质量。比如，异常日志处理时的各种不规范行为；集合转换的各种坑；创建线程池出现的等待队列OOM等。 </p>
+<h3 id="阿里技术资深大咖联袂推荐"><a href="#阿里技术资深大咖联袂推荐" class="headerlink" title="阿里技术资深大咖联袂推荐"></a>阿里技术资深大咖联袂推荐</h3><p><strong>阿里高级研究员多隆</strong>：工程师对于代码，一定要“精益求精”，不论从性能，还是简洁优雅，都要具备“精益求精”的工匠精神，认真打磨自己的作品。 </p>
+<p><strong>阿里研究员毕玄</strong>：一个优秀的工程师和一个普通工程师的区别，不是现在满天飞的架构图，他的功底就是体现在他写的每一行代码上。 </p>
+<p><strong>阿里研究员玄难</strong>：代码是软件工程里面的产品设计、系统架构设计等工作的最后承载体，代码的质量决定了一切工作的成败。 </p>
+<p><strong>阿里巴巴B2B事业群CTO李纯</strong>：好的软件产品离不开工程师高质量的代码及相互间顺畅的沟通与合作。简单，适用的代码规约背后所传递的是技术上的追求卓越、协同合作的精神，是每个技术团队不可缺失的重要利器。 </p>
+<p><strong>阿里研究员、HipHop作者</strong>：赵海平（花名：福贝）：程序员是创造个性化作品的艺术家，但同时也是需要团队合作的工种。个性化应尽量表现在代码效率和算法方面，牺牲小我，成就大我。 </p>
+<p><strong>拥抱规范，远离伤害！</strong></p>
+<p>开发的同学们赶紧行动起来，遵守代码规范，你好，我好，大家好！ </p>
+<p><strong>下载链接</strong>： <a class="link"   target="_blank" rel="noopener" href="http://pan.baidu.com/s/1o8bLJSm" >http://pan.baidu.com/s/1o8bLJSm<i class="fas fa-external-link-alt"></i></a> 密码: w9vw</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：阿里巴巴Java开发手册</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2017-02-16 09:12:50</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2017_02_16_java_help_doc/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2017_04_15_to_son/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">经典诫子书</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2017_01_15_oak/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">爱的深沉</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%EF%BC%8C%E7%A0%81%E5%87%BA%E8%B4%A8%E9%87%8F%EF%BC%81"><span class="nav-text">码出高效，码出质量！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E5%87%BA%E5%93%81%EF%BC%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%EF%BC%81"><span class="nav-text">阿里出品，质量保证！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E8%A7%84%E7%9F%A9%E4%B8%8D%E6%88%90%E6%96%B9%E5%9C%86-%E6%97%A0%E8%A7%84%E8%8C%83%E4%B8%8D%E8%83%BD%E5%8D%8F%E4%BD%9C"><span class="nav-text">无规矩不成方圆 无规范不能协作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E6%8A%80%E6%9C%AF%E8%B5%84%E6%B7%B1%E5%A4%A7%E5%92%96%E8%81%94%E8%A2%82%E6%8E%A8%E8%8D%90"><span class="nav-text">阿里技术资深大咖联袂推荐</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

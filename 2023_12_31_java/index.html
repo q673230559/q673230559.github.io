@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            Java 8 新特性一 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Java 8 新特性一</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2023-12-31
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/java8/">java8</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD/">类型推断</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3/">类型注解</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Stream-API/">Stream API</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>24 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Java 现在发布的版本很快，每年两个，但是真正会被大规模使用的是 3 年一个的 LTS 版本。</p>
+<p>每 3 年发布一个 LTS（Long-Term Support），长期维护版本。意味着只有Java 8 ，Java 11， Java 17，Java 21 才可能被大规模使用。</p>
+<p>每年发布两个正式版本，分别是 3 月份和 9 月份。</p>
+<p>在 Java 版本中，一个特性的发布都会经历孵化阶段、预览阶段和正式版本。其中孵化和预览可能会跨越多个 Java 版本。所以在介绍 Java 新特性时采用如下这种策略：</p>
+<ol>
+<li>每个版本的新特性，都会做一个简单的概述。</li>
+<li>单独出文介绍跟编码相关的新特性，一些如 JVM、性能优化的新特性不单独出文介绍。</li>
+<li>孵化阶段的新特性不出文介绍。</li>
+<li>首次引入为预览特性、新特性增强、首次引入的正式特性，单独出文做详细介绍。</li>
+<li>影响比较大的新特性如果在现阶段没有转正的新特性不单独出文介绍，单独出文的重大特性一般都在 Java 21 版本之前已转为正式特性，例如：<ul>
+<li>虚拟线程，Java 19 引入的，在 Java 21 转正，所以在 Java 19 单独出文做详细介绍</li>
+<li>作用域值，Java 20 引入的，但是在 Java 21 还处于预览阶段，所以不做介绍，等将来转正后会详细介绍</li>
+</ul>
+</li>
+</ol>
+<h1 id="Java-8-新特性一"><a href="#Java-8-新特性一" class="headerlink" title="Java 8 新特性一"></a>Java 8 新特性一</h1><h2 id="JEP-101：类型推断优化"><a href="#JEP-101：类型推断优化" class="headerlink" title="JEP 101：类型推断优化"></a>JEP 101：类型推断优化</h2><h3 id="简单理解泛型"><a href="#简单理解泛型" class="headerlink" title="简单理解泛型"></a>简单理解泛型</h3><p>泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。通俗点将就是“类型的变量”。这种类型变量可以用在类、接口和方法的创建中。</p>
+<p>理解Java泛型最简单的方法是把它看成一种便捷语法，能节省你某些Java类型转换(casting)上的操作:</p>
+<p>List<Apple> box &#x3D; new ArrayList<Apple>();box.add(new Apple());Apple apple &#x3D;box.get(0);</p>
+<p>上面的代码自身已表达的很清楚: box是一个装有Apple对象的List。get方法返回一个Apple对象实例，这个过程不需要进行类型转换。没有泛型，上面的代码需要写成这样:</p>
+<p>Apple apple &#x3D; (Apple)box.get(0);</p>
+<h3 id="泛型的尴尬"><a href="#泛型的尴尬" class="headerlink" title="泛型的尴尬"></a>泛型的尴尬</h3><p>泛型的最大优点是提供了程序的类型安全同时可以向后兼容，但也有尴尬的地方，就是每次定义时都要写明泛型的类型，这样显示指定不仅感觉有些冗长，最主要是很多程序员不熟悉泛型，因此很多时候不能够给出正确的类型参数，现在通过编译器自动推断泛型的参数类型，能够减少这样的情况，并提高代码可读性。</p>
+<h3 id="java7的泛型类型推断改进"><a href="#java7的泛型类型推断改进" class="headerlink" title="java7的泛型类型推断改进"></a>java7的泛型类型推断改进</h3><p>在以前的版本中使用泛型类型，需要在声明并赋值的时候，两侧都加上泛型类型。例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; myMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>你可能觉得:老子在声明变量的的时候已经指明了参数类型，为毛还要在初始化对象时再指定? 幸好，在Java SE 7中，这种方式得以改进，现在你可以使用如下语句进行声明并赋值:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; myMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(); <span class="comment">//注意后面的&quot;&lt;&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这条语句中，编译器会根据变量声明时的泛型类型自动推断出实例化HashMap时的泛型类型。再次提醒一定要注意new HashMap后面的“&lt;&gt;”，只有加上这个“&lt;&gt;”才表示是自动类型推断，否则就是非泛型类型的HashMap，并且在使用编译器编译源代码时会给出一个警告提示。</p>
+<p>但是: Java SE 7在创建泛型实例时的类型推断是有限制的: 只有构造器的参数化类型在上下文中被显著的声明了，才可以使用类型推断，否则不行。例如: 下面的例子在java 7无法正确编译(但现在在java8里面可以编译，因为根据方法参数来自动推断泛型的类型):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;A&quot;</span>);<span class="comment">// 由于addAll期望获得Collection&lt;? extends String&gt;类型的参数，因此下面的语句无法通过</span></span><br><span class="line">list.addAll(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java8的泛型类型推断改进"><a href="#Java8的泛型类型推断改进" class="headerlink" title="Java8的泛型类型推断改进"></a>Java8的泛型类型推断改进</h3><p>java8里面泛型的目标类型推断主要2个:</p>
+<p>1.支持通过方法上下文推断泛型目标类型</p>
+<p>2.支持在方法调用链路当中，泛型类型推断传递到最后一个方法</p>
+<p>让我们看看官网的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">List</span>&lt;E&gt; &#123;</span><br><span class="line">   <span class="keyword">static</span> &lt;Z&gt; List&lt;Z&gt; <span class="title function_">nil</span><span class="params">()</span> &#123; ... &#125;;</span><br><span class="line">   <span class="keyword">static</span> &lt;Z&gt; List&lt;Z&gt; <span class="title function_">cons</span><span class="params">(Z head, List&lt;Z&gt; tail)</span> &#123; ... &#125;;</span><br><span class="line">   E <span class="title function_">head</span><span class="params">()</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据JEP101的特性，我们在调用上面方法的时候可以这样写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过方法赋值的目标参数来自动推断泛型的类型</span></span><br><span class="line">List&lt;String&gt; l = List.nil();</span><br><span class="line"><span class="comment">//而不是显示的指定类型</span></span><br><span class="line"><span class="comment">//List&lt;String&gt; l = List.&lt;String&gt;nil();</span></span><br><span class="line"><span class="comment">//通过前面方法参数类型推断泛型的类型</span></span><br><span class="line">List.cons(<span class="number">42</span>, List.nil());</span><br><span class="line"><span class="comment">//而不是显示的指定类型</span></span><br><span class="line"><span class="comment">//List.cons(42, List.&lt;Integer&gt;nil());</span></span><br></pre></td></tr></table></figure>
+
+<p>以上是JEP101的特性内容了，Java作为静态语言的代表者，可以说类型系统相当丰富。导致类型间互相转换的问题困扰着每个java程序员，通过编译器自动推断类型的东西可以稍微缓解一下类型转换太复杂的问题。 虽然说是小进步，但对于我们天天写代码的程序员，肯定能带来巨大的作用，至少心情更愉悦了</p>
+<h2 id="JEP-104：类型注解"><a href="#JEP-104：类型注解" class="headerlink" title="JEP 104：类型注解"></a>JEP 104：类型注解</h2><p>从java5开始加入这一特性，发展到现在已然是遍地开花，在很多框架中得到了广泛的使用，用来简化程序中的配置。那充满争议的类型注解究竟是什么? 复杂还是便捷?</p>
+<ol>
+<li><p>在java 8之前，注解只能是在声明的地方所使用，比如类，方法，属性；</p>
+</li>
+<li><p>java 8里面，注解可以应用在任何地方，比如:</p>
+</li>
+</ol>
+<p>创建类实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="meta">@Interned</span> MyObject();</span><br></pre></td></tr></table></figure>
+
+<p>类型映射</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myString = (<span class="meta">@NonNull</span> String) str;</span><br></pre></td></tr></table></figure>
+
+<p>implements 语句中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UnmodifiableList</span>&lt;T&gt; implements <span class="meta">@Readonly</span> List&lt;<span class="meta">@Readonly</span> T&gt; &#123; … &#125;</span><br></pre></td></tr></table></figure>
+
+<p>throw exception声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">monitorTemperature</span><span class="params">()</span> <span class="keyword">throws</span> <span class="meta">@Critical</span> TemperatureException &#123; … &#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，类型注解只是语法而不是语义，并不会影响java的编译时间，加载时间，以及运行时间，也就是说，编译成class文件的时候并不包含类型注解。</p>
+<h3 id="类型注解的作用"><a href="#类型注解的作用" class="headerlink" title="类型注解的作用"></a>类型注解的作用</h3><p>先看看下面代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collections.emptyList().add(<span class="string">&quot;One&quot;</span>);</span><br><span class="line"><span class="type">int</span> i=Integer.parseInt(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.console().readLine();</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码编译是通过的，但运行是会分别报UnsupportedOperationException； NumberFormatException；NullPointerException异常，这些都是runtime error；</p>
+<p>类型注解被用来支持在Java的程序中做强类型检查。配合插件式的check framework，可以在编译的时候检测出runtime error，以提高代码质量。这就是类型注解的作用了。</p>
+<p>check framework是第三方工具，配合Java的类型注解效果就是1+1&gt;2。它可以嵌入到javac编译器里面，可以配合ant和maven使用, 地址是<a class="link"   target="_blank" rel="noopener" href="http://types.cs.washington.edu/checker-framework/%E3%80%82" >http://types.cs.washington.edu/checker-framework/。<i class="fas fa-external-link-alt"></i></a> check framework可以找到类型注解出现的地方并检查，举个简单的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> checkers.nullness.quals.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GetStarted</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sample</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="meta">@NonNull</span> <span class="type">Object</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用javac编译上面的类</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -processor checkers.nullness.NullnessChecker GetStarted.java</span><br></pre></td></tr></table></figure>
+
+<p>编译是通过，但如果修改成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NonNull</span> <span class="type">Object</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GetStarted.java:5: incompatible types.</span><br><span class="line">found   : @Nullable &lt;nulltype&gt;</span><br><span class="line">required: @NonNull Object</span><br><span class="line">        @NonNull Object ref = null;</span><br><span class="line">                              ^</span><br><span class="line">1 error</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="类型注解向下兼容的解决方案"><a href="#类型注解向下兼容的解决方案" class="headerlink" title="类型注解向下兼容的解决方案"></a>类型注解向下兼容的解决方案</h3><p>如果你不想使用类型注解检测出来错误，则不需要processor，直接javac GetStarted.java是可以编译通过的，这是在java 8 with Type Annotation Support版本里面可以，但java 5,6,7版本都不行，因为javac编译器不知道@NonNull是什么东西，但check framework 有个向下兼容的解决方案，就是将类型注解nonnull用&#x2F;**&#x2F;注释起来，比如上面例子修改为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> checkers.nullness.quals.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GetStarted</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sample</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">/*@NonNull*/</span> <span class="type">Object</span> <span class="variable">ref</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样javac编译器就会忽略掉注释块，但用check framework里面的javac编译器同样能够检测出nonnull错误。 通过类型注解+check framework我们可以看到，现在runtime error可以在编译时候就能找到。</p>
+<h3 id="关于JSR-308"><a href="#关于JSR-308" class="headerlink" title="关于JSR 308"></a>关于JSR 308</h3><p>JSR 308想要解决在Java 1.5注解中出现的两个问题:</p>
+<ul>
+<li>在句法上对注解的限制: 只能把注解写在声明的地方</li>
+<li>类型系统在语义上的限制: 类型系统还做不到预防所有的bug</li>
+</ul>
+<p>JSR 308 通过如下方法解决上述两个问题:</p>
+<ul>
+<li>对Java语言的句法进行扩充，允许注解出现在更多的位置上。包括: 方法接收器(method receivers，译注: 例public int size() @Readonly { … })，泛型参数，数组，类型转换，类型测试，对象创建，类型参数绑定，类继承和throws子句。其实就是类型注解，现在是java 8的一个特性</li>
+<li>通过引入可插拔的类型系统(pluggable type systems)能够创建功能更强大的注解处理器。类型检查器对带有类型限定注解的源码进行分析，一旦发现不匹配等错误之处就会产生警告信息。其实就是check framework</li>
+</ul>
+<p>对JSR308，有人反对，觉得更复杂更静态了，比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotEmpty</span> List&lt;<span class="meta">@NonNull</span> String&gt; strings = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;<span class="meta">@NonNull</span> String&gt;()&gt;</span><br></pre></td></tr></table></figure>
+
+<p>换成动态语言为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">var</span> <span class="variable">strings</span> <span class="operator">=</span> [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>有人赞成，说到底，代码才是“最根本”的文档。代码中包含的注解清楚表明了代码编写者的意图。当没有及时更新或者有遗漏的时候，恰恰是注解中包含的意图信息，最容易在其他文档中被丢失。而且将运行时的错误转到编译阶段，不但可以加速开发进程，还可以节省测试时检查bug的时间。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>并不是人人都喜欢这个特性，特别是动态语言比较流行的今天，所幸，java 8并不强求大家使用这个特性，反对的人可以不使用这一特性，而对代码质量有些要求比较高的人或公司可以采用JSR 308，毕竟代码才是“最基本”的文档，这句话我是赞同的。虽然代码会增多，但可以使你的代码更具有表达意义。对这个特性有何看法，大家各抒己见。。。。</p>
+<h2 id="JEP-107：Stream-API"><a href="#JEP-107：Stream-API" class="headerlink" title="JEP 107：Stream API"></a>JEP 107：Stream API</h2><p>Stream API ( java.util.stream) 把真正的函数式编程风格引入到Java中。这是目前为止对Java类库最好的补充，因为Stream API可以极大提供Java程 序员的生产力，让程序员写出高效率、干净、简洁的代码。</p>
+<p>Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望对集合进行的操作，可以执行非常复杂的查找、过滤和映射数据等操作。<br>使用 Stream API 对集合数据进行操作，就类似于使用 SQL 执行的数据库查询。 也可以使用 Stream API来并行执行操作。简言之，Stream API 提供了一种高效且易于使用的处理数据的方式。</p>
+<h3 id="为什么要使用Stream-API？"><a href="#为什么要使用Stream-API？" class="headerlink" title="为什么要使用Stream API？"></a>为什么要使用Stream API？</h3><p>实际开发中，项目中多数数据源都来自于Mysql，Oracle等。但现在数据源可以更多了，有MongDB，Radis等，而这些NoSQL的数据就需要Java层面去处理。</p>
+<p>Stream 和 Collection 集合的区别：Collection 是一种静态的内存数据结构，而 Stream 是有关计算的。前者是主要面向内存，存储在内存中，后者主要是面向 CPU，通过 CPU 实现计算。</p>
+<h3 id="什么是-Stream？"><a href="#什么是-Stream？" class="headerlink" title="什么是 Stream？"></a>什么是 Stream？</h3><p>是数据渠道，用于操作数据源（集合、数组等）所生成的元素序列。 “集合讲的是数据，Stream讲的是计算！”</p>
+<p>注意：</p>
+<ol>
+<li>Stream关注的是对数据的运算，与CPU打交道，集合关注的是数据的存储，与内存打交道。</li>
+<li>Stream 自己不会存储元素。</li>
+<li>Stream 不会改变源对象。相反，他们会返回一个持有结果的新Stream。</li>
+<li>Stream 操作是延迟执行的。这意味着他们会等到需要结果的时候才执行</li>
+</ol>
+<h3 id="Stream-操作的三个步骤"><a href="#Stream-操作的三个步骤" class="headerlink" title="Stream 操作的三个步骤"></a>Stream 操作的三个步骤</h3><ol>
+<li><p>创建 Stream</p>
+<blockquote>
+<p>一个数据源（如：集合、数组），获取一个流。</p>
+</blockquote>
+</li>
+<li><p>中间操作</p>
+<blockquote>
+<p>一个中间操作链，对数据源的数据进行处理。</p>
+</blockquote>
+</li>
+<li><p>终止操作(终端操作)</p>
+<blockquote>
+<p>一旦执行终止操作，就执行中间操作链，并产生结果，之后，不会再被使用。</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/2023_12_30_java/1.jpg" alt="1"></p>
+<p>注意：</p>
+<blockquote>
+<ol>
+<li>一个中间操作链，对数据源的数据进行处理</li>
+<li>一旦执行终止操作，就执行中间操作链，并产生结果。之后，不会再被使用</li>
+</ol>
+</blockquote>
+<h3 id="创建Stream实例"><a href="#创建Stream实例" class="headerlink" title="创建Stream实例"></a>创建Stream实例</h3><ol>
+<li>创建 Stream方式一：通过集合</li>
+</ol>
+<p>Java8 中的 Collection 接口被扩展，提供了两个获取流的方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>default Stream<E> stream()</td>
+<td>返回一个顺序流</td>
+</tr>
+<tr>
+<td>default Stream<E> parallelStream()</td>
+<td>返回一个并行流</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建 Stream方式一：通过集合</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        default Stream&lt;E&gt; stream() : 返回一个顺序流</span></span><br><span class="line">        Stream&lt;Employee&gt; stream = employees.stream();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        default Stream&lt;E&gt; parallelStream() : 返回一个并行流</span></span><br><span class="line">        Stream&lt;Employee&gt; parallelStream = employees.parallelStream();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建 Stream方式二：通过数组</li>
+</ol>
+<p>Java8 中的 Arrays 的静态方法 stream() 可以获取数组流：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static <T> Stream<T> stream(T[] array)</td>
+<td>返回一个流</td>
+</tr>
+<tr>
+<td>public static IntStream stream(int[] array)</td>
+<td>返回一个 int 型流</td>
+</tr>
+<tr>
+<td>public static LongStream stream(long[] array)</td>
+<td>返回一个 long 型流</td>
+</tr>
+<tr>
+<td>public static DoubleStream stream(double[] array)</td>
+<td>返回一个 double 型流</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建 Stream方式二：通过数组</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="comment">//调用Arrays类的static &lt;T&gt; Stream&lt;T&gt; stream(T[] array): 返回一个流</span></span><br><span class="line">        <span class="type">IntStream</span> <span class="variable">stream</span> <span class="operator">=</span> Arrays.stream(arr);</span><br><span class="line"></span><br><span class="line">        <span class="type">Employee</span> <span class="variable">e1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1001</span>,<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">        <span class="type">Employee</span> <span class="variable">e2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1002</span>,<span class="string">&quot;Jerry&quot;</span>);</span><br><span class="line">        Employee[] arr1 = <span class="keyword">new</span> <span class="title class_">Employee</span>[]&#123;e1,e2&#125;;</span><br><span class="line">        Stream&lt;Employee&gt; stream1 = Arrays.stream(arr1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>创建 Stream方式三：通过Stream的of()</li>
+</ol>
+<p>可以调用Stream类静态方法 of(), 通过显示值创建一个流。它可以接收任意数量的参数。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>spublic static<T> Stream<T> of(T… values)</td>
+<td>返回一个流</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建 Stream方式三：通过Stream的of()</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">        Stream&lt;Integer&gt; stream = Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建 Stream方式四：创建无限流</li>
+</ol>
+<p>可以使用静态方法 Stream.iterate() 和 Stream.generate(), 创建无限流。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public static<T> Stream<T> iterate(final T seed, final UnaryOperator<T> f)</td>
+<td>迭代</td>
+</tr>
+<tr>
+<td>public static<T> Stream<T> generate(Supplier<T> s)</td>
+<td>生成</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//创建 Stream方式四：创建无限流</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//      迭代</span></span><br><span class="line"><span class="comment">//      public static&lt;T&gt; Stream&lt;T&gt; iterate(final T seed, final UnaryOperator&lt;T&gt; f)</span></span><br><span class="line">        <span class="comment">//遍历前10个偶数</span></span><br><span class="line">        Stream.iterate(<span class="number">0</span>, t -&gt; t + <span class="number">2</span>).limit(<span class="number">10</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//      生成</span></span><br><span class="line"><span class="comment">//      public static&lt;T&gt; Stream&lt;T&gt; generate(Supplier&lt;T&gt; s)</span></span><br><span class="line">        Stream.generate(Math::random).limit(<span class="number">10</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stream-的中间操作"><a href="#Stream-的中间操作" class="headerlink" title="Stream 的中间操作"></a>Stream 的中间操作</h3><p>多个中间操作可以连接起来形成一个流水线，除非流水线上触发终止 操作，否则中间操作不会执行任何的处理！而在终止操作时一次性全<br>部处理，称为“惰性求值”。</p>
+<ol>
+<li>筛选与切片</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter(Predicate p)</td>
+<td>接收 Lambda， 从流中排除某些元素</td>
+</tr>
+<tr>
+<td>distinct()</td>
+<td>筛选，通过流所生成元素的 hashCode() 和 equals() 去除重复元素</td>
+</tr>
+<tr>
+<td>limit(long maxSize)</td>
+<td>截断流，使其元素不超过给定数量</td>
+</tr>
+<tr>
+<td>skip(long n)</td>
+<td>跳过元素，返回一个扔掉了前 n个元素的流。若流中元素不足 n个，则返回一个空流。与 limit(n) 互补</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1-筛选与切片</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Employee&gt; list = EmployeeData.getEmployees();</span><br><span class="line"><span class="comment">//        filter(Predicate p)——接收 Lambda ， 从流中排除某些元素。</span></span><br><span class="line">        Stream&lt;Employee&gt; stream = list.stream();</span><br><span class="line">        <span class="comment">//练习：查询员工表中薪资大于7000的员工信息</span></span><br><span class="line">        stream.filter(e -&gt; e.getSalary() &gt; <span class="number">7000</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        System.out.println();</span><br><span class="line"><span class="comment">//        limit(n)——截断流，使其元素不超过给定数量。</span></span><br><span class="line">        list.stream().limit(<span class="number">3</span>).forEach(System.out::println);</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        skip(n) —— 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补</span></span><br><span class="line">        list.stream().skip(<span class="number">3</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        System.out.println();</span><br><span class="line"><span class="comment">//        distinct()——筛选，通过流所生成元素的 hashCode() 和 equals() 去除重复元素</span></span><br><span class="line"></span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1010</span>,<span class="string">&quot;刘强东&quot;</span>,<span class="number">40</span>,<span class="number">8000</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1010</span>,<span class="string">&quot;刘强东&quot;</span>,<span class="number">41</span>,<span class="number">8000</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1010</span>,<span class="string">&quot;刘强东&quot;</span>,<span class="number">40</span>,<span class="number">8000</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1010</span>,<span class="string">&quot;刘强东&quot;</span>,<span class="number">40</span>,<span class="number">8000</span>));</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1010</span>,<span class="string">&quot;刘强东&quot;</span>,<span class="number">40</span>,<span class="number">8000</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//        System.out.println(list);</span></span><br><span class="line"></span><br><span class="line">        list.stream().distinct().forEach(System.out::println);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>映射</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>map(Function f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。</td>
+</tr>
+<tr>
+<td>mapToDouble(ToDoubleFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 DoubleStream。</td>
+</tr>
+<tr>
+<td>mapToInt(ToIntFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 IntStream。</td>
+</tr>
+<tr>
+<td>mapToLong(ToLongFunction f)</td>
+<td>接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 LongStream。</td>
+</tr>
+<tr>
+<td>flatMap(Function f)</td>
+<td>接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流。</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//映射</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line"><span class="comment">//        map(Function f)——接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素。</span></span><br><span class="line">        List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;bb&quot;</span>, <span class="string">&quot;cc&quot;</span>, <span class="string">&quot;dd&quot;</span>);</span><br><span class="line">        list.stream().map(str -&gt; str.toUpperCase()).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        练习1：获取员工姓名长度大于3的员工的姓名。</span></span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">        Stream&lt;String&gt; namesStream = employees.stream().map(Employee::getName);</span><br><span class="line">        namesStream.filter(name -&gt; name.length() &gt; <span class="number">3</span>).forEach(System.out::println);</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="comment">//练习2：</span></span><br><span class="line">        Stream&lt;Stream&lt;Character&gt;&gt; streamStream = list.stream().map(StreamAPITest1::fromStringToStream);</span><br><span class="line">        streamStream.forEach(s -&gt;&#123;</span><br><span class="line">            s.forEach(System.out::println);</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println();</span><br><span class="line"><span class="comment">//        flatMap(Function f)——接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流。</span></span><br><span class="line">        Stream&lt;Character&gt; characterStream = list.stream().flatMap(StreamAPITest1::fromStringToStream);</span><br><span class="line">        characterStream.forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将字符串中的多个字符构成的集合转换为对应的Stream的实例</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Stream&lt;Character&gt; <span class="title function_">fromStringToStream</span><span class="params">(String str)</span>&#123;<span class="comment">//aa</span></span><br><span class="line">        ArrayList&lt;Character&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(Character c : str.toCharArray())&#123;</span><br><span class="line">            list.add(c);</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> list.stream();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">list1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list1.add(<span class="number">1</span>);</span><br><span class="line">        list1.add(<span class="number">2</span>);</span><br><span class="line">        list1.add(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">list2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list2.add(<span class="number">4</span>);</span><br><span class="line">        list2.add(<span class="number">5</span>);</span><br><span class="line">        list2.add(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        list1.add(list2);</span></span><br><span class="line">        list1.addAll(list2);</span><br><span class="line">        System.out.println(list1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>排序</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sorted()</td>
+<td>产生一个新流，其中按自然顺序排序。</td>
+</tr>
+<tr>
+<td>sorted(Comparator com)</td>
+<td>产生一个新流，其中按比较器顺序排序。</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3-排序</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span>&#123;</span><br><span class="line"><span class="comment">//        sorted()——自然排序</span></span><br><span class="line">        List&lt;Integer&gt; list = Arrays.asList(<span class="number">12</span>, <span class="number">43</span>, <span class="number">65</span>, <span class="number">34</span>, <span class="number">87</span>, <span class="number">0</span>, -<span class="number">98</span>, <span class="number">7</span>);</span><br><span class="line">        list.stream().sorted().forEach(System.out::println);</span><br><span class="line">        <span class="comment">//抛异常，原因:Employee没有实现Comparable接口</span></span><br><span class="line"><span class="comment">//        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span></span><br><span class="line"><span class="comment">//        employees.stream().sorted().forEach(System.out::println);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//        sorted(Comparator com)——定制排序</span></span><br><span class="line"></span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">        employees.stream().sorted( (e1,e2) -&gt; &#123;</span><br><span class="line"></span><br><span class="line">           <span class="type">int</span> <span class="variable">ageValue</span> <span class="operator">=</span> Integer.compare(e1.getAge(),e2.getAge());</span><br><span class="line">           <span class="keyword">if</span>(ageValue != <span class="number">0</span>)&#123;</span><br><span class="line">               <span class="keyword">return</span> ageValue;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               <span class="keyword">return</span> -Double.compare(e1.getSalary(),e2.getSalary());</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">        &#125;).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Stream-的终止操作"><a href="#Stream-的终止操作" class="headerlink" title="Stream 的终止操作"></a>Stream 的终止操作</h3><blockquote>
+<p>终端操作会从流的流水线生成结果。其结果可以是任何不是流的值，例 如：List、Integer，甚至是 void 。</p>
+</blockquote>
+<blockquote>
+<p>流进行了终止操作后，不能再次使用。</p>
+</blockquote>
+<ol>
+<li>匹配与查找</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>allMatch(Predicate p)</td>
+<td>检查是否匹配所有元素。</td>
+</tr>
+<tr>
+<td>anyMatch(Predicate p)</td>
+<td>检查是否至少匹配一个元素。</td>
+</tr>
+<tr>
+<td>noneMatch(Predicate p)</td>
+<td>检查是否没有匹配所有元素</td>
+</tr>
+<tr>
+<td>findFirst()</td>
+<td>返回第一个元素</td>
+</tr>
+<tr>
+<td>findAny()</td>
+<td>返回当前流中的任意元素</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回流中元素总数</td>
+</tr>
+<tr>
+<td>max(Comparator c)</td>
+<td>返回流中最大值</td>
+</tr>
+<tr>
+<td>min(Comparator c)</td>
+<td>返回流中最小值</td>
+</tr>
+<tr>
+<td>forEach(Consumer c)</td>
+<td>内部迭代(使用 Collection 接口需要用户去做迭代，称为外部迭代。相反，Stream API 使用内部迭代——它帮你把迭代做了)</td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//1-匹配与查找</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        allMatch(Predicate p)——检查是否匹配所有元素。</span></span><br><span class="line"><span class="comment">//          练习：是否所有的员工的年龄都大于18</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">allMatch</span> <span class="operator">=</span> employees.stream().allMatch(e -&gt; e.getAge() &gt; <span class="number">18</span>);</span><br><span class="line">        System.out.println(allMatch);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        anyMatch(Predicate p)——检查是否至少匹配一个元素。</span></span><br><span class="line"><span class="comment">//         练习：是否存在员工的工资大于 10000</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">anyMatch</span> <span class="operator">=</span> employees.stream().anyMatch(e -&gt; e.getSalary() &gt; <span class="number">10000</span>);</span><br><span class="line">        System.out.println(anyMatch);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        noneMatch(Predicate p)——检查是否没有匹配的元素。</span></span><br><span class="line"><span class="comment">//          练习：是否存在员工姓“雷”</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">noneMatch</span> <span class="operator">=</span> employees.stream().noneMatch(e -&gt; e.getName().startsWith(<span class="string">&quot;雷&quot;</span>));</span><br><span class="line">        System.out.println(noneMatch);</span><br><span class="line"><span class="comment">//        findFirst——返回第一个元素</span></span><br><span class="line">        Optional&lt;Employee&gt; employee = employees.stream().findFirst();</span><br><span class="line">        System.out.println(employee);</span><br><span class="line"><span class="comment">//        findAny——返回当前流中的任意元素</span></span><br><span class="line">        Optional&lt;Employee&gt; employee1 = employees.parallelStream().findAny();</span><br><span class="line">        System.out.println(employee1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">        <span class="comment">// count——返回流中元素的总个数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> employees.stream().filter(e -&gt; e.getSalary() &gt; <span class="number">5000</span>).count();</span><br><span class="line">        System.out.println(count);</span><br><span class="line"><span class="comment">//        max(Comparator c)——返回流中最大值</span></span><br><span class="line"><span class="comment">//        练习：返回最高的工资：</span></span><br><span class="line">        Stream&lt;Double&gt; salaryStream = employees.stream().map(e -&gt; e.getSalary());</span><br><span class="line">        Optional&lt;Double&gt; maxSalary = salaryStream.max(Double::compare);</span><br><span class="line">        System.out.println(maxSalary);</span><br><span class="line"><span class="comment">//        min(Comparator c)——返回流中最小值</span></span><br><span class="line"><span class="comment">//        练习：返回最低工资的员工</span></span><br><span class="line">        Optional&lt;Employee&gt; employee = employees.stream().min((e1, e2) -&gt; Double.compare(e1.getSalary(), e2.getSalary()));</span><br><span class="line">        System.out.println(employee);</span><br><span class="line">        System.out.println();</span><br><span class="line"><span class="comment">//        forEach(Consumer c)——内部迭代</span></span><br><span class="line">        employees.stream().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用集合的遍历操作</span></span><br><span class="line">        employees.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>归约</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reduce(T iden, BinaryOperator b)</td>
+<td>可以将流中元素反复结合起来，得到一个值。返回 T</td>
+</tr>
+<tr>
+<td>reduce(BinaryOperator b)</td>
+<td>可以将流中元素反复结合起来，得到一个值。返回 Optional<T></td>
+</tr>
+</tbody></table>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2-归约</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line"><span class="comment">//        reduce(T identity, BinaryOperator)——可以将流中元素反复结合起来，得到一个值。返回 T</span></span><br><span class="line"><span class="comment">//        练习1：计算1-10的自然数的和</span></span><br><span class="line">        List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">sum</span> <span class="operator">=</span> list.stream().reduce(<span class="number">0</span>, Integer::sum);</span><br><span class="line">        System.out.println(sum);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//        reduce(BinaryOperator) ——可以将流中元素反复结合起来，得到一个值。返回 Optional&lt;T&gt;</span></span><br><span class="line"><span class="comment">//        练习2：计算公司所有员工工资的总和</span></span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">        Stream&lt;Double&gt; salaryStream = employees.stream().map(Employee::getSalary);</span><br><span class="line"><span class="comment">//        Optional&lt;Double&gt; sumMoney = salaryStream.reduce(Double::sum);</span></span><br><span class="line">        Optional&lt;Double&gt; sumMoney = salaryStream.reduce((d1,d2) -&gt; d1 + d2);</span><br><span class="line">        System.out.println(sumMoney.get());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>收集</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>collect(Collector c)</td>
+<td>将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法</td>
+</tr>
+</tbody></table>
+<p>Collector 接口中方法的实现决定了如何对流执行收集的操作(如收集到 List、Set、Map)。</p>
+<p>另外， Collectors 实用类提供了很多静态方法，可以方便地创建常见收集器实例，具体方法参考文档：<a class="link"   target="_blank" rel="noopener" href="https://www.matools.com/api/java8" >https://www.matools.com/api/java8<i class="fas fa-external-link-alt"></i></a></p>
+<p>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3-收集</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span>&#123;</span><br><span class="line"><span class="comment">//        collect(Collector c)——将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法</span></span><br><span class="line"><span class="comment">//        练习1：查找工资大于6000的员工，结果返回为一个List或Set</span></span><br><span class="line"></span><br><span class="line">        List&lt;Employee&gt; employees = EmployeeData.getEmployees();</span><br><span class="line">        List&lt;Employee&gt; employeeList = employees.stream().filter(e -&gt; e.getSalary() &gt; <span class="number">6000</span>).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        employeeList.forEach(System.out::println);</span><br><span class="line">        System.out.println();</span><br><span class="line">        Set&lt;Employee&gt; employeeSet = employees.stream().filter(e -&gt; e.getSalary() &gt; <span class="number">6000</span>).collect(Collectors.toSet());</span><br><span class="line"></span><br><span class="line">        employeeSet.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Java 8 新特性一</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2023-12-31 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2023_12_31_java/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2023_12_30_java/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Java 8 ~ Java 21 的新特性</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-8-%E6%96%B0%E7%89%B9%E6%80%A7%E4%B8%80"><span class="nav-text">Java 8 新特性一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JEP-101%EF%BC%9A%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E4%BC%98%E5%8C%96"><span class="nav-text">JEP 101：类型推断优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E6%B3%9B%E5%9E%8B"><span class="nav-text">简单理解泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%B0%B4%E5%B0%AC"><span class="nav-text">泛型的尴尬</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java7%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E6%94%B9%E8%BF%9B"><span class="nav-text">java7的泛型类型推断改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java8%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD%E6%94%B9%E8%BF%9B"><span class="nav-text">Java8的泛型类型推断改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JEP-104%EF%BC%9A%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="nav-text">JEP 104：类型注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">类型注解的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3%E5%90%91%E4%B8%8B%E5%85%BC%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">类型注解向下兼容的解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EJSR-308"><span class="nav-text">关于JSR 308</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JEP-107%EF%BC%9AStream-API"><span class="nav-text">JEP 107：Stream API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8Stream-API%EF%BC%9F"><span class="nav-text">为什么要使用Stream API？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Stream%EF%BC%9F"><span class="nav-text">什么是 Stream？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%89%E4%B8%AA%E6%AD%A5%E9%AA%A4"><span class="nav-text">Stream 操作的三个步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAStream%E5%AE%9E%E4%BE%8B"><span class="nav-text">创建Stream实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-%E7%9A%84%E4%B8%AD%E9%97%B4%E6%93%8D%E4%BD%9C"><span class="nav-text">Stream 的中间操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-%E7%9A%84%E7%BB%88%E6%AD%A2%E6%93%8D%E4%BD%9C"><span class="nav-text">Stream 的终止操作</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

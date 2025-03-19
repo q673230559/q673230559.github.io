@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            消息队列与数据库总结 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">消息队列与数据库总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-10-23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/kafka/">kafka</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mysql/">mysql</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/mysql%E8%B0%83%E4%BC%98/">mysql调优</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>8.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>30 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>本文主要讲解消息队列与数据库相关的知识，重点讲解三部分知识点：</p>
+<ol style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">Kafka 的架构与消息交互流程；</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">数据库事务的 4 大特性和分类；</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">MySQL 相关的内容，比如索引、MySQL 调优等。</span></p></li>
+</ol>
+
+<h1 id="消息队列与数据库知识点"><a href="#消息队列与数据库知识点" class="headerlink" title="消息队列与数据库知识点"></a>消息队列与数据库知识点</h1><p>先来看看相关知识点汇总，如下图。首先为了防止歧义进行说明，本课时中提到的“队列“就是指“消息队列“。</p>
+<p style="white-space: normal; text-align: justify; line-height: 1.75em; text-indent: 0em;"><img src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANuANlgNAAE1sI_RJDk707.png"></p>
+
+<h1 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h1><p>来看消息队列的应用场景，也就是队列能解决哪些问题。</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">队列可以对应用进行解耦合，应用之间不用直接调用。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">可以通过队列来传递消息，完成通信。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">队列也可以用来执行异步任务，任务提交方无需等待结果。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">队列的另一个作用是削峰填谷，在突发流量时，可以通过队列做缓冲，不会对后端服务产生较大压力，当峰值过去时，可以逐渐消费堆积的数据，填平流量低谷。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">消息队列一般还提供了一写多读的能力，可以用来做消息的多播与广播。</span></p></li>
+</ul>
+
+<p>关于队列还需要知道两个主要的消息协议。</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">JMS 是 Java 的消息服务，规定了 Java 使用消息服务的 API，在前面 Spring 的课时提到过，Spring 提供了支持 JMS 的组件。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">AMQP 是高级消息队列协议，是应用层协议的一个开放标准，AMQP 不从 API 层进行限定，而是直接定义网络交换的数据格式，因此支持跨语言的能力，例如 RabbitMQ 就使用了 AMQP 实现。</span></p></li>
+</ul>
+
+<p>再来对比几个常用的消息队列。</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">RabbitMQ</span></p></li>
+</ul>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);">使用 Erlang 开发的开源消息队列，通过 Erlang 的 Actor 模型实现了数据的稳定可靠传输。支持 AMQP、XMPP、SMTP 等多种协议，因此也比较重量级。由于采用 Broker 代理架构，发送给客户端时先在中心队列排队，<span style="font-size: 14px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">疑似 RabbitMQ</span>的单机吞吐量在万级，不算很高。</span></p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">ActiveMQ</span></p></li>
+</ul>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);">可以部署于代理模式和 P2P 模式，支持多种协议，单机吞吐量在万级，但是 ActiveMQ 不够轻巧，对于队列较多的情况支持不是很好。并且有较低概率丢失消息。</span></p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">RocketMQ</span></p></li>
+</ul>
+<p style="margin-top: 0pt; margin-bottom: 0pt; white-space: normal; font-size: 11pt; color: rgb(73, 73, 73); text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; color: rgb(63, 63, 63);">阿里开源的消息中间件，单机能够支持 10w 级的吞吐量，使用 Java 开发，具有高吞吐量、高可用性的特点、适合在大规模分布式系统中应用。</span></p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">Kafka</span></p></li>
+</ul>
+
+
+<p>由 Scala 开发的高性能跨语言分布式消息队列，单机吞吐量可以到达 10w 级，消息延迟在 ms 级。Kafka 是完全的分布式系统，Broker、Producer、Consumer 都原生自动支持分布式，依赖于 ZooKeeper 做分布式协调。Kafka 支持一写多读，消息可以被多个客户端消费，消息有可能会重复，但是不会丢失。本课时后面会对 Kafka 的架构进行详细介绍。</p>
+<h1 id="数据库中间件"><a href="#数据库中间件" class="headerlink" title="数据库中间件"></a>数据库中间件</h1><p>数据库中间件一般提供了读写分离、数据库水平扩展的能力。下面主要介绍两个中间件。</p>
+<p>一是 Sharding-Sphere，它是一个开源的分布式数据库中间件解决方案，由 Sharding-JDBC、Sharding-Proxy、Sharding-Sidecar 这几个独立产品组成，适用不同使用场景。这几个产品都提供标准化的数据分片、读写分离、柔性事务和数据治理功能，可适用于如 Java 同构、异构语言、容器、云原生等各种多样化的应用场景。 目前 Sharding-Sphere 已经进入 Apache 孵化，发展速度很快，可以重点关注。</p>
+<p>二是 Mycat，它也提供了分库分表等能力，Mycat 基于 Proxy 代理模式，后端可以支持 MySQL、Oracle、DB2 等不同数据库实现，不过代理方式对性能会有一定影响</p>
+<p>其他还有一些数据库中间件例如 Vitess 等，使用不算广泛，了解即可</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p>对于数据库相关知识点，首先需要知道不同类型的数据库。</p>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p>常用的关系型数据库主要是 Oracle 和 MySQL。Oracle 功能强大，主要缺点就是贵。MySQL 是互联网行业中最流行的数据库，这不仅仅是因为 MySQL 免费，可以说关系数据库场景中你需要的功能，MySQL 都能很好得满足。后面的详解部分会详细介绍 MySQL 的一些知识点。</p>
+<p>MariaDB 是 MySQL 的分支，由开源社区维护，MariaDB 虽然被看作 MySQL 的替代品，但与 MySQL 相比，它在扩展功能、存储引擎上都有非常好的改进，后续可以关注。</p>
+<p>PostgreSQL也叫 PGSQL，PGSQL 类似于 Oracle 的多进程框架，可以支持高并发的应用场景。PG 几乎支持所有的 SQL 标准，支持类型相当丰富。PG 更加适合严格的企业应用场景，而 MySQL 更适合业务逻辑相对简单、数据可靠性要求较低的互联网场景。</p>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>NoSQL，就是 Not only SQL，一般指非关系型数据库。</p>
+<p>Redis 就是非关系型数据库，它提供了持久化能力，支持多种数据类型。Redis 适用于数据变化快且数据大小可预测的场景。</p>
+<p>MongoDB 是一个基于分布式文件存储的数据库，将数据存储为一个文档，数据结构由键值对组成。MongoDB 比较适合表结构不明确，且数据结构可能不断变化的场景，不适合有事务和复杂查询的场景。</p>
+<p>HBase 是建立在 HDFS，也就是 Hadoop 文件系统之上的分布式面向列的数据库，类似于谷歌的大表设计，HBase 可以快速随机访问海量结构化数据。在表中它由行排序，一个表有多个列族以及每一个列族可以有任意数量的列。 HBase 依赖 HDFS 可以实现海量数据的可靠存储，适用于数据量大，写多读少，不需要复杂查询的场景。</p>
+<p>Cassandra 是一个高可靠的大规模分布式存储系统。支持分布式的结构化 key-value 存储，以高可用性为主要目标。适合写多的场景，适合做一些简单查询，不适合用来做数据分析统计。</p>
+<p>Pika 是一个可持久化的大容量类 Redis 存储服务， 兼容五种主要数据结构的大部分命令。Pika 使用磁盘存储，主要解决 Redis 大容量存储的成本问题。</p>
+<h2 id="NewSQL"><a href="#NewSQL" class="headerlink" title="NewSQL"></a>NewSQL</h2><p>NewSQL 数据库也越来越被大家关注，NewSQL 是指新一代关系型数据库。比较典型的有TiDB。</p>
+<p>TiDB 是开源的分布式关系数据库，几乎完全兼容 MySQL，能够支持水平弹性扩展、ACID 事务、标准 SQL、MySQL 语法和 MySQL 协议，具有数据强一致的高可用特性。既适合在线事务处理，也适合在线分析处理。</p>
+<p>另外一个比较著名的 NewSQL 是蚂蚁金服的 OceanBase。OB 是可以满足金融级的可靠性和数据一致性要求的数据库系统。需要使用事务，并且数据量比较大的时候，就比较适合使用 OB。不过目前 OB 已经商业化，不再开源。</p>
+<p>最后来看数据库的范式。目前关系数据库有六种范式：第一范式、第二范式、第三范式、巴斯-科德范式（BCNF）、第四范式和第五范式。范式级别越高对数据表的要求越严格。</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">要求最低的第一范式只要求表中字段不可用在拆分。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">第二范式在第一范式的基础上要求每条记录由主键唯一区分，记录中所有属性都依赖于主键。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">第三范式在第二范式的基础上，要求所有属性必须直接依赖主键，不允许间接依赖。</span></p></li>
+</ul>
+ 
+<p> 一般说来，数据库只需满足第三范式就可以了。</p>
+<h1 id="详解-Kafka"><a href="#详解-Kafka" class="headerlink" title="详解 Kafka"></a>详解 Kafka</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>下面来学习 Kafka 的架构。先结合如下的架构图来了解 Kafka 中的几个概念。</p>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAF3c_AADzlbSKXcQ261.png"></p>
+
+<p>首先 Kafka 消息队列由三个角色组成，左面的是消息的生产方 Producer；中间是 Kafka 集群， Kafka 集群由多台 Kafka server 组成，每个 Server 称为一个 Broker，也就是消息代理；右面的是消息的消费方 Consumer。</p>
+<p>Kafka 中消息是按照 Topic 进行划分的，一个 Topic 就是一个 Queue。在实际应用中，不同业务数据就可以设置为不同的 Topic。一个 Topic 可以有多个消费方，当生产方在某个 Topic 发出一条消息后，所有订阅了这个 Topic 的消费方都可以收到这条消息。</p>
+<p>为了提高并行能力，Kafka 为每个 Topic 维护了多个 Partition 分区，每个分区可以看作一份追加类型的日志。 每个分区中的消息保证 ID 唯一且有序，新消息不断追加到尾部。Partition 实际存储数据时，会对按大小进行分段（Segment），来保证总是对较小的文件进行写操作，提高性能，方便管理。</p>
+<p>如图中间部分，Partition 分布于多个 Broker 上。图中绿色的模块表示 Topic1 被分为了 3 个 Partition。每个 Partition 会被复制多份存在于不同的 Broker 上，如图中红色的模块，这样可以保证主分区出现问题时进行容灾。每个 Broker 可以保存多个 Topic 的多个 Partition。</p>
+<p>Kafka 只保证一个分区内的消息有序，不能保证一个 Topic 的不同分区之间的消息有序。为了保证较高的处理效率，所有的消息读写都是在主 Partition 中进行，其他副本分区只会从主分区复制数据。Kafka 会在 ZooKeeper 上针对每个 Topic 维护一个称为 ISR（in-sync replica），就是已同步的副本集。如果某个主分区不可用了，Kafka 就会从 ISR 集合中选择一个副本作为新的主分区。</p>
+<h2 id="消息发布-x2F-消费流程"><a href="#消息发布-x2F-消费流程" class="headerlink" title="消息发布&#x2F;消费流程"></a>消息发布&#x2F;消费流程</h2><p>Kafka 通过对消费方进行分组管理来支持消息一写多读，流程如下图所示。</p>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WANyAeuEAAAEVCeRMppA370.png"></p>
+
+<p>来看图中的例子，这个 Topic 分为 4 个 Partition，就是图中绿色的 P1到 P4，上部的生产方根据规则选择一个 Partition 进行写入，默认规则是轮询策略。也可以由生产方指定 Partition 或者指定 key 来根据 Hash 值选择 Partition。</p>
+<p>消息的发送有三种方式：同步、异步以及 oneway。</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">同步模式下后台线程中发送消息时同步获取结果，这也是默认模式。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">异步的模式允许生产者批量发送数据，可以极大的提高性能，但是会增加丢失数据的风险。</span></p></li>
+ <li><p style="text-align: justify; line-height: 1.75em; text-indent: 0em;"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; color: rgb(63, 63, 63);">oneway 模式只发送消息不需要返回发送结果，消息可靠性最低，但是低延迟、高吞吐，适用于对可靠性要求不高的场景。</span></p></li>
+</ul>
+
+
+<p>来看消息的消费，Consumer 按照 Group 来消费消息，Topic 中的每一条消息可以被多个 Consumer Group 消费，如上图中的 GroupA 和 GroupB。Kafka 确保每个 Partition 在一个 Group 中只能由一个 Consumer 消费。Kafka 通过 Group Coordinator 来管理 Consumer 实际负责消费哪个 Partition，默认支持 Range 和轮询分配。</p>
+<p>Kafka 在 ZK 中保存了每个 Topic 中每个 Partition 在不同 Group 的消费偏移量 offset，通过更新偏移量保证每条消息都被消费</p>
+<p>注意：用多线程来读取消息时，一个线程相当于一个 Consumer 实例。当 Consumer 的数量大于分区的数量的时候，有的 Consumer 线程会读取不到数据。</p>
+<h1 id="详解数据库事务"><a href="#详解数据库事务" class="headerlink" title="详解数据库事务"></a>详解数据库事务</h1><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>数据库的特性是面试时考察频率非常高的题目，来看看数据库的 ACID 四大特性，如下图</p>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANyAYcRMAABaLbJGT1Q369.png"></p>
+
+<p>第一个原子性，指事务由原子的操作序列组成，所有操作要么全部成功，要么全部失败回滚。</p>
+<p>第二个事务的一致性，指事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处以一致性状态。比如在做多表操作时，多个表要么都是事务后新的值，要么都是事务前的旧值</p>
+<p>第三个事务的隔离性，指多个用户并发访问数据库时，数据库为每个用户执行的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。事务的隔离级别在后文中介绍。</p>
+<p>第四个事务的持久性，指一个事务一旦提交并执行成功，那么对数据库中数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作。</p>
+<h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><p>在介绍数据的隔离级别之前，先看看没有隔离性的情况下数据库会出现哪些并发问题，如下图左侧部分所示。</p>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/AB/57/CgotOV3WAN2ANddVAADwY17WNNE095.png"></p>
+
+<p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据，例如，账户 A 转帐给 B 500元，B 余额增加后但事务还没有提交完成，此时如果另外的请求中获取的是 B 增加后的余额，这就发生了脏读，因为事务如果失败回滚时，B 的余额就不应该增加。</p>
+<p>不可重复读是指对于数据库中某个数据，一个事务范围内多次查询返回了不同的数据值，这是由于在多次查询之间，有其他事务修改了数据并进行了提交。</p>
+<p>幻读是指一个事务中执行两次完全相同的查询时，第二次查询所返回的结果集跟第一个查询不相同。与不可重复读的区别在于，不可重复读是对同一条记录，两次读取的值不同。而幻读是记录的增加或删除，导致两次相同条件获取的结果记录数不同。</p>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>事务的四种隔离级别可以解决上述几种并发问题。如上图右侧内容所示，由上到下，四种隔离级别由低到高。</p>
+<p>第一个隔离级别是读未提交，也就是可以读取到其他事务未提交的内容，这是最低的隔离级别，这个隔离级别下，前面提到的三种并发问题都有可能发生。</p>
+<p>第二个隔离级别是读已提交，就是只能读取到其他事务已经提交的数据。这个隔离级别可以解决脏读问题。</p>
+<p>第三个隔离级别是可重复读，可以保证整个事务过程中，对同数据的多次读取结果是相同的。这个级别可以解决脏读和不可重复读的问题。MySQL 默认的隔离级别就是可重复读。</p>
+<p>最后一个隔离级别是串行化，这是最高的隔离级别，所有事务操作都依次顺序执行。这个级别会导致并发度下降，性能最差。不过这个级别可以解决前面提到的所有并发问题</p>
+<h2 id="事务分类"><a href="#事务分类" class="headerlink" title="事务分类"></a>事务分类</h2><p>接下来看事务的分类，如下图。</p>
+<p style="text-align:center"><img src="http://s0.lgstatic.com/i/image2/M01/AB/37/CgoB5l3WANuAZCmHAACv9TI5H7A917.png"></p>
+
+<p>第一个是扁平化事务，在扁平事务中，所有的操作都在同一层次，这也是我们平时使用最多的一种事务。它的主要限制是不能提交或者回滚事务的某一部分，要么都成功，要么都回滚。</p>
+<p>为了解决第一种事务的弊端，就有了第二种带保存点的扁平事务。它允许事务在执行过程中回滚到较早的状态，而不是全部回滚。通过在事务中插入保存点，当操作失败后，可以选择回滚到最近的保存点处。</p>
+<p>第三种事务是链事务，可以看做是第二种事务的变种。它在事务提交时，会将必要的上下文隐式传递给下一个事务，当事务失败时就可以回滚到最近的事务。不过，链事务只能回滚到最近的保存点，而带保存点的扁平化事务是可以回滚到任意的保存点。</p>
+<p>第四种事务是嵌套事务，由顶层事务和子事务构成，类似于树的结构。一般顶层事务负责逻辑管理，子事务负责具体的工作，子事务可以提交，但真正提交要等到父事务提交，如果上层事务回滚，那么所有的子事务都会回滚。</p>
+<p>最后一种类型是分布式事务。是指分布式环境中的扁平化事务。</p>
+<p>常用的分布式事务解决方案如上图右侧所示，下面进行简要介绍。</p>
+<p>第一个分布式事务解决方案是 XA 协议，是保证强一致性的刚性事务。实现方式有两段式提交和三段式提交。两段式提交需要有一个事务协调者来保证所有的事务参与者都完成了第一阶段的准备工作。如果协调者收到所有参与者都准备好的消息，就会通知所有的事务执行第二阶段提交。一般场景下两段式提交已经能够很好得解决分布式事务了，然而两阶段在即使只有一个进程发生故障时，也会导致整个系统存在较长时间的阻塞。三段式提交通过增加 pre-commit 阶段来减少前面提到的系统阻塞的时间。三段式提交很少在实际中使用，简单了解就可以了。</p>
+<p>第二个分布式解决方案是 TCC，是满足最终一致性的柔性事务方案。TCC 采用补偿机制，核心思想是对每个操作，都要注册对应的确认和补偿操作。它分为三个阶段：Try 阶段主要对业务系统进行检测及资源预留；Confirm 阶段对业务系统做确认提交；Cancel 阶段是在业务执行错误，执行回滚，释放预留的资源。</p>
+<p>第三种方案是消息一致性方案。基本思路是将本地操作和发送消息放在一个事务中，保证本地操作和消息发送要么都成功要么都失败。下游应用订阅消息，收到消息后执行对应操作。</p>
+<p>第四种方案可以了解一下阿里云中的全局事务服务 GTS，对应的开源版本是 Fescar。Fescar 基于两段式提交进行改良，剥离了分布式事务方案对数据库在协议支持上的要求。使用 Fescar 的前提是分支事务中涉及的资源，必须是支持 ACID 事务的关系型数据库。分支的提交和回滚机制，都依赖于本地事务来保障。 Fescar 的实现目前还存在一些局限，比如事务隔离级别最高支持到读已提交级别。</p>
+<h1 id="详解-MySQL"><a href="#详解-MySQL" class="headerlink" title="详解 MySQL"></a>详解 MySQL</h1><p>下面来学习互联网行业使用最为广泛的关系型数据库 MySQL，它的知识点结构图如下所示。</p>
+<p style="white-space: normal; text-align: justify; line-height: 1.75em; text-indent: 0em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCAAj4qAAG5pZSsGg0126.png"></p>
+
+<h2 id="常用-SQL-语句"><a href="#常用-SQL-语句" class="headerlink" title="常用 SQL 语句"></a>常用 SQL 语句</h2><p>对于手写常用 SQL 语句，没有什么特殊的技巧，根据所列的语句类型多做一些练习就好。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>要知道 MySQL 都提供哪些基本的数据类型，不同数据类型占用的空间大小。可以按给出的分类进行记忆，不一一罗列。</p>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><p>介绍 MySQL 中主要的存储引擎。</p>
+<ul>
+<li>MyISAM 是 MySQL 官方提供的存储引擎，其特点是支持全文索引，查询效率比较高，缺点是不支持事务、使用表级锁。</li>
+<li>InnoDB 在 5.5 版本后成为了 MySQL 的默认存储引擎，特点是支持 ACID 事务、支持外键、支持行级锁提高了并发效率。</li>
+<li>TokuDB 是第三方开发的开源存储引擎，有非常快的写速度，支持数据的压缩存储、可以在线添加索引而不影响读写操作。但是因为压缩的原因，TokuDB 非常适合访问频率不高的数据或历史数据归档，不适合大量读取的场景。</li>
+</ul>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>MySQL 中的锁，上面也提到了，MyIASAM 使用表级锁，InnoDB 使用行级锁。</p>
+<ul>
+<li>表锁开销小，加锁快，不会出现死锁；但是锁的粒度大，发生锁冲突的概率高，并发访问效率比较低。</li>
+<li>行级锁开销大，加锁慢，有可能会出现死锁，不过因为锁定粒度最小，发生锁冲突的概率低，并发访问效率比较高。</li>
+<li>共享锁也就是读锁，其他事务可以读，但不能写。MySQL 可以通过 lock in share mode 语句显示使用共享锁。</li>
+<li>排他锁就是写锁，其他事务不能读取，也不能写。对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及的数据集加排他锁，或者使用 select for update 显示使用排他锁。</li>
+</ul>
+<h2 id="存储过程与函数"><a href="#存储过程与函数" class="headerlink" title="存储过程与函数"></a>存储过程与函数</h2><p>MySQL 的存储过程与函数都可以避免开发人员重复编写相同的 SQL 语句，并且存储过程和函数都是在 MySQL 服务器中执行的，可以减少客户端和服务器端的数据传输</p>
+<p>存储过程能够实现更复杂的功能，而函数一般用来实现针对性比较强的功能，例如特殊策略求和等。存储过程可以执行包括修改表等一系列数据库操作，而用户定义函数不能用于执行修改全局数据库状态的操作。</p>
+<p>存储过程一般是作为一个独立的部分来执行，而函数可以作为查询语句的一个部分来调用。SQL 语句中不能使用存储过程，但可以使用函数。存储过程一般与数据库实现绑定，使用存储过程会降低程序的可移植性，应谨慎使用。</p>
+<h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><p>此外，可以去了解 MySQL8.0 的一些新特性，例如：</p>
+<ul>
+<li>默认字符集格式改为了 UTF-8；</li>
+<li>增加了隐藏索引的功能，隐藏后的索引不会被查询优化器使用，可以使用这个特性用于性能调试；</li>
+<li>支持了通用表表达式，使复杂查询中的嵌入表语句更加清晰；</li>
+<li>新增了窗口函数的概念，可以用来实现新的查询方式。</li>
+</ul>
+<p>其中，窗口函数与 SUM、COUNT 等集合函数类似，但不会将多行查询结果合并，而是将结果放在多行中，即窗口函数不需要 GROUP BY。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>来看 MySQL 的索引，索引可以大幅增加数据库的查询的性能，在实际业务场景中，或多或少都会使用到。但是索引也是有代价的，首先需要额外的磁盘空间来保存索引；其次，对于插入、更新、删除等操作由于更新索引会增加额外的开销，因此索引比较适合用在读多写少的场景</p>
+<p>首先学习 MySQL 索引类型。</p>
+<ul>
+<li>唯一索引，就是索引列中的值必须是唯一的，但是允许出现空值。这种索引一般用来保证数据的唯一性，比如保存账户信息的表，每个账户的 ID 必须保证唯一，如果重复插入相同的账户 ID 时 MySQL 返回异常。</li>
+<li>主键索引是一种特殊的唯一索引，但是它不允许出现空值。</li>
+<li>普通索引，与唯一索引不同，它允许索引列中存在相同的值。例如学生的成绩表，各个学科的分数是允许重复的，就可以使用普通索引。</li>
+<li>联合索引，就是由多个列共同组成的索引。一个表中含有多个单列的索引并不是联合索引，联合索引是对多个列字段按顺序共同组成一个索引。应用联合索引时需要注意最左原则，就是 where 查询条件中的字段必须与索引字段从左到右进行匹配。比如，一个用户信息表，用姓名和年龄组成了联合索引，如果查询条件是“姓名等于张三“，那么满足最左原则；如果查询条件是“年龄大于 20“，由于索引中最左的字段是姓名不是年龄，所以不能使用这个索引。</li>
+<li>全文索引，前面提到了，MyISAM 引擎中实现了这个索引，在 5.6 版本后 InnoDB 引擎也支持了全文索引，并且在 5.7.6 版本后支持了中文索引。全文索引只能在 CHAR、VARCHAR、TEXT 类型字段上使用，底层使用倒排索引实现。要注意对于大数据量的表，生成全文索引会非常消耗时间也非常消耗磁盘空间。</li>
+</ul>
+<p>然后来看索引的实现。</p>
+<p>B+ 树实现，B+ 树比较适合用作 &gt; 或 &lt; 这样的范围查询，是 MySQL 中最常使用的一种索引实现。</p>
+<p>R-Tree 是一种用于处理多维数据的数据结构，可以对地理数据进行空间索引。不过实际业务场景中使用的比较少。</p>
+<p>Hash 是使用散列表来对数据进行索引，Hash 方式不像 B-Tree 那样需要多次查询才能定位到记录，因此 Hash 索引的效率高于 B-Tree，但是不支持范围查找和排序等功能。实际使用的也比较少。</p>
+<p>FullText 就是前面提到的全文索引，是一种记录关键字与对应文档关系的倒排索引</p>
+<h2 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h2><p>MySQL 的调优也是研发人员需要掌握的一项技能，一般 MySQL 调优有如下图所示的四个纬度。</p>
+<p style="white-space: normal; text-align: justify; line-height: 1.75em; text-indent: 0em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcCAW4TEAAA4gPziGLI076.png"></p>
+
+<ul>
+<li>第一个纬度是针对数据库设计、表结构设计以及索引设置纬度进行的优化；</li>
+<li>第二个纬度是对我们业务中使用的 SQL 语句进行优化，例如调整 where 查询条件；</li>
+<li>第三个纬度是对 MySQL 服务的配置进行优化，例如对链接数的管理，对索引缓存、查询缓存、排序缓存等各种缓存大小进行优化；</li>
+<li>第四个纬度是对硬件设备和操作系统设置进行优化，例如调整操作系统参数、禁用 swap、增加内存、升级固态硬盘等等。</li>
+</ul>
+<p>这四个纬度从优化的成本角度来讲，从左到右优化成本逐渐升高；从优化效果角度来看，从右到左优化的效果更高。</p>
+<p>对于研发人员来说，前两个纬度与业务息息相关，因此需要重点掌握，后两个纬度更适合 DBA 进行深入学习，简单了解就好。</p>
+<p>那么，重点来看前两个纬度，要点如下图所示。</p>
+<p style="white-space: normal; text-align: justify; line-height: 1.75em; text-indent: 0em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/EF/CgotOV14tcCADvHvAAC0X6SqEbk666.png"></p>
+
+<p>先看到图中左边的模块，关于表结构和索引的优化，应该掌握如下原则。</p>
+<ol>
+<li>要在设计表结构时，考虑数据库的水平与垂直扩展能力，提前规划好未来1年的数据量、读写量的增长，规划好分库分表方案。比如设计用户信息表，预计1年后用户数据10亿条，写QPS约5000，读QPS30000，可以设计按UID纬度进行散列，分为4个库每个库32张表，单表数据量控制在KW级别。</li>
+<li>要为字段选择合适的数据类型，在保留扩展能力的前提下，优先选用较小的数据结构。例如保存年龄的字段，要使用TINYINT而不要使用INT。</li>
+<li>可以将字段多的表分解成多个表，必要时增加中间表进行关联。假如一张表有40～50个字段显然不是一个好的设计。</li>
+<li>一般来说，设计关系数据库时需要满足第三范式，但为了满足第三范式，我们可能会拆分出多张表。而在进行查询时需要对多张表进行关联查询，有时为了提高查询效率，会降低范式的要求，在表中保存一定的冗余信息，也叫做反范式。但要注意反范式一定要适度。</li>
+<li>要擅用索引，比如为经常作为查询条件的字段创建索引、创建联合索引时要根据最左原则考虑索引的复用能力，不要重复创建索引；要为保证数据不能重复的字段创建唯一索引等等。不过要注意索引对插入、更新等写操作是有代价的，不要滥用索引，比如像性别这样唯一很差的字段就不适合建立索引。</li>
+<li>列字段尽量设置为not null。MySQL难以对使用null的列进行查询优化，允许null会使索引、索引统计和值更加复杂，允许null值的列需要更多的存储空间，还需要MySQL内部进行特殊处理。</li>
+<li>再看到如图右边所示的模块，对SQL语句进行优化的原则</li>
+<li>要找到最需要优化的SQL语句。要么是使用最频繁的语句，要么是优化后提高最明显的语句，可以通过查询 MySQL的慢查询日志来发现需要进行优化的SQL语句；</li>
+<li>要学会利用 MySQL 提供的分析工具。例如使用 Explain 来分析语句的执行计划，看看是否使用了索引，使用了哪个索引，扫描了多少记录，是否使用文件排序等等。或者利用 Profile 命令来分析某个语句执行过程中各个分步的耗时。</li>
+<li>要注意使用查询语句是要避免使用 SELECT *，而是应该指定具体需要获取的字段。原因一是可以避免查询出不需要使用的字段，二是可以避免查询列字段的元信息。</li>
+<li>是尽量使用 prepared statements，一个是它性能更好，另一个是可以防止 SQL 注入。</li>
+<li>要尽量使用索引扫描来进行排序，也就是尽量在有索引的字段上进行排序操作。</li>
+</ol>
+<h1 id="考察点"><a href="#考察点" class="headerlink" title="考察点"></a>考察点</h1><ol>
+<li>必须了解消息队列、数据库的基本原理、使用场景以及常用队列、数据库的特点。比如消息队列适用于异步处理和削峰填谷的场景；Kafka 在提供高可用性的前提下实现了 0 消息丢失的高性能分布式队列服务；MySQL 提供了多种引擎可以支持事务型与非事务型的关系对象库服务等等。</li>
+<li>要了解 Kafka 的架构和消息处理流程，明白 Kafka 是如何通过 Partition 来保证并发能力与冗余灾备的；了解消费组是如何保证每个 Consumer 实例不会获取到重复消息的</li>
+<li>要深刻理解数据库事务的 ACID 特性，了解并发事务可能导致的并发问题和不同的数据库隔离级别如何解决这些并发问题。</li>
+<li>要牢牢掌握常用的 MySQL 语句，比如 WHERE 条件查询语句、JOIN 关联语句、ORDER BY 排序语句等等。还要熟悉常用的自带函数，例如 SUM、COUNT 等等。</li>
+<li>了解 MySQL 数据库不同引擎的特点及不同类型的索引实现。比如知道最常使用的 InnoDB 非常擅长事务处理，MyISAM 比较适合非事务的简单查询场景。比如知道 MySQL 的唯一索引、联合索引、全文索引等不同索引类型，以及最常使用等 B+ 树索引实现等等。</li>
+</ol>
+<h2 id="加分项"><a href="#加分项" class="headerlink" title="加分项"></a>加分项</h2><p>如果想要在面试中获得更好的表现，还应该了解下面这些加分项。</p>
+<ol>
+<li>要了解新特性，不论是 Kafka 还是 MySQL，都要了解一下新版本特性。例如 MySQL8.0 中提供了窗口函数来支持新的查询方式；支持通用表表达式，使复杂查询中的嵌入表语句更加清晰等等。</li>
+<li>要知道数据库表设计原则，如果有过线上业务数据库的设计经验就更好了，就能够知道如何对容量进行评估，也知道适当分库分表来保证未来服务的可扩展性，这会对面试起到积极的影响。</li>
+<li>最好有过数据库调优经验，例如明明建立了索引的语句，但是查询效率还是很慢，通过 Explain 分析发现表中有多个索引，MySQL 的优化器选用了错误的索引，导致查询效率偏低，然后通过在 SQL 语句中使用 use index 来指定索引解决。</li>
+<li>有过 Kafka 等主流消息队列使用经验，并且知道应该如何在业务场景下进行调优。例如日志推送的场景，对小概率消息丢失可以容忍，可以设置异步发送消息。而对应金融类业务，需要设置同步发送消息，并设置最高的消息可靠性，把 request.required.acks 参数设置为 -1。</li>
+</ol>
+<h2 id="真题汇总"><a href="#真题汇总" class="headerlink" title="真题汇总"></a>真题汇总</h2><p style="white-space: normal; text-align: justify; line-height: 1.75em; text-indent: 0em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/CF/CgoB5l14tcGASkb-AABwwI5lamM754.png"></p>
+
+<ul>
+<li>第 2 题，可以从消息的发送者保证投递到消息队列、消息对象自身的高可用、消费方处理完成后修改 offset 这三个方面来保证消息的可靠性。这个题目可以结合 Kafka 的消息发送同步、异步，消息可靠性配置来回答。</li>
+<li>第 3 题可以从两个方面解决消息重复：一个是通过对消息处理实现幂等，消除消息重复的影响；另一个是使用 Redis 来进行消息去重，避免重复消息的处理。</li>
+<li>第 4 题可以从创建索引、减少关联查询、优化 SQL 查询条件等方面展开。</li>
+<li>第 6 题可以从 MySQL 调优部分讲解的相关原则这个角度来回答。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：消息队列与数据库总结</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2021-10-23 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2021_10_23_msg_mysql/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021_10_24_framework/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">分布式系统架构演进总结</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021_10_22_cache/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">缓存中间件总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">消息队列与数据库知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">数据库中间件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">关系型数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NoSQL"><span class="nav-text">NoSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NewSQL"><span class="nav-text">NewSQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3-Kafka"><span class="nav-text">详解 Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83-x2F-%E6%B6%88%E8%B4%B9%E6%B5%81%E7%A8%8B"><span class="nav-text">消息发布&#x2F;消费流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><span class="nav-text">详解数据库事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-text">特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"><span class="nav-text">并发问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-text">隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E5%88%86%E7%B1%BB"><span class="nav-text">事务分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3-MySQL"><span class="nav-text">详解 MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-SQL-%E8%AF%AD%E5%8F%A5"><span class="nav-text">常用 SQL 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E6%93%8E"><span class="nav-text">引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81"><span class="nav-text">锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="nav-text">存储过程与函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-text">新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E4%BC%98"><span class="nav-text">调优</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%80%83%E5%AF%9F%E7%82%B9"><span class="nav-text">考察点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="nav-text">加分项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%9F%E9%A2%98%E6%B1%87%E6%80%BB"><span class="nav-text">真题汇总</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            缓存中间件总结 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">缓存中间件总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-10-22
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/redis/">redis</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/memcache/">memcache</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/">缓存击穿</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9/">缓存雪崩</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F/">缓存穿透</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>17 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>本文介绍缓存相关的知识点以及Memcache和Redis这两个最常使用的缓存。重点学习以下三个方面的内容：</p>
+<ol>
+<li>使用缓存时常遇到的典型问题；</li>
+<li>Memcache的内存结构；</li>
+<li>Redis相关的知识点以及Redis常用结构的实现。</li>
+</ol>
+<h1 id="缓存知识点"><a href="#缓存知识点" class="headerlink" title="缓存知识点"></a>缓存知识点</h1><img src="http://s0.lgstatic.com/i/image2/M01/8A/CA/CgoB5l14rXSAWVk7AAFdi6Ly8iM148.png">
+
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>缓存是高并发场景下提高热点数据访问性能的一个有效手段，在开发项目时会经常使用到。缓存的类型分为：本地缓存、分布式缓存和多级缓存。</p>
+<p>本地缓存就是在进程的内存中进行缓存，比如我们的JVM堆中，可以用LRUMap来实现，也可以使用Ehcache这样的工具来实现。本地缓存是内存访问，没有远程交互开销，性能最好，但是受限于单机容量，一般缓存较小且无法扩展。</p>
+<p>分布式缓存可以很好得解决这个问题。分布式缓存一般都具有良好的水平扩展能力，对较大数据量的场景也能应付自如。缺点就是需要进行远程请求，性能不如本地缓存。</p>
+<p>为了平衡这种情况，实际业务中一般采用多级缓存，本地缓存只保存访问频率最高的部分热点数据，其他的热点数据放在分布式缓存中。</p>
+<h2 id="淘汰策略"><a href="#淘汰策略" class="headerlink" title="淘汰策略"></a>淘汰策略</h2><p>不管是本地缓存还是分布式缓存，为了保证较高性能，都是使用内存来保存数据，由于成本和内存限制，当存储的数据超过缓存容量时，需要对缓存的数据进行剔除。一般的剔除策略有FIFO淘汰最早数据、LRU 剔除最近最少使用、和LFU剔除最近使用频率最低的数据几种策略。</p>
+<h2 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h2><p>注意后面会把Memcache简称为MC。</p>
+<p>先来看看MC 的特点：</p>
+<ul>
+<li>MC处理请求时使用多线程异步IO的方式，可以合理利用CPU多核的优势，性能非常优秀；</li>
+<li>MC功能简单，使用内存存储数据，只支持K-V结构，不提供持久化和主从同步功能；</li>
+<li>MC的内存结构以及钙化问题后面会详细介绍;</li>
+<li>MC对缓存的数据可以设置失效期，过期后的数据会被清除；</li>
+<li>失效的策略采用延迟失效，就是当再次使用数据时检查是否失效；</li>
+<li>当容量存满时，会对缓存中的数据进行剔除，剔除时除了会对过期key进行清理，还会按LRU策略对数据进行剔除。</li>
+</ul>
+<p>另外，使用MC 有一些限制：</p>
+<ul>
+<li>key不能超过250个字节</li>
+<li>value不能超过1M字节；</li>
+<li>key的最大失效时间是30天。</li>
+</ul>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>先简单说一下Redis 的特点，方便和MC比较。</p>
+<p>与MC不同的是，Redis采用单线程模式处理请求。这样做的原因有2个：一个是因为采用了非阻塞的异步事件处理机制；另一个是缓存数据都是内存操作IO时间不会太长，单线程可以避免线程上下文切换产生的代价。</p>
+<p>Redis支持持久化，所以Redis不仅仅可以用作缓存，也可以用作NoSQL数据库。</p>
+<p>相比MC，Redis还有一个非常大的优势，就是除了K-V之外，还支持多种数据格式，例如list、set、sorted set、hash等。</p>
+<p>Redis提供主从同步机制，以及Cluster集群部署能力，能够提供高可用服务</p>
+<h1 id="详解-Memcache（MC）"><a href="#详解-Memcache（MC）" class="headerlink" title="详解 Memcache（MC）"></a>详解 Memcache（MC）</h1><h2 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h2><p>首先来看MC的内存结构。MC默认是通过 SlabAllocator来管理内存，如下图所示。Slab机制主要是用来解决频繁malloc&#x2F;free会产生内存碎片的问题。</p>
+<p style="white-space: normal; text-align: justify; text-indent: 0em; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/EA/CgotOV14rXSAJl5hAABTCQiyh9k530.png"></p>
+
+<p>如图左侧，MC会把内存分为许多不同类型的Slab，每种类型Slab用来保存不同大小的对象。每个Slab由若干的Page组成，如图中浅绿色的模块。不同Slab的Page，默认大小是一样的，都是1M，这也是默认MC存储对象不能超过1M的原因。每个Page内又划分为许多的Chunk，Chunk就是实际用来保存对象的空间，就是图中橘色的。不同类型的Slab中Chunk的大小是不同的，当保存一个对象时，MC会根据对象的大小来选择最合适的Chunk来存储，减少空间浪费。</p>
+<p>Slab Allocator创建Slab时的参数有三个，分别是Chunk大小的增长因子，Chunk大小的初始值以及Page的大小。在运行时会根据要保存的对象大小来逐渐创建Slab</p>
+<h2 id="钙化问题"><a href="#钙化问题" class="headerlink" title="钙化问题"></a>钙化问题</h2><p>来考虑这样一个场景，使用MC来保存用户信息，假设单个对象大约300字节。这时会产生大量的384字节大小的Slab。运行一段时间后，用户信息增加了一个属性，单个对象的大小变成了500字节，这时再保存对象需要使用768字节的Slab，而MC 中的容量大部分创建了384字节的Slab，所以768的Slab非常少。这时虽然384Slab的内存大量空闲，但768Slab还是会根据LRU算法频繁剔除缓存，导致MC的剔除率升高，命中率降低。这就是所谓的MC钙化问题。</p>
+<p>解决钙化问题可以开启MC的Automove机制，每10s调整Slab。也可以分批重启MC缓存，不过要注意重启时要进行一定时间的预热，防止雪崩问题。另外，在使用Memcached时，最好计算一下数据的预期平均长度，调整growth factor， 以获得最恰当的设置，避免内存的大量浪费。</p>
+<h1 id="详解-Redis"><a href="#详解-Redis" class="headerlink" title="详解 Redis"></a>详解 Redis</h1><p>Redis的知识点结构如下图所示。</p>
+<p style="white-space: normal; text-align: justify; text-indent: 0em; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/CA/CgoB5l14rXSAHFMcAAFKedIz0a0877.png"></p>
+
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>来看Redis提供的功能。</p>
+<p>Bitmap位图是支持按bit位来存储信息，可以用来实现BloomFilter；HyperLogLog提供不精确的去重计数功能，比较适合用来做大规模数据的去重统计，例如统计UV；Geospatial可以用来保存地理位置，并作位置距离计算或者根据半径计算位置等。这三个其实也可以算作一种数据结构。</p>
+<p>pub&#x2F;sub功能是订阅发布功能，可以用作简单的消息队列。</p>
+<p>Pipeline可以批量执行一组指令，一次性返回全部结果，可以减少频繁的请求应答。</p>
+<p>Redis支持提交Lua脚本来执行一系列的功能。</p>
+<p>最后一个功能是事务，但Redis提供的不是严格的事务，Redis只保证串行执行命令，并且能保证全部执行，但是执行命令失败时并不会回滚，而是会继续执行下去。</p>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>Redis提供了RDB和AOF两种持久化方式，RDB是把内存中的数据集以快照形式写入磁盘，实际操作是通过fork子进程执行，采用二进制压缩存储；AOF是以文本日志的形式记录Redis处理的每一个写入或删除操作。</p>
+<p>RDB把整个Redis的数据保存在单一文件中，比较适合用来做灾备，但缺点是快照保存完成之前如果宕机，这段时间的数据将会丢失，另外保存快照时可能导致服务短时间不可用。</p>
+<p>AOF对日志文件的写入操作使用的追加模式，有灵活的同步策略，支持每秒同步、每次修改同步和不同步，缺点就是相同规模的数据集，AOF要大于RDB，AOF在运行效率上往往会慢于RDB。</p>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><p>来看Redis的高可用。Redis支持主从同步，提供Cluster集群部署模式，通过Sentinel哨兵来监控Redis主服务器的状态。当主挂掉时，在从节点中根据一定策略选出新主，并调整其他从slaveof到新主。</p>
+<p>选主的策略简单来说有三个：</p>
+<ul style=" white-space: normal;">
+ <li><p style="text-indent: 0em; line-height: 1.75em; text-align: justify;"><span style="color: rgb(63, 63, 63); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">slave的priority设置的越低，优先级越高；</span></p></li>
+ <li><p style="text-indent: 0em; line-height: 1.75em; text-align: justify;"><span style="color: rgb(63, 63, 63); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">同等情况下，slave复制的数据越多优先级越高；</span></p></li>
+ <li><p style="text-indent: 0em; line-height: 1.75em; text-align: justify;"><span style="color: rgb(63, 63, 63); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;;">相同的条件下runid越小越容易被选中。</span></p></li>
+</ul>
+
+<p>在Redis集群中，sentinel也会进行多实例部署，sentinel之间通过Raft协议来保证自身的高可用。</p>
+<p>RedisCluster使用分片机制，在内部分为16384个slot插槽，分布在所有master节点上，每个master节点负责一部分slot。数据操作时按key做CRC16来计算在哪个slot，由哪个master进行处理。数据的冗余是通过slave节点来保障。</p>
+<h2 id="key-失效机制"><a href="#key-失效机制" class="headerlink" title="key 失效机制"></a>key 失效机制</h2><p>Redis的key可以设置过期时间，过期后Redis采用主动和被动结合的失效机制，一个是和MC一样在访问时触发被动删除，另一种是定期的主动删除。</p>
+<h2 id="淘汰策略-1"><a href="#淘汰策略-1" class="headerlink" title="淘汰策略"></a>淘汰策略</h2><p>Redis提供了6种淘汰策略，一类是只针对设置了失效期的key做LRU、最小生存时间和随机剔除；另一类是针对所有key做LRU、随机剔除。当然，也可以设置不剔除，容量满时再存储对象会返回异常，但是已存在的key还可以继续读取</p>
+<h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><p>可以了解一下Redis4.0和5.0的新特性，例如5.0的Stream，是一个可以支持多播，也就是一写多读的消息队列。还可以了解一下4.0的模块机制等。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>Redis内部使用字典来存储不同类型的数据，如下图中的dictht，字典由一组dictEntry组成，其中包括了指向key和value的指针以及指向下一个dictEntry的指针。</p>
+<p style="white-space: normal; text-align: justify; text-indent: 0em; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/CA/CgoB5l14rXWAdWuJAABsOwtDCh0241.png"></p>
+
+<p>在Redis中，所有的对象都被封装成了redisObject，如图中浅绿的模块。redisObject包括了对象的类型，就是Redis支持的string、hash、list、set和sortedset5种类型。另外redisObject还包括了具体对象的存储方式，如图最右边的虚线标出的模块内的几种类型。</p>
+<p>下面结合类型来介绍具体的数据存储方式。</p>
+<ul>
+<li>string类型是Redis中最常使用的类型，内部的实现是通过SDS（Simple Dynamic String ）来存储的。SDS类似于Java中的ArrayList，可以通过预分配冗余空间的方式来减少内存的频繁分配。</li>
+<li>list类型，有ziplist压缩列表和linkedlist双链表实现。ziplist是存储在一段连续的内存上，存储效率高，但是它不利于修改操作，适用于数据较少的情况；linkedlist在插入节点上复杂度很低，但它的内存开销很大，每个节点的地址不连续，容易产生内存碎片。此外在3.2版本后增加了quicklist，结合了两者的优点，quicklist本身是一个双向无环链表，它的每一个节点都是一个ziplist。</li>
+<li>hash类型在Redis中有ziplist和hashtable两种实现。当Hash表中所有的key和value字符串长度都小于64字节且键值对数量小于512个时，使用压缩表来节省空间；超过时，转为使用hashtable。</li>
+<li>set类型的内部实现可以是intset或者hashtable，当集合中元素小于512且所有的数据都是数值类型时，才会使用intset，否则会使用hashtable。</li>
+<li>sorted set是有序集合，有序集合的实现可以是ziplist或者是skiplist跳表。有序集合的编码转换条件与hash和list有些不同，当有序集合中元素数量小于128个并且所有元素长度都小于64字节时会使用ziplist，否则会转换成skiplist。</li>
+</ul>
+<p>提示：Redis的内存分配是使用jemalloc进行分配。jemalloc将内存空间划分为小、大、巨大三个范围，并在范围中划分了小的内存块，当存储数据时，选择大小最合适的内存块进行分配，有利于减小内存碎片。</p>
+<h1 id="缓存常见问题"><a href="#缓存常见问题" class="headerlink" title="缓存常见问题"></a>缓存常见问题</h1><p>对使用缓存时常遇到几个问题，整理出一个表格，如下图所示。</p>
+<p style="white-space: normal; text-align: justify; text-indent: 0em; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/EA/CgotOV14rXWAUG1iAABuijHdubk935.png"></p>
+
+<h2 id="缓存更新方式"><a href="#缓存更新方式" class="headerlink" title="缓存更新方式"></a>缓存更新方式</h2><p>第一个问题是缓存更新方式，这是决定在使用缓存时就该考虑的问题。</p>
+<p>缓存的数据在数据源发生变更时需要对缓存进行更新，数据源可能是DB，也可能是远程服务。更新的方式可以是主动更新。数据源是DB时，可以在更新完DB后就直接更新缓存。</p>
+<p>当数据源不是DB而是其他远程服务，可能无法及时主动感知数据变更，这种情况下一般会选择对缓存数据设置失效期，也就是数据不一致的最大容忍时间</p>
+<p>这种场景下，可以选择失效更新，key不存在或失效时先请求数据源获取最新数据，然后再次缓存，并更新失效期。</p>
+<p>但这样做有个问题，如果依赖的远程服务在更新时出现异常，则会导致数据不可用。改进的办法是异步更新，就是当失效时先不清除数据，继续使用旧的数据，然后由异步线程去执行更新任务。这样就避免了失效瞬间的空窗期。另外还有一种纯异步更新方式，定时对数据进行分批更新。实际使用时可以根据业务场景选择更新方式。</p>
+<h2 id="数据不一致"><a href="#数据不一致" class="headerlink" title="数据不一致"></a>数据不一致</h2><p>第二个问题是数据不一致的问题，可以说只要使用缓存，就要考虑如何面对这个问题。缓存不一致产生的原因一般是主动更新失败，例如更新DB后，更新Redis因为网络原因请求超时；或者是异步更新失败导致。</p>
+<p>解决的办法是，如果服务对耗时不是特别敏感可以增加重试；如果服务对耗时敏感可以通过异步补偿任务来处理失败的更新，或者短期的数据不一致不会影响业务，那么只要下次更新时可以成功，能保证最终一致性就可以</p>
+<h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>第三个问题是缓存穿透。产生这个问题的原因可能是外部的恶意攻击，例如，对用户信息进行了缓存，但恶意攻击者使用不存在的用户id频繁请求接口，导致查询缓存不命中，然后穿透DB查询依然不命中。这时会有大量请求穿透缓存访问到DB。</p>
+<p>解决的办法如下。</p>
+<ol>
+<li>对不存在的用户，在缓存中保存一个空对象进行标记，防止相同ID再次访问DB。不过有时这个方法并不能很好解决问题，可能导致缓存中存储大量无用数据。</li>
+<li>使用BloomFilter过滤器，BloomFilter的特点是存在性检测，如果BloomFilter中不存在，那么数据一定不存在；如果BloomFilter中存在，实际数据也有可能会不存在。非常适合解决这类的问题。</li>
+</ol>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p>第四个问题是缓存击穿，就是某个热点数据失效时，大量针对这个数据的请求会穿透到数据源</p>
+<p>解决这个问题有如下办法。</p>
+<ol>
+<li>可以使用互斥锁更新，保证同一个进程中针对同一个数据不会并发请求到DB，减小DB压力。</li>
+<li>使用随机退避方式，失效时随机sleep一个很短的时间，再次查询，如果失败再执行更新</li>
+<li>针对多个热点key同时失效的问题，可以在缓存时使用固定时间加上一个小的随机数，避免大量热点key同一时刻失效。</li>
+</ol>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p>第五个问题是缓存雪崩。产生的原因是缓存挂掉，这时所有的请求都会穿透到DB。</p>
+<p>解决方法：</p>
+<ol>
+<li>使用快速失败的熔断策略，减少DB瞬间压力；</li>
+<li>使用主从模式和集群模式来尽量保证缓存服务的高可用。</li>
+</ol>
+<p>实际场景中，这两种方法会结合使用。</p>
+<h1 id="考察点"><a href="#考察点" class="headerlink" title="考察点"></a>考察点</h1><p>这一块内容的主要面试考察点是对缓存特性的理解，对MC、Redis的特点和使用方式的掌握。</p>
+<ol>
+<li><p>要知道缓存的使用场景，不同类型缓存的使用方式，例如：</p>
+<ol>
+<li>对DB热点数据进行缓存减少DB压力；对依赖的服务进行缓存，提高并发性能；</li>
+<li>单纯K-V缓存的场景可以使用MC，而需要缓存list、set等特殊数据格式，可以使用Redis；</li>
+<li>需要缓存一个用户最近播放视频的列表可以使用Redis的list来保存、需要计算排行榜数据时，可以使用Redis的zset结构来保存。</li>
+</ol>
+</li>
+<li><p>要了解MC和Redis的常用命令，例如原子增减、对不同数据结构进行操作的命令等。</p>
+</li>
+<li><p>了解MC 和Redis在内存中的存储结构，这对评估使用容量会很有帮助</p>
+</li>
+<li><p>了解MC 和Redis的数据失效方式和剔除策略，比如主动触发的定期剔除和被动触发延期剔除</p>
+</li>
+<li><p>要理解Redis的持久化、主从同步与Cluster部署的原理，比如RDB和AOF的实现方式与区别。</p>
+</li>
+</ol>
+<h2 id="加分项"><a href="#加分项" class="headerlink" title="加分项"></a>加分项</h2><p>如果想要在面试中获得更好的表现，还应了解下面这些加分项。</p>
+<p>第一，是要结合实际应用场景来介绍缓存的使用。例如调用后端服务接口获取信息时，可以使用本地+远程的多级缓存；对于动态排行榜类的场景可以考虑通过Redis的sorted set来实现等等</p>
+<p>第二，最好你有过分布式缓存设计和使用经验，例如项目中在什么场景使用过Redis，使用了什么数据结构，解决哪类的问题；使用MC时根据预估值大小调整McSlab分配参数等等。</p>
+<p>第三，最好可以了解缓存使用中可能产生的问题。比如Redis是单线程处理请求，应尽量避免耗时较高的单个请求任务，防止相互影响；Redis服务应避免和其他CPU密集型的进程部署在同一机器；或者禁用Swap内存交换，防止Redis的缓存数据交换到硬盘上，影响性能。再比如前面提到的MC钙化问题等等。</p>
+<p>第四，要了解Redis的典型应用场景，例如，使用Redis来实现分布式锁；使用Bitmap来实现BloomFilter，使用HyperLogLog来进行UV统计等等。</p>
+<p>最后，知道Redis4.0、5.0中的新特性，例如支持多播的可持久化消息队列Stream；通过Module系统来进行定制功能扩展等等。</p>
+<h2 id="真题汇总"><a href="#真题汇总" class="headerlink" title="真题汇总"></a>真题汇总</h2><p style="white-space: normal; text-align: justify; text-indent: 0em; line-height: 1.75em;"><img src="http://s0.lgstatic.com/i/image2/M01/8A/CA/CgoB5l14rXWARjDrAABeJtAm0w0873.png"></p>
+
+
+<p>第1～4题前面都有提到，不再赘述</p>
+<p>第5题，可以从主从读写分离、多从库、多端口实例，以及Cluster集群部署来支持水平扩展等几方面回答，高可用可以回答用Sentinel来保证主挂掉时重新选主并完成从库变更。</p>
+<p>第6题，可以使用Redis的sorted set来实现延时队列，使用时间戳做Score，消费方使用zrangbyscore来获取指定延迟时间之前的数据。</p>
+<ul>
+<li>简单场景下分布式锁可以使用setnx实现，使用setnx设置key，如果返回1表示设置成功，即获取锁成功，如果返回0则获取锁失败。setnx需要同时使用px参数设置超时时间，防止获取锁的实例宕机后产生死锁。</li>
+<li>严格场景下，可以考虑使用RedLock方案。但是实现比较复杂。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：缓存中间件总结</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2021-10-22 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2021_10_22_cache/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021_10_23_msg_mysql/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">消息队列与数据库总结</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021_10_21_spring_rpc_orm/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring、rpc、orm常用框架总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">缓存知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5"><span class="nav-text">淘汰策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memcache"><span class="nav-text">Memcache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-text">Redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3-Memcache%EF%BC%88MC%EF%BC%89"><span class="nav-text">详解 Memcache（MC）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-text">内存结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%99%E5%8C%96%E9%97%AE%E9%A2%98"><span class="nav-text">钙化问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3-Redis"><span class="nav-text">详解 Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key-%E5%A4%B1%E6%95%88%E6%9C%BA%E5%88%B6"><span class="nav-text">key 失效机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5-1"><span class="nav-text">淘汰策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-text">新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-text">缓存常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">缓存更新方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="nav-text">数据不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">缓存击穿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">缓存雪崩</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%80%83%E5%AF%9F%E7%82%B9"><span class="nav-text">考察点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="nav-text">加分项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%9F%E9%A2%98%E6%B1%87%E6%80%BB"><span class="nav-text">真题汇总</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
