@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            Java 8 新特性二 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Java 8 新特性二</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2023-01-02
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/java8/">java8</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/java8-Repeatable/">java8-@Repeatable</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.9k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>24 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>学习必须往深处挖，挖的越深，基础越扎实！</p>
+<p>Java 现在发布的版本很快，每年两个，但是真正会被大规模使用的是 3 年一个的 LTS 版本。</p>
+<p>每 3 年发布一个 LTS（Long-Term Support），长期维护版本。意味着只有Java 8 ，Java 11， Java 17，Java 21 才可能被大规模使用。</p>
+<p>每年发布两个正式版本，分别是 3 月份和 9 月份。</p>
+<p>在 Java 版本中，一个特性的发布都会经历孵化阶段、预览阶段和正式版本。其中孵化和预览可能会跨越多个 Java 版本。所以在介绍 Java 新特性时采用如下这种策略：</p>
+<ol>
+<li>每个版本的新特性，都会做一个简单的概述。</li>
+<li>单独出文介绍跟编码相关的新特性，一些如 JVM、性能优化的新特性不单独出文介绍。</li>
+<li>孵化阶段的新特性不出文介绍。</li>
+<li>首次引入为预览特性、新特性增强、首次引入的正式特性，单独出文做详细介绍。</li>
+<li>影响比较大的新特性如果在现阶段没有转正的新特性不单独出文介绍，单独出文的重大特性一般都在 Java 21 版本之前已转为正式特性，例如：<ul>
+<li>虚拟线程，Java 19 引入的，在 Java 21 转正，所以在 Java 19 单独出文做详细介绍</li>
+<li>作用域值，Java 20 引入的，但是在 Java 21 还处于预览阶段，所以不做介绍，等将来转正后会详细介绍</li>
+</ul>
+</li>
+</ol>
+<h1 id="JEP-120：重复注解-Repeatable"><a href="#JEP-120：重复注解-Repeatable" class="headerlink" title="JEP 120：重复注解@Repeatable"></a>JEP 120：重复注解@Repeatable</h1><p>官方文档:<br><a class="link"   target="_blank" rel="noopener" href="https://openjdk.org/jeps/120" >https://openjdk.org/jeps/120<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Java-8-之前如何使用重复注"><a href="#Java-8-之前如何使用重复注" class="headerlink" title="Java 8 之前如何使用重复注"></a>Java 8 之前如何使用重复注</h2><p>在 Java 8 之前我们是无法在一个类型重复使用多次同一个注解，比如我们常用的 @PropertySource，如果我们在 Java 8 版本以下这样使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource(&quot;classpath:config.properties&quot;)</span></span><br><span class="line"><span class="meta">@PropertySource(&quot;classpath:application.properties&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PropertyTest</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译会报错，错误信息是：Duplicate annotation。</p>
+<p>那怎么解决这个问题呢？在 Java 8 之前想到一个方案来解决 Duplicate annotation 错误：新增一个注解 @PropertySources，该注解包裹 @PropertySource，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PropertySources &#123;</span><br><span class="line"> </span><br><span class="line">  PropertySource[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以利用 @PropertySources 来完成了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySources(&#123;</span></span><br><span class="line"><span class="meta">  @PropertySource(&quot;classpath:config.properties&quot;),</span></span><br><span class="line"><span class="meta">  @PropertySource(&quot;classpath:application.properties&quot;)     </span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PropertyTest</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用这种嵌套的方式来规避重复注解的问题，怎么获取呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span>  <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">PropertySources</span> <span class="variable">propertySources</span> <span class="operator">=</span> PropertyTest.class.getAnnotation(PropertySources.class);</span><br><span class="line">        <span class="keyword">for</span> (PropertySource propertySource : propertySources.value()) &#123;</span><br><span class="line">            System.out.println(propertySource.value()[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 结果......</span></span><br><span class="line">classpath:config.properties</span><br><span class="line">classpath:application.properties</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java-8-重复注解-Repeatable"><a href="#Java-8-重复注解-Repeatable" class="headerlink" title="Java 8 重复注解 @Repeatable"></a>Java 8 重复注解 @Repeatable</h2><p>通过上述那种方式确实是可以解决重复注解的问题，但是使用有点儿啰嗦，所以 Java 8 为了解决这个问题引入了注解 @Repeatable 来解决这个问题。</p>
+<p>@Repeatable 注解允许在同一个类型上多次使用相同的注解，它提供了更灵活的注解使用方式。</p>
+<p>下面我们来看看如何使用重复注解。</p>
+<ol>
+<li>重复注解声明<br>在使用重复注解之前，需要在自定义注解类型上使用@Repeatable注解，以指定该注解可重复使用的容器注解类型。容器注解类型本身也是一个注解，通常具有一个value属性，其值是一个数组，用于存储重复使用的注解。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Repeatable(MyAnnotations.class)</span>        <span class="comment">// 声明重复注解</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">    String <span class="title function_">name</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 重复注解容器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotations &#123;</span><br><span class="line">    MyAnnotation[] value();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用重复注解<br>定义了重复注解，我们就可以在一个类型上面使用多个相同的注解，如下：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation(name = &quot;死磕 Java 并发&quot;)</span></span><br><span class="line"><span class="meta">@MyAnnotation(name = &quot;死磕 Netty&quot;)</span></span><br><span class="line"><span class="meta">@MyAnnotation(name = &quot;死磕 Redis&quot;)</span></span><br><span class="line"><span class="meta">@MyAnnotation(name = &quot;死磕 Java 基础&quot;)</span></span><br><span class="line"><span class="meta">@MyAnnotation(name = &quot;死磕 Redis&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAnnotationTest</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>获取重复注解的值<br>使用放射获取元素上面的重复注解，由于我们这里有多个所以需要根据 getAnnotationsByType() 来获取所有重复注解的数组：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">    MyAnnotation[] myAnnotations = MyAnnotationTest.class.getAnnotationsByType(MyAnnotation.class);</span><br><span class="line">    <span class="keyword">for</span> (MyAnnotation myAnnotation : myAnnotations) &#123;</span><br><span class="line">        System.out.println(myAnnotation.name());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以直接获取它的容器注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">MyAnnotations</span> <span class="variable">myAnnotations</span> <span class="operator">=</span> MyAnnotationTest.class.getAnnotation(MyAnnotations.class);</span><br><span class="line">    <span class="keyword">for</span> (MyAnnotation myAnnotation : myAnnotations.value()) &#123;</span><br><span class="line">        System.out.println(myAnnotation.name());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重复注解很容易就理解了，知道如何自定义注解，然后变换下思路就行了。</p>
+<h1 id="JEP-122：移除Permgen"><a href="#JEP-122：移除Permgen" class="headerlink" title="JEP 122：移除Permgen"></a>JEP 122：移除Permgen</h1><ol>
+<li><p>官方文档<br><a class="link"   target="_blank" rel="noopener" href="https://openjdk.org/jeps/122" >https://openjdk.org/jeps/122<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>摘要<br>从 Hotspot JVM 中移除永久代，从而不再需要调整永久代的大小。</p>
+</li>
+<li><p>非目标<br>将类数据共享扩展到应用程序类。减少类元数据所需的内存。启用类元数据的异步收集。</p>
+</li>
+<li><p>成功指标<br>类元数据、已驻留字符串和类静态变量将从永久代移动到 Java 堆或本地内存中。</p>
+</li>
+</ol>
+<p>将从 Hotspot JVM 中移除永久代的代码。</p>
+<p>根据尚未选定的基准测试集测量，应用程序的启动时间和占用空间不会增加超过 1%。</p>
+<ol start="5">
+<li><p>动机<br>这是 JRockit 和 Hotspot 融合工作的一部分。JRockit 客户无需配置永久代（因为 JRockit 没有永久代），并且习惯于不配置永久代。</p>
+</li>
+<li><p>描述<br>将 Hotspot 中永久代的部分内容移动到 Java 堆，其余部分移动到本地内存。</p>
+</li>
+</ol>
+<p>Hotspot 对 Java 类（此处称为类元数据）的表示当前存储在 Java 堆的一部分中，该部分称为永久代。此外，已驻留字符串和类静态变量也存储在永久代中。永久代由 Hotspot 管理，并且必须为 Java 应用程序使用的所有类元数据、已驻留字符串和类静态变量提供足够的空间。当加载类时，类元数据和静态变量在永久代中分配，并在卸载类时从永久代中垃圾回收。当永久代进行垃圾回收时，已驻留字符串也会被垃圾回收。</p>
+<p>提议的实现将在本地内存中分配类元数据，并将已驻留字符串和类静态变量移动到 Java 堆。Hotspot 将显式地为类元数据分配和释放本地内存。新类元数据的分配将受可用本地内存量的限制，而不是由-XX:MaxPermSize 的值（无论是默认值还是命令行上指定的值）固定。</p>
+<p>类元数据的本地内存分配将以足够大的块进行，以便能够容纳多个类元数据片段。每个块将与一个类加载器相关联，并且由该类加载器加载的所有类元数据都将由 Hotspot 从该类加载器的块中分配。如有需要，将为类加载器分配额外的块。块的大小将根据应用程序的行为而变化。将选择这些大小以限制内部和外部碎片。当类加载器死亡时，将释放与该类加载器相关联的所有块，从而释放类元数据的空间。在类的生命周期内，类元数据不会被移动。</p>
+<h1 id="JEP-126：Lambda-表达式-amp-函数式接口"><a href="#JEP-126：Lambda-表达式-amp-函数式接口" class="headerlink" title="JEP 126：Lambda 表达式&amp;函数式接口"></a>JEP 126：Lambda 表达式&amp;函数式接口</h1><ol>
+<li><p>官方文档<br><a class="link"   target="_blank" rel="noopener" href="https://openjdk.org/jeps/126" >https://openjdk.org/jeps/126<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>摘要<br>添加lambda表达式 (闭包) 和支持功能，包括 方法引用、增强的类型推断和虚拟扩展 方法，以Java编程语言和平台。</p>
+</li>
+<li><p>目标<br>lambda表达式和虚拟扩展的主要功能 方法，以及它们的一组辅助支持功能， 更多平台目标:</p>
+</li>
+</ol>
+<p>简化了更抽象的创造和消费， 更高性能的库<br>通过迁移兼容性支持更平滑的库演进<br>除了为Java编程语言添加一个现在常见的功能之外， lambda表达式为改进多核支持提供了可能性 通过启用内部迭代成语。</p>
+<p>围绕lambda的支持语言功能包括虚拟扩展 方法,这将允许接口在源和二进制文件中进化 兼容时尚。</p>
+<p>除了语言更改，协调库和JVM更改 也会发生。</p>
+<p>请注意，活动的和正在进行的 项目LambdaOpenJDK项目 早于JEP进程，相应的JSR也是如此， JSR 335,这是有针对性的 对于Java SE 8 (JSR 336)。</p>
+<ol start="4">
+<li><p>非目标<br>函数类型和一般控制的语言特征 抽象是不将lambda表达式添加到Java的目标。 然而，目的是不排除增加这样的 未来的特点。</p>
+</li>
+<li><p>动机<br>许多其他常用的面向对象编程语言， 包括托管在JVM上的那些 (例如Groovy、Ruby和 Scala) 和托管在其他虚拟机 (CLR上的C #) 上，包括 支持闭包。因此，Java程序员越来越 熟悉语言功能和编程模型 启用。</p>
+</li>
+</ol>
+<p>特别感兴趣的是启用以下成语内部迭代。 数组和集合当前支持外部迭代,在哪里 迭代的控制逻辑位于数据结构之外 被穿越。例如，afor-数组上的每个循环或 集合是外部迭代的一个例子。的语义 forJava中的循环要求严格的串行迭代，这意味着 程序员对标准进行迭代的唯一手段 集合将不允许使用所有可用的内核。</p>
+<p>通过内部迭代，数据结构被传递一段代码 来执行，作为lambda表达式，数据结构为 负责划分计算并报告 结果。由于数据结构熟悉其自身的内部 详细信息，它可能会选择一个更好的调度 通过调整选项进行计算，例如</p>
+<p>备用执行顺序<br>使用线程池的并发执行<br>使用分区和工作窃取的并行执行。的 fork&#x2F;join框架, 在Java SE 7中添加的是一个这样的候选并行执行框架，并且 在广泛的核心范围内提供性能稳定的工作分区 计数。<br>内部迭代样式的一个典型示例是序列 filter-map-reduce操作，例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">maxFooWeight</span> <span class="operator">=</span></span><br><span class="line">    collection.filter( <span class="comment">/* isFoo Predicate as a lambda */</span>)</span><br><span class="line">              .map(    <span class="comment">/* Map a Foo to its weight with a lambda */</span>)</span><br><span class="line">              .max();  <span class="comment">/* Reduction step */</span></span><br></pre></td></tr></table></figure>
+<p>lambda表达式是具有简洁语法的表达式，用于 表示所需的操作。此样式代替一个或多个 显式for循环，这将不必要的约束迭代 订购收藏品。此外，设计良好的算法可以 不仅可以并行执行这些操作集，而且还可以 将这三个操作聚合到一个并行过程中。</p>
+<p>项目Lambda还包括虚拟扩展方法，这将 解决长期存在的无法添加方法的限制 到广泛使用的接口，因为源兼容性问题。</p>
+<p>通过向现有的集合接口添加扩展方法， 如java.util.Collection和java.util.List,现有 这些类型的实现可以参与新的编程 成语。JDK (和其他地方) 中这些类型的实现可以 重写扩展方法的默认实现 超级接口，以提供更高性能或以其他方式专用 实现。</p>
+<ol start="6">
+<li>使用<br><a href="/2021_04_16_lambda">Lambda表达式和匿名内部类</a></li>
+</ol>
+<h1 id="JEP-126：接口的默认方法"><a href="#JEP-126：接口的默认方法" class="headerlink" title="JEP 126：接口的默认方法"></a>JEP 126：接口的默认方法</h1><p>Java 8 用默认方法与静态方法这两个新概念来扩展接口的声明。默认方法使接口有点像 Traits（Scala 中特征（trait）类似于 Java 中的 Interface，但它可以包含实现代码，也就是目前 Java 8 新增的功能），但与传统的接口又有些不一样，它允许在已有的接口中添加新方法，而同时又保持了与旧版本代码的兼容性。</p>
+<p>默认方法与抽象方法不同之处在于抽象方法必须要求实现，但是默认方法则没有这个要求。相反，每个接口都必须提供一个所谓的默认实现，这样所有的接口实现者将会默认继承它（如果有必要的话，可以覆盖这个默认实现）。让我们看看下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> h.xd.java8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> <span class="title class_">DefaultableImpl</span>().notRequired());</span><br><span class="line">        System.out.println(<span class="keyword">new</span> <span class="title class_">OverridableImpl</span>().notRequired());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line">    <span class="comment">// Interfaces now allow default methods, the implementer may or</span></span><br><span class="line">    <span class="comment">// may not implement (override) them.</span></span><br><span class="line">    <span class="keyword">default</span> String <span class="title function_">notRequired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Default implementation&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultableImpl</span> <span class="keyword">implements</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OverridableImpl</span> <span class="keyword">implements</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">notRequired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Overridden implementation&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Defaulable 接口用关键字 default 声明了一个默认方法 notRequired()，Defaulable 接口的实现者之一 DefaultableImpl 实现了这个接口，并且让默认方法保持原样。Defaulable 接口的另一个实现者 OverridableImpl 用自己的方法覆盖了默认方法。</p>
+<p>Java 8 带来的另一个有趣的特性是接口可以声明（并且可以提供实现）静态方法。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">DefaulableFactory</span> &#123;</span><br><span class="line">    <span class="comment">// Interfaces now allow static methods</span></span><br><span class="line">    <span class="keyword">static</span> Defaulable <span class="title function_">create</span><span class="params">( Supplier&lt; Defaulable &gt; supplier )</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> supplier.get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的一小段代码片段把上面的默认方法与静态方法黏合到一起。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> h.xd.java8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.function.Supplier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">( String[] args )</span> &#123;</span><br><span class="line">        <span class="type">Defaulable</span> <span class="variable">defaulable</span> <span class="operator">=</span> DefaulableFactory.create( DefaultableImpl::<span class="keyword">new</span> );</span><br><span class="line">        System.out.println( defaulable.notRequired() );</span><br><span class="line">        defaulable = DefaulableFactory.create( OverridableImpl::<span class="keyword">new</span> );</span><br><span class="line">        System.out.println( defaulable.notRequired() );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line">    <span class="comment">// Interfaces now allow default methods, the implementer may or</span></span><br><span class="line">    <span class="comment">// may not implement (override) them.</span></span><br><span class="line">    <span class="keyword">default</span> String <span class="title function_">notRequired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Default implementation&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DefaultableImpl</span> <span class="keyword">implements</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OverridableImpl</span> <span class="keyword">implements</span> <span class="title class_">Defaulable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">notRequired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Overridden implementation&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">DefaulableFactory</span> &#123;</span><br><span class="line">    <span class="comment">// Interfaces now allow static methods</span></span><br><span class="line">    <span class="keyword">static</span> Defaulable <span class="title function_">create</span><span class="params">( Supplier&lt; Defaulable &gt; supplier )</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> supplier.get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个程序的控制台输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Connected to the target VM, address: &#x27;127.0.0.1:57010&#x27;, transport: &#x27;socket&#x27;</span><br><span class="line">Default implementation</span><br><span class="line">Overridden implementation</span><br></pre></td></tr></table></figure>
+
+<p>在JVM中，默认方法的实现是非常高效的，并且通过字节码指令为方法调用提供了支持。默认方法允许继续使用现有的Java接口，而同时能够保障正常的编译过程。这方面好的例子是大量的方法被添加到 java.util.Collection 接口中去：stream()，parallelStream()，forEach()，removeIf()，……</p>
+<p>尽管默认方法非常强大，但是在使用默认方法时我们需要小心注意一个地方：在声明一个默认方法前，请仔细思考是不是真的有必要使用默认方法，因为默认方法会带给程序歧义，并且在复杂的继承体系中容易产生编译错误。更多详情请参考官方文档。</p>
+<h1 id="JEP-150：新的日期时间-API-amp-amp-日期时间格式化"><a href="#JEP-150：新的日期时间-API-amp-amp-日期时间格式化" class="headerlink" title="JEP 150：新的日期时间 API &amp;&amp; 日期时间格式化"></a>JEP 150：新的日期时间 API &amp;&amp; 日期时间格式化</h1><p>JDK8之前，Java的日期和时间API存在以下问题：</p>
+<p>设计很差：在java.util和java.sql中都有日期类，java.util.Date同时包含日期和时间，而java.sql.Date仅包含日期。此外，用于格式化和解析的类定义在java.text包中。<br>非线程安全：java.util.Date是非线程安全的，所有的日期类都是可变的，这是Java日期类的最大问题之一。<br>时区处理麻烦：日期类并不提供国际化，没有时区支持，虽然后来引入了java.util.Calendar和java.util.TimeZone类，但他们也存在上述所有问题。</p>
+<p>为了解决这些问题，JDK8借鉴了Joda Time的设计，引入了一套全新的日期和时间API，这些API设计合理，线程安全，都位于java.time包中，下面是一些关键类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDate：表示日期，包含年月日，格式为 <span class="number">2024</span>-<span class="number">01</span>-<span class="number">02</span></span><br><span class="line">LocalTime：表示时间，包含时分秒，格式为 <span class="number">23</span>:<span class="number">01</span>:<span class="number">28.123456789</span></span><br><span class="line">LocalDateTime：表示日期时间，包含年月日 时分秒，格式为 <span class="number">2024</span>-<span class="number">01</span>-02T23:<span class="number">01</span>:<span class="number">28.123456789</span></span><br><span class="line">DateTimeFormatter：日期时间的格式化类</span><br><span class="line"></span><br><span class="line">Instant：时间戳，表示时间线上的一个特定瞬间</span><br><span class="line">Period：用于计算<span class="number">2</span>个日期（LocalDate）的距离</span><br><span class="line">Duration：用于计算<span class="number">2</span>个时间（LocalTime）的距离</span><br><span class="line"></span><br><span class="line">ZonedDateTime：包含时区的时间</span><br></pre></td></tr></table></figure>
+
+<p>Java使用的日历系统是ISO 8601，它是世界民用历法，也就是通常讲的公历。平年有365天，闰年有366天。</p>
+<p>LocalDate、LocalTime、LocalDateTime类的实例是不可变对象，分别表示ISO 8601日历系统的日期、时间、日期和时间。他们提供了简单的日期或时间，并不包含当前的时间信息，也不包含与时区相关的信息。</p>
+<h2 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h2><p>日期，格式为：2024-01-02。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前日期</span></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">nowDay</span> <span class="operator">=</span> LocalDate.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定日期</span></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">theDay</span> <span class="operator">=</span> LocalDate.of(<span class="number">2024</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取LocalDateTime对象的日期</span></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">dayFromDateTime</span> <span class="operator">=</span> LocalDate.from(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析字符串获取日期</span></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">parsedDay</span> <span class="operator">=</span> LocalDate.parse(<span class="string">&quot;2024-01-02&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取LocalDate对象调整后的日期</span></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">nextMonday</span> <span class="operator">=</span> theDay.with(TemporalAdjusters.next(DayOfWeek.MONDAY));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取日期信息</span></span><br><span class="line">System.out.println(<span class="string">&quot;年：&quot;</span> + nowDay.getYear());</span><br><span class="line">System.out.println(<span class="string">&quot;月：&quot;</span> + nowDay.getMonthValue());</span><br><span class="line">System.out.println(<span class="string">&quot;日：&quot;</span> + nowDay.getDayOfMonth());</span><br><span class="line">System.out.println(<span class="string">&quot;星期：&quot;</span> + nowDay.getDayOfWeek().getValue());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否为闰年</span></span><br><span class="line">nowDay.isLeapYear();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改日期</span></span><br><span class="line">nowDay.plusYears(<span class="number">1</span>);</span><br><span class="line">nowDay.plusMonths(<span class="number">1</span>);</span><br><span class="line">nowDay.plusWeeks(<span class="number">1</span>);</span><br><span class="line">nowDay.plusDays(<span class="number">2</span>);</span><br><span class="line">nowDay.minusYears(<span class="number">1</span>);</span><br><span class="line">nowDay.minusMonths(<span class="number">1</span>);</span><br><span class="line">nowDay.minusWeeks(<span class="number">1</span>);</span><br><span class="line">nowDay.minusDays(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 日期比较</span></span><br><span class="line">nowDay.isBefore(tomorrow); <span class="comment">// true</span></span><br><span class="line">nowDay.isEqual(tomorrow);  <span class="comment">// false</span></span><br><span class="line">nowDay.isAfter(tomorrow);  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h2><p>时间，格式为：23:01:28.123456789。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前时间</span></span><br><span class="line"><span class="type">LocalTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalTime.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定时间</span></span><br><span class="line"><span class="type">LocalTime</span> <span class="variable">theTime</span> <span class="operator">=</span> LocalTime.of(<span class="number">18</span>, <span class="number">20</span>, <span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取LocalDateTime对象的时间</span></span><br><span class="line"><span class="type">LocalTime</span> <span class="variable">TimeFromDateTime</span> <span class="operator">=</span> LocalTime.from(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析字符串获取时间</span></span><br><span class="line"><span class="type">LocalTime</span> <span class="variable">parsedTime</span> <span class="operator">=</span> LocalTime.parse(<span class="string">&quot;22:25:05&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取LocalTime对象调整后的时间</span></span><br><span class="line">theTime.withHour(<span class="number">20</span>);</span><br><span class="line">theTime.withMinute(<span class="number">30</span>);</span><br><span class="line">theTime.withMinute(<span class="number">15</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取时间信息</span></span><br><span class="line">System.out.println(<span class="string">&quot;时：&quot;</span> + now.getHour());</span><br><span class="line">System.out.println(<span class="string">&quot;分：&quot;</span> + now.getMinute());</span><br><span class="line">System.out.println(<span class="string">&quot;秒：&quot;</span> + now.getSecond());</span><br><span class="line">System.out.println(<span class="string">&quot;纳秒：&quot;</span> + now.getNano());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改时间</span></span><br><span class="line">now.plusHours(<span class="number">1</span>);</span><br><span class="line">now.plusMinutes(<span class="number">1</span>);</span><br><span class="line">now.plusSeconds(<span class="number">10</span>);</span><br><span class="line">now.plusNanos(<span class="number">1000</span>);</span><br><span class="line">now.minusHours(<span class="number">1</span>);</span><br><span class="line">now.minusMinutes(<span class="number">1</span>);</span><br><span class="line">now.minusSeconds(<span class="number">10</span>);</span><br><span class="line">now.minusNanos(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 时间比较</span></span><br><span class="line">now.isBefore(nextHour); <span class="comment">// true</span></span><br><span class="line">now.isAfter(nextHour);  <span class="comment">// false</span></span><br><span class="line">now.equals(nextHour);   <span class="comment">// false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h2><p>日期和时间，格式为：2024-01-02T22:24:05.123456789。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前日期时间</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建指定日期时间</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">theDateTime</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2024</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">22</span>, <span class="number">5</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据另一个LocalDateTime对象创建日期时间</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">dateTimeFromAnother</span> <span class="operator">=</span> LocalDateTime.from(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析字符串获取日期时间</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">parsedDateTime</span> <span class="operator">=</span> LocalDateTime.parse(<span class="string">&quot;2024-01-02T22:29:23.787&quot;</span>);</span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">parsedDateTime</span> <span class="operator">=</span> LocalDateTime.parse(<span class="string">&quot;2024-01-02 22:29:23&quot;</span>, </span><br><span class="line">    DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取LocalDateTime对象调整后的日期时间</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">nextMonth</span> <span class="operator">=</span> now.with(TemporalAdjusters.firstDayOfNextMonth());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取时间信息</span></span><br><span class="line">System.out.println(<span class="string">&quot;年：&quot;</span> + now.getYear());</span><br><span class="line">System.out.println(<span class="string">&quot;月：&quot;</span> + now.getMonthValue());</span><br><span class="line">System.out.println(<span class="string">&quot;日：&quot;</span> + now.getDayOfMonth());</span><br><span class="line">System.out.println(<span class="string">&quot;星期：&quot;</span> + now.getDayOfWeek().getValue());</span><br><span class="line">System.out.println(<span class="string">&quot;时：&quot;</span> + now.getHour());</span><br><span class="line">System.out.println(<span class="string">&quot;分：&quot;</span> + now.getMinute());</span><br><span class="line">System.out.println(<span class="string">&quot;秒：&quot;</span> + now.getSecond());</span><br><span class="line">System.out.println(<span class="string">&quot;纳秒：&quot;</span> + now.getNano());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 格式化LocalDateTime</span></span><br><span class="line">now.format(DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 桉指定时间单位保留精度</span></span><br><span class="line">now = now.truncatedTo(ChronoUnit.HOURS);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改LocalDateTime</span></span><br><span class="line">now.plusYears(<span class="number">1</span>);</span><br><span class="line">now.plusMonths(<span class="number">1</span>);</span><br><span class="line">now.plusWeeks(<span class="number">1</span>);</span><br><span class="line">now.plusDays(<span class="number">2</span>);</span><br><span class="line">now.plusHours(<span class="number">1</span>);</span><br><span class="line">now.plusMinutes(<span class="number">1</span>);</span><br><span class="line">now.plusSeconds(<span class="number">10</span>);</span><br><span class="line">now.plusNanos(<span class="number">1000</span>);</span><br><span class="line">now.minusYears(<span class="number">1</span>);</span><br><span class="line">now.minusMonths(<span class="number">1</span>);</span><br><span class="line">now.minusWeeks(<span class="number">1</span>);</span><br><span class="line">now.minusDays(<span class="number">2</span>);</span><br><span class="line">now.minusHours(<span class="number">1</span>);</span><br><span class="line">now.minusMinutes(<span class="number">1</span>);</span><br><span class="line">now.minusSeconds(<span class="number">10</span>);</span><br><span class="line">now.minusNanos(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// LocalDateTime比较</span></span><br><span class="line">now.isBefore(nextHour); <span class="comment">// true</span></span><br><span class="line">now.isEqual(nextHour);  <span class="comment">// false</span></span><br><span class="line">now.isAfter(nextHour);  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// LocalDateTime转为ZonedDateTime</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">zonedDateTime</span> <span class="operator">=</span> now.atZone(ZoneId.of(<span class="string">&quot;+08&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// LocalDateTime转为OffsetDateTime</span></span><br><span class="line"><span class="type">OffsetDateTime</span> <span class="variable">offsetDateTime</span> <span class="operator">=</span> now.atOffset(ZoneOffset.ofHours(<span class="number">8</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间格式化与解析"><a href="#时间格式化与解析" class="headerlink" title="时间格式化与解析"></a>时间格式化与解析</h2><p>java.time.format.DateTimeFormatter类专门负责日期时间的格式化与解析，这个类是final的，线程安全。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DateTimeFormatter</span> <span class="variable">fmt</span> <span class="operator">=</span> DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 格式化LocalDateTime为字符串</span></span><br><span class="line">System.out.println(LocalDateTime.now().format(fmt));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析时间字符串</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">parsedDateTime</span> <span class="operator">=</span> LocalDateTime.parse(<span class="string">&quot;2024-01-02 10:20:30&quot;</span>, fmt);</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h2><p>Instant类，时间戳，表示时间线上的一个特定瞬间。内部保存了从1970年1月1日 00:00:00以来的秒和纳秒。</p>
+<p>一般不是给用户使用的，而是方便程序做一些统计。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Instant</span> <span class="variable">instant</span> <span class="operator">=</span> Instant.now();</span><br><span class="line"><span class="comment">// 当前时间戳：2024-01-02T15:51:12.068Z</span></span><br><span class="line">System.out.println(<span class="string">&quot;当前时间戳：&quot;</span> + instant);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1970-01-01 00:00:00 到现在的秒：1716565872</span></span><br><span class="line">System.out.println(<span class="string">&quot;1970-01-01 00:00:00 到现在的秒：&quot;</span> + instant.getEpochSecond());</span><br><span class="line"><span class="comment">// 1970-01-01 00:00:00 到现在的毫秒：1716565872068</span></span><br><span class="line">System.out.println(<span class="string">&quot;1970-01-01 00:00:00 到现在的毫秒：&quot;</span> + instant.toEpochMilli());</span><br><span class="line"><span class="comment">// 秒后面的纳秒：68000000</span></span><br><span class="line">System.out.println(<span class="string">&quot;秒后面的纳秒：&quot;</span> + instant.getNano());</span><br><span class="line"></span><br><span class="line"><span class="type">Instant</span> <span class="variable">second</span> <span class="operator">=</span> Instant.ofEpochSecond(<span class="number">1716565310</span>);</span><br><span class="line">System.out.println(second); <span class="comment">// 2024-01-02T15:41:50Z</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="计算日期、时间差"><a href="#计算日期、时间差" class="headerlink" title="计算日期、时间差"></a>计算日期、时间差</h2><p>Duration：用于计算2个时间的距离；</p>
+<p>Period：用于计算2个日期的距离。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">nextMonday</span> <span class="operator">=</span> now.with(TemporalAdjusters.next(DayOfWeek.MONDAY));</span><br><span class="line"><span class="comment">// Duration 计算时间的距离</span></span><br><span class="line"><span class="type">Duration</span> <span class="variable">duration</span> <span class="operator">=</span> Duration.between(now, nextMonday);</span><br><span class="line">System.out.println(<span class="string">&quot;相差的天：&quot;</span> + duration.toDays());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的小时：&quot;</span> + duration.toHours());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的分钟：&quot;</span> + duration.toMinutes());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的秒：&quot;</span> + duration.getSeconds());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的毫秒：&quot;</span> + duration.toMillis());</span><br><span class="line"></span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">today</span> <span class="operator">=</span> LocalDate.now();</span><br><span class="line"><span class="type">LocalDate</span> <span class="variable">nextTuesday</span> <span class="operator">=</span> today.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));</span><br><span class="line"><span class="comment">// Period 计算日期的距离</span></span><br><span class="line"><span class="type">Period</span> <span class="variable">period</span> <span class="operator">=</span> Period.between(today, nextTuesday);</span><br><span class="line">System.out.println(<span class="string">&quot;相差的年：&quot;</span> + period.getYears());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的月：&quot;</span> + period.getMonths());</span><br><span class="line">System.out.println(<span class="string">&quot;相差的天：&quot;</span> + period.getDays());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="时间调整器"><a href="#时间调整器" class="headerlink" title="时间调整器"></a>时间调整器</h2><p>有时候我们可能需要根据一个LocalDateTime获取它调整后的时间，比如“下个月的第2天”，“下个周三”，等等。类似的时间可以通过时间调整器获取。</p>
+<p>TemporalAdjuster：时间调整器接口。</p>
+<p>TemporalAdjusters：该类通过静态方法提供了很多常用的TemporalAdjuster的实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将 LocalDateTime 调整到下个月第2天</span></span><br><span class="line"><span class="type">TemporalAdjuster</span> <span class="variable">secondDayOfNextMonth</span> <span class="operator">=</span> temporal -&gt; &#123;</span><br><span class="line">	<span class="type">LocalDateTime</span> <span class="variable">dateTime</span> <span class="operator">=</span> (LocalDateTime) temporal;</span><br><span class="line">	<span class="keyword">return</span> dateTime.plusMonths(<span class="number">1</span>).withDayOfMonth(<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line">System.out.println(now); <span class="comment">// 2024-01-02T12:17:01.524</span></span><br><span class="line">System.out.println(now.with(secondDayOfNextMonth)); <span class="comment">// 2024-02-02T12:17:01.524</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>JDK自带的时间调整器实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当月第1天</span></span><br><span class="line">TemporalAdjusters.firstDayOfMonth()</span><br><span class="line"><span class="comment">// 当月最后1天</span></span><br><span class="line">TemporalAdjusters.lastDayOfMonth()</span><br><span class="line"><span class="comment">// 下月第1天</span></span><br><span class="line">TemporalAdjusters.firstDayOfNextMonth()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当年第1天</span></span><br><span class="line">TemporalAdjusters.firstDayOfYear()</span><br><span class="line"><span class="comment">// 当年最后1天</span></span><br><span class="line">TemporalAdjusters.lastDayOfYear()</span><br><span class="line"><span class="comment">// 下年第1天</span></span><br><span class="line">TemporalAdjusters.firstDayOfNextYear()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当月第1个周几</span></span><br><span class="line">TemporalAdjusters.firstInMonth(DayOfWeek dayOfWeek)</span><br><span class="line"><span class="comment">// 当月最后1个周几</span></span><br><span class="line">TemporalAdjusters.lastInMonth(DayOfWeek dayOfWeek)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当前时间之后的下1个周几</span></span><br><span class="line">TemporalAdjusters.next(DayOfWeek dayOfWeek)</span><br><span class="line"><span class="comment">// 当前时间或者之后的下1个周几</span></span><br><span class="line">TemporalAdjusters.nextOrSame(DayOfWeek dayOfWeek)</span><br><span class="line"><span class="comment">// 当前时间之前的上1个周几</span></span><br><span class="line">TemporalAdjusters.previous(DayOfWeek dayOfWeek)</span><br><span class="line"><span class="comment">// 当前时间或者之前的上1个周几</span></span><br><span class="line">TemporalAdjusters.previousOrSame(DayOfWeek dayOfWeek)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><p>JDK8加入了对时区的支持，LocalDate、LocalTime、LocalDateTime是不带时区的，带时区的日期时间类分别为：ZonedDateTime。</p>
+<p>ZoneId类包含了时区信息，每个时区对应一个ID，格式为“区域&#x2F;城市”，比如：Asia&#x2F;Shanghai。</p>
+<p>东八区代表的ZoneId可通过以下多种方式创建：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ZoneId.of(<span class="string">&quot;Asia/Shanghai&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;+8&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;+08&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;+08:00&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC+8&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC+08&quot;</span>);</span><br><span class="line">ZoneId.of(<span class="string">&quot;UTC+08:00&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>ZonedDateTime的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印所有可用的时区</span></span><br><span class="line">ZoneId.getAvailableZoneIds().forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"> <span class="comment">// 不带时区的当前时间：2024-01-02T12:42:44.550</span></span><br><span class="line">System.out.println(now);</span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">zonedNow</span> <span class="operator">=</span> ZonedDateTime.now();</span><br><span class="line"><span class="comment">// 当前时区的当前时间：2024-01-02T12:42:44.550+08:00[Asia/Shanghai]</span></span><br><span class="line">System.out.println(zonedNow);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UTC的当前时间：2024-01-02T04:44:39.496Z</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">utcNow</span> <span class="operator">=</span> ZonedDateTime.now(Clock.systemUTC());</span><br><span class="line">System.out.println(utcNow);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UTC时间转为东八区时间：2024-01-02T12:44:39.496+08:00</span></span><br><span class="line"><span class="type">ZonedDateTime</span> <span class="variable">utc8Now</span> <span class="operator">=</span> utcNow.withZoneSameInstant(ZoneId.of(<span class="string">&quot;+08&quot;</span>));</span><br><span class="line">System.out.println(utc8Now);</span><br></pre></td></tr></table></figure>
+
+<h1 id="JEP-174：Nashorn-JavaScript-引擎"><a href="#JEP-174：Nashorn-JavaScript-引擎" class="headerlink" title="JEP 174：Nashorn JavaScript 引擎"></a>JEP 174：Nashorn JavaScript 引擎</h1><p>官方文档：<br><a class="link"   target="_blank" rel="noopener" href="https://openjdk.org/jeps/174" >https://openjdk.org/jeps/174<i class="fas fa-external-link-alt"></i></a></p>
+<p>java重执行js脚本的引擎</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计和实现一个新的轻量级，高性能的实现 的JavaScript，并将其集成到JDK中。新引擎将 通过现有的可用于Java应用程序javax.scriptAPI, 也更一般地通过一个新的命令行工具。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>Nashorn将基于ECMAScript-262版5.1语言 规范，并且必须通过ECMAScript-262符合性测试。</p>
+<p>Nashorn将支持javax.script(JSR 223) API。</p>
+<p>将提供从JavaScript调用Java代码的支持 为Java调用JavaScript代码。这包括直接映射到 JavaBeans。</p>
+<p>Nashorn将定义一个新的命令行工具，jjs,用于评估 “shebang” 脚本中的JavaScript代码，此处文档和编辑 字符串。</p>
+<p>Nashorn应用程序的性能和内存使用情况应该是 比犀牛好得多。</p>
+<p>Nashorn不会暴露任何额外的安全风险。</p>
+<p>提供的库应在本地化下正确运行。</p>
+<p>错误消息和文档将被国际化。</p>
+<h1 id="JEP-179：方法引用和构造器引用"><a href="#JEP-179：方法引用和构造器引用" class="headerlink" title="JEP 179：方法引用和构造器引用"></a>JEP 179：方法引用和构造器引用</h1><p>参考lambda表达式介绍</p>
+<h1 id="利用-Optional-解决NullPointerException"><a href="#利用-Optional-解决NullPointerException" class="headerlink" title="利用 Optional 解决NullPointerException"></a>利用 Optional 解决NullPointerException</h1><h1 id="全新的、标准的-Base64-API"><a href="#全新的、标准的-Base64-API" class="headerlink" title="全新的、标准的 Base64 API"></a>全新的、标准的 Base64 API</h1>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Java 8 新特性二</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2023-01-02 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2024_01_02_java/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2023_12_26_docker_hexo/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker安装hexo编译环境</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022_06_18_springboot_actuator/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Springboot自定义指标并使用Prometheus监控预警</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-120%EF%BC%9A%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3-Repeatable"><span class="nav-text">JEP 120：重复注解@Repeatable</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-%E4%B9%8B%E5%89%8D%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%87%8D%E5%A4%8D%E6%B3%A8"><span class="nav-text">Java 8 之前如何使用重复注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3-Repeatable"><span class="nav-text">Java 8 重复注解 @Repeatable</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-122%EF%BC%9A%E7%A7%BB%E9%99%A4Permgen"><span class="nav-text">JEP 122：移除Permgen</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-126%EF%BC%9ALambda-%E8%A1%A8%E8%BE%BE%E5%BC%8F-amp-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="nav-text">JEP 126：Lambda 表达式&amp;函数式接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-126%EF%BC%9A%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="nav-text">JEP 126：接口的默认方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-150%EF%BC%9A%E6%96%B0%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4-API-amp-amp-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-text">JEP 150：新的日期时间 API &amp;&amp; 日期时间格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LocalDate"><span class="nav-text">LocalDate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LocalTime"><span class="nav-text">LocalTime</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LocalDateTime"><span class="nav-text">LocalDateTime</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8E%E8%A7%A3%E6%9E%90"><span class="nav-text">时间格式化与解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E6%88%B3"><span class="nav-text">时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%97%A5%E6%9C%9F%E3%80%81%E6%97%B6%E9%97%B4%E5%B7%AE"><span class="nav-text">计算日期、时间差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%B0%83%E6%95%B4%E5%99%A8"><span class="nav-text">时间调整器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%8C%BA"><span class="nav-text">时区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-174%EF%BC%9ANashorn-JavaScript-%E5%BC%95%E6%93%8E"><span class="nav-text">JEP 174：Nashorn JavaScript 引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-text">目标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JEP-179%EF%BC%9A%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E5%92%8C%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8"><span class="nav-text">JEP 179：方法引用和构造器引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-Optional-%E8%A7%A3%E5%86%B3NullPointerException"><span class="nav-text">利用 Optional 解决NullPointerException</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A8%E6%96%B0%E7%9A%84%E3%80%81%E6%A0%87%E5%87%86%E7%9A%84-Base64-API"><span class="nav-text">全新的、标准的 Base64 API</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
