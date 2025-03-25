@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            Clickhouse总结 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Clickhouse总结</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-01-10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/clickhouse/">clickhouse</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/OLAP/">OLAP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/OLTP/">OLTP</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8/">列式存储</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/">数据仓库</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>22 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="OLTP与OLAP"><a href="#OLTP与OLAP" class="headerlink" title="OLTP与OLAP"></a>OLTP与OLAP</h1><h2 id="什么是-OLTP"><a href="#什么是-OLTP" class="headerlink" title="什么是 OLTP"></a>什么是 OLTP</h2><ul>
+<li><strong>全称</strong>: Online Transaction Processing（联机事务处理系统）</li>
+<li><strong>特点</strong>:<ul>
+<li>专注于事务处理</li>
+<li>进行数据的增删改查操作</li>
+<li>典型代表: MySQL、Oracle</li>
+<li>用于网站和系统应用的后端数据库</li>
+<li>存储业务数据（如下单、支付、注册信息）</li>
+<li>支持事务操作，响应时间要求高</li>
+<li>数据量相对较少</li>
+</ul>
+</li>
+</ul>
+<h2 id="OLTP-的问题"><a href="#OLTP-的问题" class="headerlink" title="OLTP 的问题"></a>OLTP 的问题</h2><ul>
+<li>当数据量达到 TB 或 PB 级别时，传统的 MySQL 性能不足</li>
+<li>数据分析场景需要全盘扫描统计，不适合 OLTP</li>
+</ul>
+<h2 id="什么是-OLAP"><a href="#什么是-OLAP" class="headerlink" title="什么是 OLAP"></a>什么是 OLAP</h2><ul>
+<li><strong>全称</strong>: Online Analytical Processing（联机分析处理）</li>
+<li><strong>特点</strong>:<ul>
+<li>专注于复杂分析操作</li>
+<li>更侧重于决策支持</li>
+<li>典型代表: ClickHouse、Doris、StarRocks</li>
+<li>数据量通常为 TB 级别</li>
+<li>不擅长修改操作，数据一致性要求低</li>
+</ul>
+</li>
+</ul>
+<h1 id="ClickHouse-数据库介绍"><a href="#ClickHouse-数据库介绍" class="headerlink" title="ClickHouse 数据库介绍"></a>ClickHouse 数据库介绍</h1><ul>
+<li><strong>简介</strong>:<ul>
+<li>是俄罗斯的Yandex于2016年开源的列式存储数据库</li>
+<li>使用c++语言编写</li>
+</ul>
+</li>
+<li><strong>类型</strong>: OLAP 数据库</li>
+<li><strong>特点</strong>:<ul>
+<li>实时数据仓库，在线分析处理查询</li>
+<li>支持标准 SQL 语句（如 INSERT、SELECT），实时生成分析数据报告</li>
+<li>提供高级查询功能（复合聚合函数、窗口函数、跨表查询）</li>
+<li>支持列式存储、数据分区和线程并行</li>
+</ul>
+</li>
+</ul>
+<h2 id="列式存储-vs-行式存储"><a href="#列式存储-vs-行式存储" class="headerlink" title="列式存储 vs 行式存储"></a>列式存储 vs 行式存储</h2><ul>
+<li><strong>行式存储</strong>:<ul>
+<li>将整行数据存储为一个整体</li>
+</ul>
+</li>
+<li><strong>列式存储</strong>:<ul>
+<li>将每一列作为一个数据块存储</li>
+<li>优势: 更高效的统计查询、数据压缩效果好</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据分区和线程并行"><a href="#数据分区和线程并行" class="headerlink" title="数据分区和线程并行"></a>数据分区和线程并行</h2><ul>
+<li><strong>数据分区</strong>:<ul>
+<li>按业务逻辑将数据分类，便于查询管理</li>
+<li>示例: 按日期分区</li>
+</ul>
+</li>
+<li><strong>线程并行</strong>:<ul>
+<li>多个 CPU 核心并行查询不同分区</li>
+<li>优势: 降低查询延迟，利用 CPU 资源</li>
+</ul>
+</li>
+</ul>
+<h2 id="支持丰富的表引擎"><a href="#支持丰富的表引擎" class="headerlink" title="支持丰富的表引擎"></a>支持丰富的表引擎</h2><ul>
+<li><strong>表引擎</strong>:<ul>
+<li>决定数据存储方式和位置</li>
+<li>支持查询类型和并发访问</li>
+</ul>
+</li>
+<li><strong>常用表引擎</strong>:<ul>
+<li>MergeTree（支持分区和 TTL）</li>
+<li>日志引擎（快速写入小数据）</li>
+<li>集成引擎（实时接入其他数据源）</li>
+</ul>
+</li>
+</ul>
+<h2 id="ClickHouse-的缺点"><a href="#ClickHouse-的缺点" class="headerlink" title="ClickHouse 的缺点"></a>ClickHouse 的缺点</h2><ul>
+<li>由于单条查询使用多核cpu，不支持高并发请求</li>
+<li>对 UPDATE 和 DELETE 操作支持较差</li>
+<li>单个插入性能较低，建议批量插入</li>
+<li>吃硬件，一般物理机安装，单独安装不和业务混部</li>
+</ul>
+<h2 id="ClickHouse-的适用场景"><a href="#ClickHouse-的适用场景" class="headerlink" title="ClickHouse 的适用场景"></a>ClickHouse 的适用场景</h2><ul>
+<li>适用于数据量大且需要分析的场景</li>
+<li>适合存储已经处理过的大宽表，进行分析，读取大量列中的少量列</li>
+<li>不适合高并发请求、频繁更新和删除的场景</li>
+</ul>
+<h1 id="ClickHouse安装"><a href="#ClickHouse安装" class="headerlink" title="ClickHouse安装"></a>ClickHouse安装</h1><h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ol>
+<li>防火墙设置：关闭防火墙以避免影响安装</li>
+<li>实际工作中需根据需要配置IP和端口限制</li>
+<li>Linux系统文件限制，取消文件限制：否则影响ch性能</li>
+</ol>
+<ul>
+<li>使用ulimit -a命令查看系统限制</li>
+<li>关注的主要参数：<ul>
+<li>打开的文件数</li>
+<li>用户最大进程数</li>
+</ul>
+</li>
+<li>修改配置文件&#x2F;etc&#x2F;security&#x2F;limits.conf<br>没修改前：<br><img src="/2024_01_10_clickhouse/1.png" alt="before"><br>修改:<br><img src="/2024_01_10_clickhouse/2.png" alt="edit"><br>修改后：<br><img src="/2024_01_10_clickhouse/3.png" alt="after"></li>
+<li>解释配置项：<ul>
+<li>用户与用户组的设置</li>
+<li>软限制（soft）与硬限制（hard）的区别</li>
+<li>打开文件数（number of open files）与进程数（number of processes）</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>安装依赖<br>  linux安装由运维协助，这里不展开记录，下面直接通过docker安装（生产环境不要使用docker，这里只为了学习原理和使用，并非安装所以简化安装）<br>  参考<br>  <a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/install#from-docker-image" >https://clickhouse.com/docs/install#from-docker-image<i class="fas fa-external-link-alt"></i></a></li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p> linux安装由运维协助，这里不展开记录，下面直接通过docker安装（生产环境不要使用docker，这里只为了学习原理和使用，并非安装所以简化安装）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">docker pull yandex/clickhouse-server:21.7.3.14</span><br><span class="line"></span><br><span class="line">docker run --<span class="built_in">rm</span> -d --name=clickhouse-server \</span><br><span class="line">--<span class="built_in">ulimit</span> nofile=262144:262144 -p 8123:8123  \</span><br><span class="line">-p 9009:9009 -p 9090:9000 yandex/clickhouse-server:21.7.3.14</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">cp</span> clickhouse-server:/etc/clickhouse-server/config.xml ./conf/config.xml</span><br><span class="line">docker <span class="built_in">cp</span> clickhouse-server:/etc/clickhouse-server/users.xml ./conf/users.xml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d --name=clickhouse-server \</span><br><span class="line">-p 8123:8123 -p 9009:9009 -p 9090:9000 \</span><br><span class="line">--<span class="built_in">ulimit</span> nofile=262144:262144 \</span><br><span class="line">-v ./data/:/var/lib/clickhouse/data \</span><br><span class="line">-v ./conf/:/etc/clickhouse-server \</span><br><span class="line">-v ./log/:/var/log \</span><br><span class="line">yandex/clickhouse-server:21.7.3.14</span><br><span class="line"></span><br><span class="line">设置密码后客户端链接</span><br><span class="line">clickhouse-client --user default --password 1234</span><br><span class="line"></span><br><span class="line"><span class="comment"># refer to https://blog.csdn.net/huas_xq/article/details/123574461</span></span><br></pre></td></tr></table></figure>
+<p>核心目录：<br><img src="/2024_01_10_clickhouse/root.png" alt="核心目录"></p>
+<ul>
+<li>数据在 data目录</li>
+<li>表结构信息在 metadata目录</li>
+</ul>
+<h1 id="Clickhouse数据类型"><a href="#Clickhouse数据类型" class="headerlink" title="Clickhouse数据类型"></a>Clickhouse数据类型</h1><h2 id="整形数值"><a href="#整形数值" class="headerlink" title="整形数值"></a>整形数值</h2><ol>
+<li>Int8, Int16, Int32, Int64:<ul>
+<li>Int8: 8位（-128 到 127）</li>
+<li>Int16: 16位（-32768 到 32767）</li>
+<li>Int32: 32位（-2147483648 到 2147483647）</li>
+<li>Int64: 64位（-9223372036854775808 到 9223372036854775807）</li>
+</ul>
+</li>
+<li>与Java类型类比<ul>
+<li>int8对应byte</li>
+<li>int16对应short</li>
+<li>int32对应int</li>
+<li>int64对应long</li>
+</ul>
+</li>
+<li>无符号整型:<ul>
+<li>UInt8: 0 到 255</li>
+<li>UInt16: 0 到 65535</li>
+<li>UInt32: 0 到 4294967295</li>
+<li>UInt64: 0 到 18446744073709551615</li>
+</ul>
+</li>
+</ol>
+<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><ol>
+<li><p>浮点型的分类</p>
+<ul>
+<li>Float32: 32位（4字节）</li>
+<li>Float64: 64位（8字节）</li>
+</ul>
+</li>
+<li><p>精度问题</p>
+<ul>
+<li>浮点型存储可能会导致精度丢失，尤其在处理货币时应避免使用。</li>
+</ul>
+</li>
+<li><p>布尔类型</p>
+<ul>
+<li>使用uint8表示布尔值</li>
+<li>0表示false</li>
+<li>1表示true</li>
+</ul>
+</li>
+<li><p>Decimal类型</p>
+<ul>
+<li>Decimal(p, s):<ul>
+<li>p: 总位数</li>
+<li>s: 小数位数</li>
+</ul>
+</li>
+<li>类型示例<ul>
+<li>decimal(32, 5)  整数小数一共9位， 小数后5位 </li>
+<li>decimal(64, 5), 整数小数一共18位， 小数后5位 </li>
+<li>decimal(128, 5) 整数小数一共38位， 小数后5位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符串类型</p>
+<ul>
+<li>String: 可变长度字符串。</li>
+<li>FixedString(n): 固定长度字符串，不足部分用空字节填充。</li>
+</ul>
+</li>
+<li><p>枚举类型</p>
+<ul>
+<li>定义和使用枚举， Enum8,Enum16</li>
+<li>插入和查询枚举值的示例 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_enum (</span><br><span class="line">    x Enum8(<span class="string">&#x27;hello&#x27;</span> <span class="operator">=</span> <span class="number">1</span>, <span class="string">&#x27;world&#x27;</span> <span class="operator">=</span> <span class="number">2</span>)</span><br><span class="line">) ENGINE <span class="operator">=</span> TinyLog;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT INTO</span> t_enum <span class="keyword">VALUES</span> (<span class="string">&#x27;hello&#x27;</span>),(<span class="string">&#x27;world&#x27;</span>),(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_enum;</span><br><span class="line"></span><br><span class="line"># 转换查询</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">CAST</span>(x, <span class="string">&#x27;Int8&#x27;</span>) <span class="keyword">FROM</span> t_enum;</span><br></pre></td></tr></table></figure></li>
+<li>插入未知类型会报错</li>
+</ul>
+</li>
+<li><p>时间类型</p>
+<ul>
+<li>Date: 仅包含年月日。</li>
+<li>DateTime: 包含年月日时分秒。</li>
+<li>DateTime64: 包含亚秒（毫秒）。</li>
+</ul>
+</li>
+<li><p>数组类型</p>
+<ul>
+<li>mergeTree表中不能存储多维数组</li>
+<li>使用 Array 表示，支持单层数组。</li>
+<li>例子：Array(UInt8) 表示存储无符号8位整型的数组。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">2</span>) <span class="keyword">AS</span> x, toTypeName(x);</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>d9991e86323 :) <span class="keyword">SELECT</span> <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">2</span>) <span class="keyword">AS</span> x, toTypeName(x);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>] <span class="keyword">AS</span> x,</span><br><span class="line">    toTypeName(x)</span><br><span class="line"></span><br><span class="line">┌─x─────┬─toTypeName([<span class="number">1</span>, <span class="number">2</span>])─┐</span><br><span class="line">│ [<span class="number">1</span>,<span class="number">2</span>] │ <span class="keyword">Array</span>(UInt8)       │</span><br><span class="line">└───────┴────────────────────┘</span><br><span class="line"><span class="number">1</span> <span class="keyword">rows</span> <span class="keyword">in</span> set. Elapsed: <span class="number">0.013</span> sec.</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>其他数据类型<br>介绍其他常用数据类型<br>可查阅ClickHouse官网获取更多信息<br><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/sql-reference/data-types" >https://clickhouse.com/docs/zh/sql-reference/data-types<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>空值处理<br>ClickHouse中的空值存储方式<br>建议使用无意义的数字或字符表示空值, 避免使用NULL<br><img src="/2024_01_10_clickhouse/4.png"><br>比如可以用-1，无意义得值，字符串可以搞空串或者null等</p>
+</li>
+</ol>
+<h1 id="Clickhouse表引擎"><a href="#Clickhouse表引擎" class="headerlink" title="Clickhouse表引擎"></a>Clickhouse表引擎</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>表引擎的定义：类似于MySQL中的InnoDB和MyISAM，不同引擎具有不同的功能和作用。</li>
+<li>表引擎的作用：<ul>
+<li>决定数据的存储方式和位置。</li>
+<li>指定如何读写数据。</li>
+</ul>
+</li>
+</ol>
+<h2 id="ClickHouse表引擎的特点"><a href="#ClickHouse表引擎的特点" class="headerlink" title="ClickHouse表引擎的特点"></a>ClickHouse表引擎的特点</h2><ol>
+<li>存储方式和位置<ul>
+<li>数据一般存储在本地磁盘上。</li>
+<li>ClickHouse不依赖于Hadoop或HDFS计算资源。</li>
+<li>默认配置路径：&#x2F;var&#x2F;lib&#x2F;clickhouse&#x2F;data。</li>
+</ul>
+</li>
+<li>支持的查询及语法<ul>
+<li>不同引擎支持不同的查询语法。</li>
+<li>例如，某些引擎不支持多维数组存储。</li>
+</ul>
+</li>
+<li>并发数据访问<ul>
+<li>ClickHouse支持多线程并发查询，但并非所有引擎都支持。</li>
+</ul>
+</li>
+<li>索引支持<ul>
+<li>不同引擎对索引的支持程度不同，索引的目的是提高查询效率。</li>
+</ul>
+</li>
+<li>数据复制<ul>
+<li>某些引擎支持数据复制，而其他引擎则不支持。</li>
+</ul>
+</li>
+<li>引擎名称是大小写敏感的，采用大驼峰命名法。</li>
+</ol>
+<h2 id="表引擎TinyLog"><a href="#表引擎TinyLog" class="headerlink" title="表引擎TinyLog"></a>表引擎TinyLog</h2><ol>
+<li>属于日志家族，适合小数据量（小于100万行）。</li>
+<li>特点：<ul>
+<li>存储在磁盘上，不支持索引。</li>
+<li>无并发控制，适合简单测试。</li>
+</ul>
+</li>
+<li>做一些简单测试，生产环境肯定不会用<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE table</span> t_tinylog(id String,name String) engine<span class="operator">=</span>TinyLog;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="表引擎Memory"><a href="#表引擎Memory" class="headerlink" title="表引擎Memory"></a>表引擎Memory</h2><ol>
+<li>基于内存，性能（超过10G&#x2F;s）快但数据易丢失。</li>
+<li>特点：<ul>
+<li>不支持索引，适合小数据量测试。</li>
+</ul>
+</li>
+<li>做一些简单测试，生产环境肯定不会用</li>
+</ol>
+<h2 id="MergeTree系列"><a href="#MergeTree系列" class="headerlink" title="MergeTree系列"></a>MergeTree系列</h2><ol>
+<li>ClickHouse的核心引擎，适合生产环境。相当于innodb之于mysql</li>
+<li>包含多个变种，如ReplacingMergeTree和SummingMergeTree，具有不同功能。<br>参考官方文档：<br><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family" >https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family<i class="fas fa-external-link-alt"></i></a></li>
+</ol>
+<h2 id="集成引擎"><a href="#集成引擎" class="headerlink" title="集成引擎"></a>集成引擎</h2><p>集成外部系统，如MySQL和Kafka。<br>外部集成的意义：无需将数据导入ClickHouse，直接查询外部数据源。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/table-engines/integrations" >https://clickhouse.com/docs/zh/engines/table-engines/integrations<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="MergeTree引擎"><a href="#MergeTree引擎" class="headerlink" title="MergeTree引擎"></a>MergeTree引擎</h1><p>mergeTree家族的第一个引擎——MergeTree。<br>MergeTree引擎本身是一个表引擎。<br>介绍建表语句和嵌表语句。</p>
+<p>参考：<br><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/mergetree" >https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/mergetree<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="建表语句"><a href="#建表语句" class="headerlink" title="建表语句"></a>建表语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_order_mt(</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime</span><br><span class="line">) engine<span class="operator">=</span>MergeTree </span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(create_time) </span><br><span class="line"><span class="keyword">primary key</span> (id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> (id,sku_id);</span><br></pre></td></tr></table></figure>
+<p><strong>primary key是可以重复的，这和mysql不一样</strong><br><strong>order by 是必须的， primary key 不是必须的</strong></p>
+<p>测试数据（多执行几次，多插入一些）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> t_order_mt (id, sku_id, total_amount, create_time) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;SKU001&#x27;</span>, <span class="number">100.50</span>, <span class="string">&#x27;2023-01-01 10:00:00&#x27;</span>), (<span class="number">1</span>, <span class="string">&#x27;SKU002&#x27;</span>, <span class="number">200.75</span>, <span class="string">&#x27;2023-01-01 15:30:00&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;SKU003&#x27;</span>, <span class="number">50.20</span>, <span class="string">&#x27;2023-03-20 09:15:00&#x27;</span>), (<span class="number">4</span>, <span class="string">&#x27;SKU004&#x27;</span>, <span class="number">150.00</span>, <span class="string">&#x27;2023-05-10 14:45:00&#x27;</span>), (<span class="number">5</span>, <span class="string">&#x27;SKU005&#x27;</span>, <span class="number">300.99</span>, <span class="string">&#x27;2023-05-10 11:20:00&#x27;</span>), (<span class="number">6</span>, <span class="string">&#x27;SKU006&#x27;</span>, <span class="number">75.55</span>, <span class="string">&#x27;2023-06-30 16:50:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>查询结果，分区了O(∩_∩)O<br><img src="/2024_01_10_clickhouse/5.png"></p>
+<h2 id="连接配置"><a href="#连接配置" class="headerlink" title="连接配置"></a>连接配置</h2><p>连接ClickHouse的步骤：<br>使用主机名和端口（默认端口为8123）。<br>默认用户名为default，密码为空。<br>如果驱动未自动下载，需要手动添加驱动文件。</p>
+<h2 id="partition-by-分区（可选）"><a href="#partition-by-分区（可选）" class="headerlink" title="partition by 分区（可选）"></a>partition by 分区（可选）</h2><p>不是必须的建表语句</p>
+<ol>
+<li><p>分区的作用<br>主要目的是避免全表扫描。<br>查询语句中加入分区字段的取值，可以优化查询速度。<br>分区的实现方式类似于物理分隔，像是将数据分放在不同的房间。</p>
+</li>
+<li><p>ClickHouse的分区机制<br>ClickHouse的分区是基于本地磁盘，而hive的分区是在HDFS上建立分区目录。<br>如果不写分区，默认会用一个分区，名为“all”，所有数据都在里面。</p>
+</li>
+<li><p>并行查询<br>单个查询可以多线程同时执行。<br>每个线程处理一个分区的数据。<br>通常按天分区，因为这样可以避免不必要的麻烦。</p>
+</li>
+<li><p>分区的存储<br><img src="/2024_01_10_clickhouse/6.png" alt="分区目录"><br>数据存储<br><img src="/2024_01_10_clickhouse/7.png" alt="数据"></p>
+</li>
+<li><p>稀疏索引<br>索引文件采用的稀疏索引，和kafka的partition一样</p>
+</li>
+<li><p>分区目录原理</p>
+<ul>
+<li>分区目录如上图所示， 第一位分区键，第二位最小区块编号，第三位，最大区块编号，第四位合并层级</li>
+<li>日期类型分区键，最好存日期类型，不像其他数仓，hive存字符串，这样效率高</li>
+<li>其他类型分区目录，如string，float类型分区建，目录名字取hash</li>
+</ul>
+</li>
+<li><p>数据写入与分区合并</p>
+<ul>
+<li>每次数据写入会产生一个临时分区，之后需要执行合并操作。</li>
+<li>合并是定期执行的，可以手动触发。</li>
+<li>手动触发指令 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE <span class="keyword">TABLE</span> t_order_mt <span class="keyword">FINAL</span></span><br></pre></td></tr></table></figure></li>
+<li>可以加一个分区参数 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE <span class="keyword">TABLE</span> t_order_mt <span class="keyword">PARTITION</span> <span class="string">&#x27;20230101&#x27;</span> <span class="keyword">FINAL</span></span><br></pre></td></tr></table></figure>
+ 合并之后，分区目录目录会变，产生合并后的目录，过期数据会自动清理，删除。</li>
+</ul>
+</li>
+</ol>
+<h2 id="primary-key主键（可选）"><a href="#primary-key主键（可选）" class="headerlink" title="primary key主键（可选）"></a>primary key主键（可选）</h2><ol>
+<li><strong>提供了数据的一级索引，但不是唯一约束</strong></li>
+</ol>
+<p>主键的设定主要依据查询中的where条件。（一般加载where条件中）</p>
+<ol start="2">
+<li><p>index granularity<br><img src="/2024_01_10_clickhouse/8.png" alt="indexgranularity"><br>直接翻译就是索引粒度，指在稀疏索引中两个相邻索引对应的间隔，Clickhouse中mergeTree默认是 <strong>8192</strong>，官方不建议修改这个值，除非该列存在大量重复值，比如在一个分区中几万行才有一个不同数据。</p>
+</li>
+<li><p>稀疏索引<br>索引文件采用的稀疏索引，和kafka的partition一样<br><strong>要求主键必须有序</strong>所以必须要有order bt<br><img src="/2024_01_10_clickhouse/9.jpg" alt="稀疏索引"></p>
+</li>
+</ol>
+<p>优点：数据量小，查询效率高</p>
+<h2 id="order-by-必选"><a href="#order-by-必选" class="headerlink" title="order by(必选)"></a>order by(必选)</h2><ol>
+<li><strong>分区内排序</strong></li>
+<li><strong>必填</strong> 甚至比主键还重要， 因为要建立稀疏索引，且后面去重和汇总也要用到order by</li>
+<li>可以多个字段，但必须是左前坠， 比如(id,sku_id) 要么是id ,要么是id,sku_id，不能是sku_id,id 和sku_id</li>
+</ol>
+<h2 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h2><ol>
+<li><p>版本问题<br>20.1.2.4之前，官方标注是实验性的，之后是默认开启的（20年1月份版本）<br>之前版本可以用以下命令设置，之后版本会报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> allow_expreimental_data_skipping_indices<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>二级索引使用在大量重复数据的场景下<br>二级索引不必有序<br>二级索引也叫跳数索引</p>
+</li>
+<li><p>如何使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_order_mt2(</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime,</span><br><span class="line">    INDEX a total_amount TYPE minmax GRANULARITY <span class="number">5</span></span><br><span class="line">) engine<span class="operator">=</span>MergeTree</span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">primary key</span> (id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> (id,sku_id);</span><br></pre></td></tr></table></figure>
+<p>二级索引的类型是 minmax</p>
+</li>
+</ol>
+<p>minmax 是最小最大值索引，粒度是5， 也就是5个数据算一个区间， 然后取最小值和最大值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> t_order_mt2 (id, sku_id, total_amount, create_time) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;SKU001&#x27;</span>, <span class="number">100.50</span>, <span class="string">&#x27;2023-01-01 10:00:00&#x27;</span>), (<span class="number">1</span>, <span class="string">&#x27;SKU002&#x27;</span>, <span class="number">200.75</span>, <span class="string">&#x27;2023-01-01 15:30:00&#x27;</span>), (<span class="number">3</span>, <span class="string">&#x27;SKU003&#x27;</span>, <span class="number">50.20</span>, <span class="string">&#x27;2023-03-20 09:15:00&#x27;</span>), (<span class="number">4</span>, <span class="string">&#x27;SKU004&#x27;</span>, <span class="number">150.00</span>, <span class="string">&#x27;2023-05-10 14:45:00&#x27;</span>), (<span class="number">5</span>, <span class="string">&#x27;SKU005&#x27;</span>, <span class="number">300.99</span>, <span class="string">&#x27;2023-05-10 11:20:00&#x27;</span>), (<span class="number">6</span>, <span class="string">&#x27;SKU006&#x27;</span>, <span class="number">75.55</span>, <span class="string">&#x27;2023-06-30 16:50:00&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clickhouse<span class="operator">-</span>client <span class="comment">--send_logs_level=trace &lt;&lt;&lt; &#x27;select * from t_order_mt2 where total_amount &gt; toDecimal32(900,2)&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024_01_10_clickhouse/10.png"><br>使用了二级索引</p>
+<h2 id="数据TTL"><a href="#数据TTL" class="headerlink" title="数据TTL"></a>数据TTL</h2><p>time to alive 数据存活时间</p>
+<ol>
+<li>对某一列设置ttl， 数据过期之后，会自动删除<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_order_mt3(</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>) TTL create_time <span class="operator">+</span> <span class="type">INTERVAL</span> <span class="number">10</span> <span class="keyword">SECOND</span>,</span><br><span class="line">    create_time DateTime,</span><br><span class="line">    INDEX a total_amount TYPE minmax GRANULARITY <span class="number">5</span></span><br><span class="line">) engine<span class="operator">=</span>MergeTree</span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">primary key</span> (id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> (id,sku_id);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>时间到期，这一列就会被删除（相当于时间到了，会启动一个合并任务，处理删除）</p>
+<ol start="2">
+<li>表级TTL<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER table</span> t_order_mt3 MODIFY TTL create_time <span class="operator">+</span> <span class="type">INTERVAL</span> <span class="number">10</span> <span class="keyword">SECOND</span>;</span><br></pre></td></tr></table></figure>
+会根据每行的create_time 字段进行过期删除</li>
+</ol>
+<p><strong>TTL不能使用到主键字段</strong></p>
+<p>参考：<br><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/mergetree" >https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/mergetree<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="ReplacingMergeTree-引擎"><a href="#ReplacingMergeTree-引擎" class="headerlink" title="ReplacingMergeTree 引擎"></a>ReplacingMergeTree 引擎</h1><p><strong>替换合并树</strong><br><strong>他的存储特性完全继承MergeTree，  多了一个去重功能</strong><br><strong>不是根据主键去重，而是根据order by的字段去重</strong></p>
+<ol>
+<li><p>去重时机<br><strong>不是实时去重，只会在同一批插入（新版本）或合并的过程去重。</strong><br><strong>最终一致性，不实时一致</strong></p>
+</li>
+<li><p>去重范围<br>分区内去重，不能跨分区去重</p>
+</li>
+<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_order_rmt(</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime</span><br><span class="line">) engine<span class="operator">=</span>ReplacingMergeTree(create_time)</span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(create_time)</span><br><span class="line">parimary key (id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> (id,sku_id);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>ReplacingMergeTree(create_time) 中create_time 表示按照order by的去重之后，保留crate_time最大的数据。</p>
+<p>不指定，默认按照插入顺序来，保留最后插入的。</p>
+<h1 id="SummingMergeTree-引擎"><a href="#SummingMergeTree-引擎" class="headerlink" title="SummingMergeTree 引擎"></a>SummingMergeTree 引擎</h1><p><strong>预聚合求和合并树</strong><br><strong>分区内聚合</strong><br><strong>按照order by</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> t_order_smt(</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime</span><br><span class="line">) engine<span class="operator">=</span>SummingMergeTree(total_amount)</span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(create_time)</span><br><span class="line"><span class="keyword">primary key</span> (id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> (id,sku_id);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>以上求和total_amount，是按照gruop by id,sku_id来聚合求和的，  重要的是order_by，如果不指定total_amaount,那么会按照order by求和所有的数字列。</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert into</span> t_order_smt <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&#x27;sku001&#x27;</span>,<span class="number">100.50</span>,<span class="string">&#x27;2023-01-01 10:00:00&#x27;</span>),(<span class="number">1</span>,<span class="string">&#x27;sku001&#x27;</span>,<span class="number">200.75</span>,<span class="string">&#x27;2023-01-01 15:30:00&#x27;</span>),(<span class="number">3</span>,<span class="string">&#x27;sku003&#x27;</span>,<span class="number">50.20</span>,<span class="string">&#x27;2023-03-20 09:15:00&#x27;</span>),(<span class="number">4</span>,<span class="string">&#x27;sku004&#x27;</span>,<span class="number">150.00</span>,<span class="string">&#x27;2023-05-10 14:45:00&#x27;</span>),(<span class="number">5</span>,<span class="string">&#x27;sku005&#x27;</span>,<span class="number">300.99</span>,<span class="string">&#x27;2023-05-10 11:20:00&#x27;</span>),(<span class="number">6</span>,<span class="string">&#x27;sku006&#x27;</span>,<span class="number">75.55</span>,<span class="string">&#x27;2023-06-30 16:50:00&#x27;</span>);</span><br><span class="line"></span><br><span class="line">OPTIMIZE <span class="keyword">TABLE</span> t_order_smt <span class="keyword">final</span>;</span><br></pre></td></tr></table></figure>
+
+<p>结果，两条被聚合了：<br><img src="/2024_01_10_clickhouse/11.png"></p>
+<p><strong>且crate_time 是最前面的一条（第一行），而不是最后一条（最大）</strong></p>
+<p><strong>只有在同一批次插入时（新版本），或分片合并时才会聚合</strong></p>
+<p><strong>设计聚合表时，最好设置聚合的列，否则序号之类的都会被聚合，没有意义</strong></p>
+<p><strong>查询的时候，还是需要在sql里面写sum(),因为可能还没来得及聚合，体会下预聚合</strong></p>
+<h1 id="Clickhouse-SQL操作"><a href="#Clickhouse-SQL操作" class="headerlink" title="Clickhouse SQL操作"></a>Clickhouse SQL操作</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><p>和mysql一样<br>从表到表，支持insert into xxx select</p>
+<h2 id="update和delete"><a href="#update和delete" class="headerlink" title="update和delete"></a>update和delete</h2><p>OLAP的，不叫更新，叫做可变查询， 是ALTER的一种<br>不支持事务</p>
+<ol>
+<li>物理删除<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> t_order_mt <span class="keyword">delete</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+<li>逻辑删除<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> t_order_mt <span class="keyword">update</span> status <span class="operator">=</span> <span class="number">1</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+<li>恢复<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> t_order_mt <span class="keyword">update</span> status <span class="operator">=</span> <span class="number">0</span> <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>这种删除操作比较重，分了两步，新增分区并发旧分区打上逻辑失效标记，直到合并的时候才会释放磁盘空间，一般这种功能不给用户，由管理员完成</strong></p>
+<p>实践中， 可以加_sign标记，_version版本号机制以新增的方式替代删除，缺点就是数据膨胀</p>
+<h2 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h2><p>支持子查询<br>支持CTE Common Table Expression 公用表表达式with子句</p>
+<p>语法支持join，但是实际上避免join，json操作无法使用缓存，所以即使是join ch也会查询两次，且占用内存，且分布式的话内存爆炸</p>
+<p>窗口函数，目前官网表示正在试验阶段</p>
+<p>各种函数查看官网</p>
+<h2 id="多维分析函数"><a href="#多维分析函数" class="headerlink" title="多维分析函数"></a>多维分析函数</h2><p>不支持自定义函数</p>
+<p>GROUP BY 增加了with rollup上卷 , with cube多维分析,  with totals总计  来计算小计和总计<br>比如按照a,b维度分析，<br>上卷：<br>分析 group by a,b<br>分析 group by a<br>分析 group by ()</p>
+<p>多维分析：<br>分析 group by a,b<br>分析 group by a<br>分析 group by b<br>分析 group by ()</p>
+<p>总计分析：<br>分析 group by a,b<br>分析 group by ()</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> t_order_mt <span class="keyword">delete</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert into</span> t_order_mt <span class="keyword">values</span> (<span class="number">101</span>,<span class="string">&#x27;sku_001&#x27;</span>,<span class="number">1000.00</span>, <span class="string">&#x27;2024-01-01 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">102</span>,<span class="string">&#x27;sku_002&#x27;</span>,<span class="number">2000.00</span>, <span class="string">&#x27;2024-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">103</span>,<span class="string">&#x27;sku_003&#x27;</span>,<span class="number">3000.00</span>, <span class="string">&#x27;2024-01-02 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">104</span>,<span class="string">&#x27;sku_004&#x27;</span>,<span class="number">4000.00</span>, <span class="string">&#x27;2024-01-03 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">105</span>,<span class="string">&#x27;sku_005&#x27;</span>,<span class="number">5000.00</span>, <span class="string">&#x27;2024-01-03 12:00:00&#x27;</span>),</span><br><span class="line">(<span class="number">106</span>,<span class="string">&#x27;sku_006&#x27;</span>,<span class="number">6000.00</span>, <span class="string">&#x27;2024-01-03 12:00:00&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id, sku_id, <span class="built_in">sum</span>(total_amount) <span class="keyword">from</span> t_order_mt <span class="keyword">group</span> <span class="keyword">by</span> id,sku_id <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2024_01_10_clickhouse/12.png"></p>
+<h2 id="alter操作"><a href="#alter操作" class="headerlink" title="alter操作"></a>alter操作</h2><p>和mysql基本一致<br>新增字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> tableName <span class="keyword">add</span> <span class="keyword">column</span> newcolname String after col1;</span><br></pre></td></tr></table></figure>
+<p>修改字段类型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> tableName modify <span class="keyword">column</span> colname String;</span><br></pre></td></tr></table></figure>
+<p>删除字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter table</span> tableName <span class="keyword">drop</span> <span class="keyword">column</span> colname;</span><br></pre></td></tr></table></figure>
+
+<h2 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clickhouse<span class="operator">-</span>client <span class="comment">--query &quot;select * from t_order_mt where create_time=&#x27;2024-01-01 12:00:00&#x27;&quot; --output_format_csv_separator=&quot;\t&quot; --output_format_csv_with_names --output_format_csv_with_names_and_types &gt; /tmp/t_order_mt.csv</span></span><br></pre></td></tr></table></figure>
+<p>更多格式<br>参考官网</p>
+<h2 id="副本"><a href="#副本" class="headerlink" title="副本"></a>副本</h2><p><img src="/2024_01_10_clickhouse/13.jpg" alt="副本"></p>
+<p>互为副本， 平权</p>
+<p>注意点：副本的表引擎都要加Replicated<br>例如：</p>
+<ul>
+<li>ReplicatedMergeTree</li>
+<li>ReplicatedReplacingMergeTree</li>
+<li>ReplicatedSummingMergeTree<br>其他可参考官方文档</li>
+</ul>
+<h2 id="分片集群"><a href="#分片集群" class="headerlink" title="分片集群"></a>分片集群</h2><p>clickhouse支持数据分片到不同机器上存储</p>
+<ol>
+<li>集群写入流程（3分片2副本共6个节点）<br><img src="/2024_01_10_clickhouse/14.jpg" alt="集群写入流程"></li>
+</ol>
+<p>s1 s2 s3 三个分片，<br>r1 r2 每个分片两个副本</p>
+<p>参数  internal_replication   内部副本参数<br>false得话，非内部同步，如图黄色<br>true得话，内部同步（生产一般要打开true），如图绿色</p>
+<ol start="2">
+<li>集群读取流程<br><img src="/2024_01_10_clickhouse/15.jpg" alt="集群读取流程"></li>
+</ol>
+<ul>
+<li>优先选择errors_count小得副本</li>
+<li>errors_count相同，有随机，顺序，随机（优先第一顺位）host名称近似等四种选择方式</li>
+</ul>
+<ol start="3">
+<li>集群建表<br><strong>创建本地表：</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> st_order_mt <span class="keyword">on</span> cluster gmall_cluster (</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime</span><br><span class="line">)engine<span class="operator">=</span>RepilicatedMergeTree(<span class="string">&#x27;/clickhouse/tables/&#123;shard&#125;/st_order_1109&#x27;</span>, <span class="string">&#x27;&#123;replica&#125;&#x27;</span>)</span><br><span class="line">patition <span class="keyword">by</span> toYYYYMMDD(create_time)</span><br><span class="line"><span class="keyword">primary key</span>(id)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span>(id,sku_id);</span><br></pre></td></tr></table></figure>
+参数含义：<br>集群名， 集群配置里面得宏定义</li>
+</ol>
+<p>本地表得意思是集群每个节点都创建一个表</p>
+<p><strong>创建分布式表：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> st_order_mt_all <span class="keyword">on</span> cluster gmall_cluster (</span><br><span class="line">    id UInt32,</span><br><span class="line">    sku_id String,</span><br><span class="line">    total_amount <span class="type">Decimal</span>(<span class="number">16</span>,<span class="number">2</span>),</span><br><span class="line">    create_time DateTime</span><br><span class="line">)engine<span class="operator">=</span>Distributed(gmall_cluster,<span class="keyword">default</span>,st_order_mt,hiveHash(sku_id));</span><br></pre></td></tr></table></figure>
+<p>参数含义：<br>集群名称，库名，本地表名，分片键<br>统领本地表，有点视图得意思</p>
+<ol start="4">
+<li>插入数据<br>插得是分布式表，实际上存在每一张表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> st_order_mt_all <span class="keyword">values</span>()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="Clickhouse执行计划"><a href="#Clickhouse执行计划" class="headerlink" title="Clickhouse执行计划"></a>Clickhouse执行计划</h1><p>官方推荐独立部署，128G硬盘 100G内存，32线程内核</p>
+<p>参考官文档：<br><a class="link"   target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/sql-reference/statements/explain" >https://clickhouse.com/docs/zh/sql-reference/statements/explain<i class="fas fa-external-link-alt"></i></a></p>
+<p>语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN [AST <span class="operator">|</span> SYNTAX <span class="operator">|</span> QUERY TREE <span class="operator">|</span> PLAN <span class="operator">|</span> PIPELINE <span class="operator">|</span> ESTIMATE <span class="operator">|</span> <span class="keyword">TABLE</span> OVERRIDE] [setting <span class="operator">=</span> <span class="keyword">value</span>, ...]</span><br><span class="line">    [</span><br><span class="line">      <span class="keyword">SELECT</span> ... <span class="operator">|</span></span><br><span class="line">      tableFunction(...) [COLUMNS (...)] [<span class="keyword">ORDER</span> <span class="keyword">BY</span> ...] [<span class="keyword">PARTITION</span> <span class="keyword">BY</span> ...] [<span class="keyword">PRIMARY KEY</span>] [SAMPLE <span class="keyword">BY</span> ...] [TTL ...]</span><br><span class="line">    ]</span><br><span class="line">    [FORMAT ...]</span><br></pre></td></tr></table></figure>
+<p>EXPLAIN 类型:</p>
+<ul>
+<li>AST — 抽象语法树。</li>
+<li>SYNTAX — 经 AST 级别优化后的查询文本。</li>
+<li>QUERY TREE — 经查询树级别优化后的查询树。</li>
+<li>PLAN — 查询执行计划。 （默认） </li>
+<li>PIPELINE — 查询执行流水线。</li>
+</ul>
+<p><img src="/2024_01_10_clickhouse/16.png"><br>以上实例说明该查询走了预处理文件，也就是直接读的文件资源，速度比较快。</p>
+<p><img src="/2024_01_10_clickhouse/17.png"><br>以上示例，对查询做了优化</p>
+<p><img src="/2024_01_10_clickhouse/18.png"><br>以上对三元嵌套查询做了优化</p>
+<p><img src="/2024_01_10_clickhouse/19.png"><br>以上对函数查询做了优化</p>
+<h1 id="提升查询性能总结"><a href="#提升查询性能总结" class="headerlink" title="提升查询性能总结"></a>提升查询性能总结</h1><ol>
+<li><p>选择合适的表引擎， mergeTree是ch常见的引擎，但不意味着mergeTree适合所有的场景。</p>
+</li>
+<li><p>建表时不要使用Nullable，因为官方已经指出了，且这种类型几乎总是拖累性能，所以建议使用一个特殊字符来表空，比如-1， 字符串null等等</p>
+</li>
+<li><p>合适的划分分区和索引，分区是必须的，官方建议按天分区，建议自己分区的话单分区不超过100w行数据。</p>
+</li>
+<li><p>数据变更不要太频繁，避免产生过多的临时分区，加大合并的负担，如果要修改建议少次数，大批量的更新修改。官方建议1秒左右发起一起写入操作，单词操作写入数据量保持2w-5w ，具体根据服务器性能定</p>
+</li>
+<li><p>使用prewhere代替where，因为where是获取整行然后再过滤，而prewhere直接过滤列<br><img src="/2024_01_10_clickhouse/20.png"></p>
+</li>
+<li><p>指定列和分区，避免select *， 减少内存消耗</p>
+</li>
+<li><p>避免构建虚拟列，减少内存消耗<br>比如：select income,age income&#x2F;age as incrate from xxx<br>正例：避免虚拟列，直接写select income,age from xxx</p>
+</li>
+<li><p>用in代替join<br>join会加载到内存，再计算消耗内存</p>
+</li>
+<li><p>如果非要join，尽量把大表写在前面，小表写后面，这跟mysql 建议小表驱动大表相反。</p>
+</li>
+</ol>
+<h1 id="生产常见问题"><a href="#生产常见问题" class="headerlink" title="生产常见问题"></a>生产常见问题</h1><ol>
+<li>数据一致性问题</li>
+</ol>
+<ul>
+<li><p>ch强调最终一致性，事务控制天生比较弱，主要源自于合并的机制，新分区合并到旧分区</p>
+</li>
+<li><p>分布式表尽量避免使用，要用就用副本表， 分布式表网络重试问题丢消息，副本同步机制，再次启动还会同步，更稳定可靠</p>
+</li>
+<li><p>数据合并时间不确定，不一致问题要注意，  可以定期夜间optimize final， 如果非要一致性，就用_sign _version 来标记自己用乐观锁机制保持一致性（sign标记是否删除，version标记新增）</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>多副本表，尽量固定写入节点。因为ch 副本是同权的，  如果随机写，一个挂了依然写成功了，但是数据不对齐了，固定写入一个节点，这样挂了立马可以知道</p>
+</li>
+<li><p>zookeeper数据丢失导致副本无法启动。</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Clickhouse总结</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2024-01-10 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2024_01_10_clickhouse/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2025_02_10_deepseek_dify/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">DeepSeek+dify 工作流</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024_01_02_java/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Java 8 新特性二</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OLTP%E4%B8%8EOLAP"><span class="nav-text">OLTP与OLAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-OLTP"><span class="nav-text">什么是 OLTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OLTP-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">OLTP 的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-OLAP"><span class="nav-text">什么是 OLAP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ClickHouse-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="nav-text">ClickHouse 数据库介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8-vs-%E8%A1%8C%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="nav-text">列式存储 vs 行式存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA%E5%92%8C%E7%BA%BF%E7%A8%8B%E5%B9%B6%E8%A1%8C"><span class="nav-text">数据分区和线程并行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E4%B8%B0%E5%AF%8C%E7%9A%84%E8%A1%A8%E5%BC%95%E6%93%8E"><span class="nav-text">支持丰富的表引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickHouse-%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-text">ClickHouse 的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickHouse-%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">ClickHouse 的适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ClickHouse%E5%AE%89%E8%A3%85"><span class="nav-text">ClickHouse安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clickhouse%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">Clickhouse数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%BD%A2%E6%95%B0%E5%80%BC"><span class="nav-text">整形数值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-text">浮点型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clickhouse%E8%A1%A8%E5%BC%95%E6%93%8E"><span class="nav-text">Clickhouse表引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickHouse%E8%A1%A8%E5%BC%95%E6%93%8E%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">ClickHouse表引擎的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%BC%95%E6%93%8ETinyLog"><span class="nav-text">表引擎TinyLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%BC%95%E6%93%8EMemory"><span class="nav-text">表引擎Memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MergeTree%E7%B3%BB%E5%88%97"><span class="nav-text">MergeTree系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%BC%95%E6%93%8E"><span class="nav-text">集成引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MergeTree%E5%BC%95%E6%93%8E"><span class="nav-text">MergeTree引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%A1%A8%E8%AF%AD%E5%8F%A5"><span class="nav-text">建表语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">连接配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition-by-%E5%88%86%E5%8C%BA%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-text">partition by 分区（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#primary-key%E4%B8%BB%E9%94%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-text">primary key主键（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by-%E5%BF%85%E9%80%89"><span class="nav-text">order by(必选)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="nav-text">二级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AETTL"><span class="nav-text">数据TTL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ReplacingMergeTree-%E5%BC%95%E6%93%8E"><span class="nav-text">ReplacingMergeTree 引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SummingMergeTree-%E5%BC%95%E6%93%8E"><span class="nav-text">SummingMergeTree 引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clickhouse-SQL%E6%93%8D%E4%BD%9C"><span class="nav-text">Clickhouse SQL操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#insert"><span class="nav-text">insert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update%E5%92%8Cdelete"><span class="nav-text">update和delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="nav-text">查询操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0"><span class="nav-text">多维分析函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alter%E6%93%8D%E4%BD%9C"><span class="nav-text">alter操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE"><span class="nav-text">导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%AF%E6%9C%AC"><span class="nav-text">副本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4"><span class="nav-text">分片集群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clickhouse%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92"><span class="nav-text">Clickhouse执行计划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E6%80%BB%E7%BB%93"><span class="nav-text">提升查询性能总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-text">生产常见问题</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
