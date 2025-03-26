@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            go-swagger-api应用 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">go-swagger-api应用</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-05-17
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/">应用笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/go/">go</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/swagger/">swagger</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>804 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>该项目包含Swagger 2.0的golang实现 (又名OpenAPI 2.0)。 它提供了与swagger规范一起工作的工具。</p>
+<p>swagger 是RESTful API的简单而强大的实现。</p>
+<p>github：<a class="link"   target="_blank" rel="noopener" href="https://github.com/go-swagger/go-swagger" >https://github.com/go-swagger/go-swagger<i class="fas fa-external-link-alt"></i></a></p>
+<p>文档：<a class="link"   target="_blank" rel="noopener" href="https://goswagger.io/go-swagger/" >https://goswagger.io/go-swagger/<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="聊聊Swagger"><a href="#聊聊Swagger" class="headerlink" title="聊聊Swagger"></a>聊聊Swagger</h1><p>拥有全球最大的API工具生态系统，几乎所有现代编程语言和部署环境中都支持Swagger。</p>
+<p>使用支持Swagger的API，您可以获得交互式文档、生成客户端SDK和发现服务。</p>
+<p>Swagger帮助Apigee，Getty Images，Intuit，LivingSocial，McKesson，Microsoft，Morningstar和PayPal等公司使用RESTful api构建最佳服务。现在在2.0版本中，Swagger比以往任何时候都更加易用。它是完全开源的软件。</p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>go-swagger为go社区带来了一整套功能齐全、高性能的API组件，可与Swagger API配合使用: 开发服务端、客户端和数据模型。</p>
+<ul>
+<li>按照swagger规范生成服务端代码</li>
+<li>按照swagger规范生成客户端代码</li>
+<li>按照swagger规范 (alpha阶段) 生成CLI (命令行工具)</li>
+<li>支持jsonschema和swagger提供的大多数功能，包括多态</li>
+<li>从带注释的go代码生成swagger规范</li>
+<li>使用swagger规范的其他工具</li>
+<li>出色的自定义功能，具有自带的扩展和可自定义的模板</li>
+</ul>
+<p>我们对代码生成的理念是：生成惯用的，快速的go代码，它与golint，go vet等兼容得很好。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从源安装"><a href="#从源安装" class="headerlink" title="从源安装"></a>从源安装</h2><p>按章支持命令，docker，源安装，这里只记录下我用源码安装的操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; go version</span><br><span class="line">go version go1.23.1 windows/amd64</span><br><span class="line"></span><br><span class="line">&gt; go install github.com/go-swagger/go-swagger/cmd/swagger@latest</span><br><span class="line">...</span><br><span class="line">&gt; swagger.exe version</span><br><span class="line">version: v0.31.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看环境变量</span></span><br><span class="line">&gt; go <span class="built_in">env</span></span><br><span class="line"><span class="comment"># 找到 GOPATH</span></span><br><span class="line">GOPATH=C:\Users\hxd\go</span><br><span class="line"><span class="comment"># 进入目录，可以看到 swagger.exe 可执行文件，已经安装到gopath了</span></span><br><span class="line"><span class="comment"># 后续这个二进制可执行文件可以拷贝到项目中使用，统一版本避免版本问题</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>swagger工具说明：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  swagger [OPTIONS] &lt;<span class="built_in">command</span>&gt;</span><br><span class="line"></span><br><span class="line">Swagger tries to support you as best as possible when building APIs.</span><br><span class="line"></span><br><span class="line">It aims to represent the contract of your API with a language agnostic description of your application <span class="keyword">in</span> json or yaml.</span><br><span class="line"></span><br><span class="line">Application Options:</span><br><span class="line">  -q, --quiet                  silence logs</span><br><span class="line">      --log-output=LOG-FILE    redirect logs to file</span><br><span class="line"></span><br><span class="line">Help Options:</span><br><span class="line">  -h, --<span class="built_in">help</span>                   Show this <span class="built_in">help</span> message</span><br><span class="line"></span><br><span class="line">Available commands:</span><br><span class="line">  diff      diff swagger documents</span><br><span class="line">  <span class="built_in">expand</span>    <span class="built_in">expand</span> <span class="variable">$ref</span> fields <span class="keyword">in</span> a swagger spec</span><br><span class="line">  flatten   flattens a swagger document</span><br><span class="line">  generate  generate go code</span><br><span class="line">  init      initialize a spec document</span><br><span class="line">  mixin     merge swagger documents</span><br><span class="line">  serve     serve spec and docs</span><br><span class="line">  validate  validate the swagger document</span><br><span class="line">  version   <span class="built_in">print</span> the version</span><br></pre></td></tr></table></figure>
+<p>具体怎么用可以参考官网。</p>
+<h1 id="生成服务端"><a href="#生成服务端" class="headerlink" title="生成服务端"></a>生成服务端</h1><p>参考：<a class="link"   target="_blank" rel="noopener" href="https://goswagger.io/go-swagger/generate/server/" >https://goswagger.io/go-swagger/generate/server/<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成描述文件</span></span><br><span class="line">swagger.exe init spec</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化go mod</span></span><br><span class="line">go mod init mlss-cc-service</span><br><span class="line"></span><br><span class="line"><span class="comment"># git初始化</span></span><br><span class="line">git init</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如图，我新建了一个项目，按照这个目录来构建应用<br><img src="/2024_05_17_go_swagger/1.png" alt="项目"></p>
+<p>把swagger.exe放到项目里，编写好swagger.yaml  执行swagger生成代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\pkg\restapi\swagger\swagger.exe generate server -m ../models -f .\pkg\restapi\swagger\swagger.yaml -t .\pkg\restapi</span><br></pre></td></tr></table></figure>
+
+<p>新建启动文件，启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">D:\goworkspace\mlss-cc-service&gt; <span class="built_in">cd</span> .\cmd\mlss-cc-go\     </span><br><span class="line">PS D:\goworkspace\mlss-cc-service\cmd\mlss-cc-go&gt; <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    目录: D:\goworkspace\mlss-cc-service\cmd\mlss-cc-go</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">-a----         2024/3/26     16:34           1356 main.go</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PS D:\goworkspace\mlss-cc-service\cmd\mlss-cc-go&gt; go run .\main.go</span><br><span class="line">Serving open API swagger at http://127.0.0.1:56434</span><br></pre></td></tr></table></figure>
+<p>已经开源到仓库<br><a class="link"   target="_blank" rel="noopener" href="https://gitee.com/deepter/mlss-cc-service" >https://gitee.com/deepter/mlss-cc-service<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://gitee.com/deepter/mlss-cc-a" >https://gitee.com/deepter/mlss-cc-a<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：go-swagger-api应用</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2024-05-17 14:23:45</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2024_05_17_go_swagger/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024_05_30_game_theory/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">平话博弈论</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024_01_10_clickhouse/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Clickhouse总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%8A%E8%81%8ASwagger"><span class="nav-text">聊聊Swagger</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%BA%90%E5%AE%89%E8%A3%85"><span class="nav-text">从源安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-text">生成服务端</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
