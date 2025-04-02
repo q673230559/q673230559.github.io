@@ -9,7 +9,7 @@
     
     <title>
         
-            DeepSeek+dify 工作流 |
+            PostgreSQL数据库总结 |
         
         Hanxd&#39;s Notes
     </title>
@@ -163,7 +163,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">DeepSeek+dify 工作流</span>
+            <span class="title-hover-animation">PostgreSQL数据库总结</span>
         </div>
 
         
@@ -181,7 +181,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2025-02-10
+        <i class="fas fa-edit"></i>&nbsp;2024-06-08
     </span>
     
         <span class="article-categories article-meta-item">
@@ -189,7 +189,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0/">应用笔记</a>&nbsp;
+                        <a href="/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>&nbsp;
                     </li>
                 
             </ul>
@@ -201,15 +201,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/deepseek/">deepseek</a>&nbsp;
+                        <a href="/tags/postgresql/">postgresql</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/ai/">ai</a>&nbsp;
+                        | <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/dify/">dify</a>&nbsp;
+                        | <a href="/tags/pg/">pg</a>&nbsp;
                     </li>
                 
             </ul>
@@ -219,12 +219,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>984 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
         </span>
     
     
@@ -236,90 +236,78 @@
         
 
         <div class="article-content markdown-body">
-            <p>Deepseek是杭州深度求索公司开发的大语言模型，包含基础模型和代码模型。基础模型有7B和67B参数版本，7B版本在主流英文和中文基准测试中表现出色；67B版本则在多个基准测试中优于GPT-3.5 Turbo。代码模型有1.3B、7B和67B三种参数规模，在多个代码评测基准上有卓越表现，如7B代码模型在HumanEval基准测试中以65%的通过率超越GPT-3.5 Turbo，67B代码模型以82.7%的通过率超越GPT-4。</p>
-<p>Dify 是一款开源的大语言模型(LLM) 应用开发平台。它融合了后端即服务（Backend as Service）和 LLMOps 的理念，使开发者可以快速搭建生产级的生成式 AI 应用。即使你是非技术人员，也能参与到 AI 应用的定义和数据运营过程中。</p>
-<p>Dify最牛的地方就是像搭积木一样简单——不用懂代码，普通人稍微学学就能用它的「智能机器人」和「流程图」功能，自己拼出一套自动化工具。比如自动回复客户、处理文件这些事，你拖拖拽拽就能搭出想要的功能，特别适合折腾些好玩的小发明。我们可以通过智能体或工作流，自定义工具完成很多我们好玩的功能。报文篇幅较长，简单说下内容：从0开始创建一个票务识别智能体；介绍搭建过程中的各个细节；教会你每一步为什么，而不是只是完成；通过实践这个流程，我相信你可以学会自己搭建自己需要的智能体。</p>
-<h1 id="deepseek私有化部署"><a href="#deepseek私有化部署" class="headerlink" title="deepseek私有化部署"></a>deepseek私有化部署</h1><ol>
-<li><p>首先下载并安装Ollama<br>参考官网即可<br><a class="link"   target="_blank" rel="noopener" href="https://ollama.com/" >https://ollama.com/<i class="fas fa-external-link-alt"></i></a></p>
+            <h1 id="PG简介"><a href="#PG简介" class="headerlink" title="PG简介"></a>PG简介</h1><p>posgreSQL 是一个免费的对象-关系数据库服务器（ORDBMS）。</p>
+<p>BSD许可证。（可以基于开源版本二次开发，可以不开源使用。 mysql的GPL是二开之后必须也开源）</p>
+<p>postgreSQL 的 Slogan 是： “世界上最先进的开源关系型数据库”。</p>
+<p>“开源界的Oracle”，  是去O（oracle）的首选.</p>
+<p>mysql 已经被oracle收购了。</p>
+<p>官网：<a class="link"   target="_blank" rel="noopener" href="https://www.postgresql.org/" >https://www.postgresql.org/<i class="fas fa-external-link-alt"></i></a></p>
+<p>中文社区： <a class="link"   target="_blank" rel="noopener" href="http://www.postgres.cn/index.php/v2/home" >http://www.postgres.cn/index.php/v2/home<i class="fas fa-external-link-alt"></i></a></p>
+<p>全球数据库排行： <a class="link"   target="_blank" rel="noopener" href="https://db-engines.com/en/" >https://db-engines.com/en/<i class="fas fa-external-link-alt"></i></a></p>
+<p>中国数据库排行： <a class="link"   target="_blank" rel="noopener" href="https://www.modb.pro/dbRank" >https://www.modb.pro/dbRank<i class="fas fa-external-link-alt"></i></a><br>部分是基于pg二开的。</p>
+<h2 id="历史沿革"><a href="#历史沿革" class="headerlink" title="历史沿革"></a>历史沿革</h2><p>最初设想于1986年， 当时被叫做Berkley Postgres Project。教学用。</p>
+<p>Postgre95在开源社区开放。</p>
+<p>1996年， postgresSQL6.0发布。</p>
+<p>2005年，发布8.0版本，开始支持windows系统环境。</p>
+<p>postgreSQL 9.0 发布， 支持64位windows系统，异步流数据复制， HostStandby;<br>postgreSQL 9.1 发布， 支持数据同步复制，等特性</p>
+<p>目前笔者的生产环境版本是</p>
+<p>PostgreSQL 15.6 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit  </p>
+<h1 id="pg和mysql的比较"><a href="#pg和mysql的比较" class="headerlink" title="pg和mysql的比较"></a>pg和mysql的比较</h1><h2 id="pg相对于mysql优势"><a href="#pg相对于mysql优势" class="headerlink" title="pg相对于mysql优势"></a>pg相对于mysql优势</h2><ol>
+<li><p>在SQL的标准实现上要比MYSQL完善，而且功能实现比较严谨。</p>
 </li>
-<li><p>安装deepseek<br>打开Ollama官网首页，在搜索框里输入deepseek-r1，你会发现这个模型排在第一个位置，热度相当高。模型有多个版本，比如1.5b、7b、8b等，数字越大，模型越强大，但对硬件要求也越高。</p>
+<li><p>对表连接支持较完整，优化器功能较完整，支持的索引类型多，复杂查询能力强。</p>
 </li>
-</ol>
-<p>根据你的电脑配置选择合适的模型版本。一般来说，8b是一个比较平衡的选择，既能保证性能，又不会对硬件要求太高。如果你有高性能显卡，当然可以选择更大的模型。笔者显卡是4070super。由于硬盘容量不足，部署的7B版本。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run deepseek-r1:7b</span><br></pre></td></tr></table></figure>
-<p>这个过程类似于Docker拉取镜像，耐心等待即可。<br>安装完成就自动启动了。</p>
-<h1 id="dify安装部署"><a href="#dify安装部署" class="headerlink" title="dify安装部署"></a>dify安装部署</h1><p>笔者是windows系统，已经安装了docker desktop。</p>
-<p>然后直接访问它的GitHub仓库（<a class="link"   target="_blank" rel="noopener" href="https://github.com/langgenius/dify%EF%BC%89%EF%BC%8C%E8%8E%B7%E5%8F%96%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E3%80%82%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%90%8E%EF%BC%8C%E8%BF%9B%E5%85%A5%E9%A1%B9%E7%9B%AE%E6%A0%B9%E7%9B%AE%E5%BD%95%EF%BC%8C%E6%89%BE%E5%88%B0docker%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%82" >https://github.com/langgenius/dify），获取最新版本。解压缩后，进入项目根目录，找到docker文件夹。<i class="fas fa-external-link-alt"></i></a></p>
-<p>拉取镜像并启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-<p>安装完之后，查看：<br><img src="/2025_02_10_deepseek_dify/dify-docker.png"></p>
-<p>初始化：在浏览器地址栏输入以下地址：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/install</span><br></pre></td></tr></table></figure>
-<p>按照提示完成安装并登录账号，进入Dify的主页。</p>
-<ol>
-<li><p>关联本地大模型与Dify<br><img src="/2025_02_10_deepseek_dify/dify-ds.png" alt="关联本地大模型与Dify"></p>
+<li><p>pg主表采用堆表存放，mysql采用索引组织表，能够支持比mysql更大的数据量。</p>
 </li>
-<li><p>界面<br>界面如下：<br><img src="/2025_02_10_deepseek_dify/dify-ui.png" alt="界面"></p>
+<li><p>pg的主备复制属于物理复制，相对于mysql基于binlog的逻辑复制，数据的一致性更加可靠，复制性能更高，对主机性能影响更小。</p>
 </li>
-<li><p>新建智能体（工作流）<br><img src="/2025_02_10_deepseek_dify/dify-agent.png" alt="新建智能体"></p>
+<li><p>pg支持json和其他noSQL功能，如本机xml支持和使用hstore的键值对，它还支持索引json数据加快访问速度，特别是10版本jsonb更是强大。</p>
 </li>
-<li><p>智能体配置</p>
-<ul>
-<li>开始,可以配置入参，文件，图片等<br> <img src="/2025_02_10_deepseek_dify/dify-agent-start.png" alt="开始"></li>
-<li>节点类型<br> <img src="/2025_02_10_deepseek_dify/dify-node.png" alt="节点类型"><br> <img src="/2025_02_10_deepseek_dify/dify-node-1.png" alt="节点类型"></li>
-<li>比如python代码节点<br><img src="/2025_02_10_deepseek_dify/dify-node-2.png" alt="python代码节点"></li>
-<li>配置python代码</li>
-</ul>
-</li>
-<li><p>提供对外接口<br><img src="/2025_02_10_deepseek_dify/dify-api.png" alt="提供对外接口"></p>
-</li>
-<li><p>api调用<br><img src="/2025_02_10_deepseek_dify/dify-api-1.png" alt="api调用"></p>
+<li><p>pg完全免费，bsd协议，如果你把pg拿去改一改，拿去卖钱也没人管你。 mysql虽然开源，但是bsd协议已经被oracle收购了，由oracle控制</p>
 </li>
 </ol>
-<h1 id="可以实现什么功能"><a href="#可以实现什么功能" class="headerlink" title="可以实现什么功能"></a>可以实现什么功能</h1><ul>
-<li>自定义工作流，解决重复流程问题</li>
-<li>二次开发更复杂能力的节点，实现个性化方案</li>
-<li>对外提供服务，监控服务</li>
-<li>创建智能体应用</li>
-</ul>
-<h1 id="最重要的点"><a href="#最重要的点" class="headerlink" title="最重要的点"></a>最重要的点</h1><ul>
-<li>要会用提示词</li>
-</ul>
-<h1 id="附录：根据提供的智能体学习智能体"><a href="#附录：根据提供的智能体学习智能体" class="headerlink" title="附录：根据提供的智能体学习智能体"></a>附录：根据提供的智能体学习智能体</h1><p>首页提供了很多智能体，可以添加到工作空间，学习每个节点组件怎么使用</p>
-<h1 id="附录：dify结构梳理"><a href="#附录：dify结构梳理" class="headerlink" title="附录：dify结构梳理"></a>附录：dify结构梳理</h1><ol>
-<li><p>api服务<br><img src="/2025_02_10_deepseek_dify/docker-api.png" alt="api服务"></p>
+<h2 id="mysql相对于pg优势"><a href="#mysql相对于pg优势" class="headerlink" title="mysql相对于pg优势"></a>mysql相对于pg优势</h2><ol>
+<li><p>innodb 是基于回滚段实现的mvcc机制，相对pg新老数据一起存放的基于xid的mvcc机制是占优势的，新老数据一起存放需要定时触发 vacuum， 会带来多余的io和数据库加锁开销，引起数据库整体并发能力下降。而且vacuum清理不及时，还可能英法数据膨胀。</p>
 </li>
-<li><p>worker服务<br><img src="/2025_02_10_deepseek_dify/docker-worker.png" alt="worker服务"></p>
+<li><p>mysql采用索引组织表，这种存储方式非常适合基于主键匹配的查询，删改操作，但是对表结构设计存在约束。</p>
 </li>
-<li><p>web服务<br><img src="/2025_02_10_deepseek_dify/docker-web.png" alt="web服务"></p>
+<li><p>mysql的优化器比较简单，系统表，运算符，数据类型实现比较精简，非常适合简单的查询操作。</p>
 </li>
-<li><p>db-postgresql服务<br><img src="/2025_02_10_deepseek_dify/docker-db.png" alt="db-postgresql服务"></p>
+<li><p>mysql相对于pg在国内流行度更高。</p>
 </li>
-<li><p>redis服务<br><img src="/2025_02_10_deepseek_dify/docker-redis.png" alt="redis服务"></p>
-</li>
-<li><p>sandbox服务<br><img src="/2025_02_10_deepseek_dify/docker-sandbox.png" alt="sandbox服务"></p>
-</li>
-<li><p>plugin_daemon服务<br><img src="/2025_02_10_deepseek_dify/docker-plugin.png" alt="plugin_daemon服务"></p>
-</li>
-<li><p>ssrf_proxy服务<br><img src="/2025_02_10_deepseek_dify/docker-ssrf.png" alt="ssrf_proxy服务"></p>
-</li>
-<li><p>certbot服务<br><img src="/2025_02_10_deepseek_dify/docker-certbot.png" alt="nginx服务"></p>
-</li>
-<li><p>网络<br><img src="/2025_02_10_deepseek_dify/docker-network.png" alt="网络"></p>
+<li><p>mysql的存储引擎插件化机制，是的它的应用更加广泛，比如除了innodb适合事务处理场景外，myisam适合静态数据查询场景。</p>
 </li>
 </ol>
+<h2 id="总结来说"><a href="#总结来说" class="headerlink" title="总结来说"></a>总结来说</h2><p>从应用场景上，pg更加适合严格的企业应用场景，比如金融，电信，ERP， CRM，但不仅限于此，pg的json， jsonb, hstore等数据格式，特别使用一些大数据格式的分析； 而mysql更加适合业务逻辑比较简单，数据可靠性要求较低的场景，比如google， facebook， alibaba等。当然现在mysql的innodb引擎大理发展，功能表现良好。</p>
+<h1 id="pg下载安装"><a href="#pg下载安装" class="headerlink" title="pg下载安装"></a>pg下载安装</h1><p>linux安装，参考官网，这里重点在于学习使用，所以这里不详细介绍。<br>docker安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">docker pull postgres:14</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建映射目录</span></span><br><span class="line"><span class="built_in">mkdir</span> postgresql/data</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=123456 --name postgres postgres:14</span><br><span class="line"></span><br><span class="line">docker run -d -p 5432:5432 -v $(<span class="built_in">pwd</span>)/postgresql/data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 --name postgres postgres:14</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 修改配置文件/data/postgresql/data/postgresql.conf</span></span><br><span class="line"><span class="comment"># 设置时区</span></span><br><span class="line">timezone = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"><span class="comment"># 连接数</span></span><br><span class="line">max_connections = 1000</span><br></pre></td></tr></table></figure>
 
+<p>使用dbeaver可以连接：<br><img src="/2024_06_08_pg/1.png"></p>
+<p>进去docker连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">psql -U postgres -d postgres -h 127.0.0.1 -p 5432</span><br><span class="line"></span><br><span class="line"><span class="comment">##退出</span></span><br><span class="line">postgres=# \q</span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建库</span></span><br><span class="line">postgres=# create database mydb;</span><br><span class="line">CREATE DATABASE</span><br><span class="line"></span><br><span class="line"><span class="comment">## 切换数据库</span></span><br><span class="line">postgres=# \c mydb</span><br><span class="line">You are now connected to database <span class="string">&quot;mydb&quot;</span> as user <span class="string">&quot;postgres&quot;</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment">## 删除drop</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="pg数据类型"><a href="#pg数据类型" class="headerlink" title="pg数据类型"></a>pg数据类型</h1><p>三类常见的：</p>
+<ul>
+<li><p>数值类型<br>smallint 2字节 -32768 到 32767<br>integer 4字节 -2147483648 到 2147483647<br>bigint 8字节 -9223372036854775808 到 9223372036854775807<br>decimal 可变长 精确的十进制数值<br>numeric 可变长 精确的十进制数值<br>real 4字节 单精度浮点数<br>double 8字节 双精度浮点数</p>
+</li>
+<li><p>字符串类型<br>char(n) 固定长度字符串，n为字符串长度<br>varchar(n) 可变长度字符串，n为字符串长度<br>text 变长字符串</p>
+</li>
+<li><p>日期&#x2F;时间类型<br>timestamp  日期和时间<br>date 日期<br>time 时间</p>
+</li>
+</ul>
+<p>除此之外还有boolean，  money 和几何数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> test(</span><br><span class="line">    id serial <span class="keyword">primary key</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">100</span>),</span><br><span class="line">    age <span class="type">int</span>,</span><br><span class="line">    created_at <span class="type">timestamp</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert into</span> test(name, age, created_at) <span class="keyword">values</span></span><br><span class="line">(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>, now()), (<span class="string">&#x27;marry&#x27;</span>, <span class="number">19</span>, now()), (<span class="string">&#x27;tom&#x27;</span>, <span class="number">20</span>, now());</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建schema</span></span><br><span class="line"><span class="keyword">create</span> schema myschema;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 备份</span></span><br><span class="line">pg_dump mydb <span class="operator">&gt;</span> mydb.bak</span><br><span class="line"></span><br></pre></td></tr></table></figure>
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：DeepSeek+dify 工作流</li>
+        <li>本文标题：PostgreSQL数据库总结</li>
         <li>本文作者：形而上</li>
-        <li>创建时间：2025-02-10 13:13:00</li>
+        <li>创建时间：2024-06-08 18:19:40</li>
         <li>
-            本文链接：https://deepter.gitee.io/2025_02_10_deepseek_dify/
+            本文链接：https://deepter.gitee.io/2024_06_08_pg/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -336,13 +324,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2025_03_01_the_long_river/"
+                           href="/2025_02_10_deepseek_dify/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">一条长江，半部华夏文明史</span>
+                                <span class="post-nav-title-item">DeepSeek+dify 工作流</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -352,10 +340,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2024_06_08_pg/"
+                           href="/2024_05_30_game_theory/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">PostgreSQL数据库总结</span>
+                                <span class="post-nav-title-item">平话博弈论</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -479,7 +467,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#deepseek%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="nav-text">deepseek私有化部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dify%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="nav-text">dify安装部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E5%8A%9F%E8%83%BD"><span class="nav-text">可以实现什么功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E7%82%B9"><span class="nav-text">最重要的点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%8F%90%E4%BE%9B%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E5%AD%A6%E4%B9%A0%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-text">附录：根据提供的智能体学习智能体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9Adify%E7%BB%93%E6%9E%84%E6%A2%B3%E7%90%86"><span class="nav-text">附录：dify结构梳理</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PG%E7%AE%80%E4%BB%8B"><span class="nav-text">PG简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%B2%BF%E9%9D%A9"><span class="nav-text">历史沿革</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pg%E5%92%8Cmysql%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">pg和mysql的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pg%E7%9B%B8%E5%AF%B9%E4%BA%8Emysql%E4%BC%98%E5%8A%BF"><span class="nav-text">pg相对于mysql优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E7%9B%B8%E5%AF%B9%E4%BA%8Epg%E4%BC%98%E5%8A%BF"><span class="nav-text">mysql相对于pg优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E6%9D%A5%E8%AF%B4"><span class="nav-text">总结来说</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pg%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-text">pg下载安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pg%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">pg数据类型</span></a></li></ol>
     </div>
 </div>
         </aside>
