@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            再次通过行为型模式视角回顾Go |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">再次通过行为型模式视角回顾Go</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-07-08
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Go/">Go</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Chain-of-Responsibility/">Chain of Responsibility</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Command/">Command</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Interpreter/">Interpreter</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Iterator/">Iterator</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Mediator/">Mediator</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Memento/">Memento</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Observer/">Observer</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/State/">State</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Strategy/">Strategy</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Template-Method/">Template Method</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Visitor/">Visitor</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>16 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>行为模式（Behavioral Pattern） 主要关注对象之间的职责分配和通信方式</p>
+<p>行为型模式的核心是思想是通过定义对象之间的交互方式，实现系统功能，降低对象耦合度</p>
+<h1 id="行为型模式-责任链模式"><a href="#行为型模式-责任链模式" class="headerlink" title="行为型模式-责任链模式"></a>行为型模式-责任链模式</h1><p>避免请求的发送者和接收者之间耦合，将这些对象连成一条链，并沿着链传递请求，知道处理完为止</p>
+<p>例如：Go的Gin框架里面的中间件<br>审批流</p>
+<p>核心思想：</p>
+<ol>
+<li>解耦请求发送者和接收者，请求发送者不需要知道具体哪个对象处理请求，只需要将请求发送到链上即可</li>
+<li>动态组合处理逻辑，可以动态地组合处理者，灵活的调整处理顺序或者增加新的处理者</li>
+<li>每个处理者只关系自己的职责</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chain_of_responsibility</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	request  *http.Request</span><br><span class="line">	w        http.ResponseWriter</span><br><span class="line">	index    <span class="type">int</span></span><br><span class="line">	handlers []HandlerFun</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Next() &#123;</span><br><span class="line">	c.index++</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(c.handlers) &gt; c.index &#123;</span><br><span class="line">		c.handlers[c.index](c)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Abort() &#123;</span><br><span class="line">	c.index = <span class="built_in">len</span>(c.handlers)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> HandlerFun <span class="function"><span class="keyword">func</span><span class="params">(ctx *Context)</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Engine <span class="keyword">struct</span> &#123;</span><br><span class="line">	handlers []HandlerFun</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *Engine)</span></span> Use(f HandlerFun) &#123;</span><br><span class="line">	e.handlers = <span class="built_in">append</span>(e.handlers, f)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *Engine)</span></span> ServeHTTP(w http.ResponseWriter, r *http.Request) &#123;</span><br><span class="line">	context := Context&#123;</span><br><span class="line">		request:  r,</span><br><span class="line">		w:        w,</span><br><span class="line">		index:    <span class="number">-1</span>,</span><br><span class="line">		handlers: e.handlers,</span><br><span class="line">	&#125;</span><br><span class="line">	context.Next()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AuthMiddleware</span><span class="params">(ctx *Context)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;认证中间件&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">LogMiddleware</span><span class="params">(ctx *Context)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;日志中间件&quot;</span>)</span><br><span class="line">	ctx.Next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chain_of_responsibility</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestHandler</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	r := &amp;Engine&#123;&#125;</span><br><span class="line">	r.Use(LogMiddleware)</span><br><span class="line">	r.Use(AuthMiddleware)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;web server on : 8080&quot;</span>)</span><br><span class="line">	http.ListenAndServe(<span class="string">&quot;:8080&quot;</span>, r)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-命令模式"><a href="#行为型模式-命令模式" class="headerlink" title="行为型模式-命令模式"></a>行为型模式-命令模式</h1><p>将请求封装为一个对象，可以用不同的请求对客户进行参数化，并且支持请求排队，记录日志，撤销操作等功能</p>
+<p>核心思想：</p>
+<ol>
+<li>将请求封装为对象</li>
+<li>解耦请求的接收者和发送者</li>
+<li>支持扩展，不修改现有代码</li>
+</ol>
+<p>例子：任务队列系统</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> command</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Command <span class="keyword">interface</span> &#123;</span><br><span class="line">	Execute()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PrintCommand <span class="keyword">struct</span> &#123;</span><br><span class="line">	Content <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p PrintCommand)</span></span> Execute() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;打印消息&quot;</span>, p.Content)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SendEmail <span class="keyword">struct</span> &#123;</span><br><span class="line">	To      <span class="type">string</span></span><br><span class="line">	Content <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s SendEmail)</span></span> Execute() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;发送邮件&quot;</span>, s.To, s.Content)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TaskQueue <span class="keyword">struct</span> &#123;</span><br><span class="line">	Queue []Command</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewTaskQueue</span><span class="params">()</span></span> *TaskQueue &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;TaskQueue&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tq *TaskQueue)</span></span> AddCommand(command Command) &#123;</span><br><span class="line">	tq.Queue = <span class="built_in">append</span>(tq.Queue, command)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tq *TaskQueue)</span></span> Command() &#123;</span><br><span class="line">	<span class="keyword">for</span> _, command := <span class="keyword">range</span> tq.Queue &#123;</span><br><span class="line">		command.Execute()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> command</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;testing&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPrintCommand_Execute</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	queue := NewTaskQueue()</span><br><span class="line">	queue.AddCommand(&amp;PrintCommand&#123;</span><br><span class="line">		Content: <span class="string">&quot;你好&quot;</span>,</span><br><span class="line">	&#125;)</span><br><span class="line">	queue.AddCommand(&amp;SendEmail&#123;</span><br><span class="line">		To:      <span class="string">&quot;xx@qq.com&quot;</span>,</span><br><span class="line">		Content: <span class="string">&quot;hello&quot;</span>,</span><br><span class="line">	&#125;)</span><br><span class="line">	queue.Command()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-解释器模式"><a href="#行为型模式-解释器模式" class="headerlink" title="行为型模式-解释器模式"></a>行为型模式-解释器模式</h1><p>定义语言的语法表示，提供解释器来解释语法，通常用于处理类似编程语言，查询语言，规则引擎等场景</p>
+<p>核心思想：</p>
+<ol>
+<li>定义语法规则</li>
+<li>解释执行</li>
+</ol>
+<p>案例： </p>
+<ul>
+<li>抽象语法树AST， 树形结构反映嵌套关系</li>
+<li>数据库查询引擎，mysql的查询解析和执行</li>
+<li>规则引擎，解析和执行规则</li>
+<li>模板引擎，前端开发</li>
+<li>数学表达式计算，解析计算数学</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> interpreter</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestFunc</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> tmpl = <span class="string">`Hello, &#123;&#123;.Name&#125;&#125;! You are &#123;&#123;.Age&#125;&#125; years old.`</span></span><br><span class="line">	template := ParseTemplate(tmpl)</span><br><span class="line">	fmt.Println(template.tree)</span><br><span class="line">	res := template.Interpreter(&amp;Context&#123;</span><br><span class="line">		Data: <span class="keyword">map</span>[<span class="type">string</span>]any&#123;</span><br><span class="line">			<span class="string">&quot;.Name&quot;</span>: <span class="string">&quot;deepter&quot;</span>,</span><br><span class="line">			<span class="string">&quot;.Age&quot;</span>:  <span class="number">21</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data <span class="keyword">map</span>[<span class="type">string</span>]any</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Node <span class="keyword">interface</span> &#123;</span><br><span class="line">	Interpreter(ctx *Context) <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TextNode <span class="keyword">struct</span> &#123;</span><br><span class="line">	Content <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t TextNode)</span></span> Interpreter(ctx *Context) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> t.Content</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> VarNode <span class="keyword">struct</span> &#123;</span><br><span class="line">	Key <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t VarNode)</span></span> Interpreter(ctx *Context) <span class="type">string</span> &#123;</span><br><span class="line">	val, ok := ctx.Data[t.Key]</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;%v&quot;</span>, val)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Template <span class="keyword">struct</span> &#123;</span><br><span class="line">	tree []Node</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ParseTemplate</span><span class="params">(tmpl <span class="type">string</span>)</span></span> *Template &#123;</span><br><span class="line">	<span class="keyword">var</span> template = <span class="built_in">new</span>(Template)</span><br><span class="line">	<span class="keyword">var</span> index = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		startIndex := strings.Index(tmpl[index:], <span class="string">&quot;&#123;&#123;&quot;</span>)</span><br><span class="line">		<span class="keyword">if</span> startIndex == <span class="number">-1</span> &#123;</span><br><span class="line">			template.tree = <span class="built_in">append</span>(template.tree, &amp;TextNode&#123;</span><br><span class="line">				Content: tmpl[index:],</span><br><span class="line">			&#125;)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		template.tree = <span class="built_in">append</span>(template.tree, &amp;TextNode&#123;</span><br><span class="line">			Content: tmpl[index : index+startIndex],</span><br><span class="line">		&#125;)</span><br><span class="line">		endIndex := strings.Index(tmpl[index+startIndex:], <span class="string">&quot;&#125;&#125;&quot;</span>)</span><br><span class="line">		<span class="keyword">if</span> endIndex == <span class="number">-1</span> &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		key := strings.TrimSpace(tmpl[index+startIndex+<span class="number">2</span> : index+startIndex+endIndex])</span><br><span class="line">		template.tree = <span class="built_in">append</span>(template.tree, &amp;VarNode&#123;</span><br><span class="line">			Key: key,</span><br><span class="line">		&#125;)</span><br><span class="line">		index = index + startIndex + endIndex + <span class="number">2</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> template</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Template)</span></span> Interpreter(ctx *Context) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s <span class="type">string</span></span><br><span class="line">	<span class="keyword">for</span> _, node := <span class="keyword">range</span> t.tree &#123;</span><br><span class="line">		s += node.Interpreter(ctx)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-迭代器模式"><a href="#行为型模式-迭代器模式" class="headerlink" title="行为型模式-迭代器模式"></a>行为型模式-迭代器模式</h1><p>提供了一种方法，顺序访问聚合对象中的各个元素，而又不需要暴露该对象的内部表示。</p>
+<p>核心思想是：<strong>将遍历逻辑从聚合对象中分离出来</strong>，使聚合对象和遍历逻辑可以独立变化</p>
+<p>实际应用场景：</p>
+<ol>
+<li>集合类库，如Go的slice、map等集合类型，可以通过迭代器模式提供统一的遍历接口</li>
+<li>数据库查询结果</li>
+<li>文件系统遍历</li>
+<li>树形结构遍历</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> iterator</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIterator</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	book := []*Book&#123;</span><br><span class="line">		&amp;Book&#123;Title: <span class="string">&quot;Go开发&quot;</span>&#125;,</span><br><span class="line">		&#123;Title: <span class="string">&quot;前端开发&quot;</span>&#125;,</span><br><span class="line">		&#123;Title: <span class="string">&quot;Java开发&quot;</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	iterator := NewBookIterator(book)</span><br><span class="line">	IteratorFunc(iterator)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">	Title <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> BookIterator <span class="keyword">struct</span> &#123;</span><br><span class="line">	Books    []*Book</span><br><span class="line">	position <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Iterator <span class="keyword">interface</span> &#123;</span><br><span class="line">	HasNext() <span class="type">bool</span></span><br><span class="line">	Next() *Book</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *BookIterator)</span></span> HasNext() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> b.position &gt;= <span class="built_in">len</span>(b.Books) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *BookIterator)</span></span> Next() *Book &#123;</span><br><span class="line">	<span class="keyword">if</span> !b.HasNext() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	book := b.Books[b.position]</span><br><span class="line">	b.position++</span><br><span class="line">	<span class="keyword">return</span> book</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IteratorFunc</span><span class="params">(iterator Iterator)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> iterator.HasNext() &#123;</span><br><span class="line">		book := iterator.Next()</span><br><span class="line">		fmt.Println(book.Title)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewBookIterator</span><span class="params">(books []*Book)</span></span> *BookIterator &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;BookIterator&#123;</span><br><span class="line">		Books:    books,</span><br><span class="line">		position: <span class="number">0</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-中介者模式"><a href="#行为型模式-中介者模式" class="headerlink" title="行为型模式-中介者模式"></a>行为型模式-中介者模式</h1><p>引入一个中介者对象来封装一组对象之间的交互。</p>
+<p>将对象之间的复杂交互集中到一个中介者对象中，减少对象间耦合。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现一个用户发送给聊天室其他用户，其他用户收到消息，自己收不到</span></span><br><span class="line"><span class="keyword">package</span> mediator</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name     <span class="type">string</span></span><br><span class="line">	mediator Mediator</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ChatRoom <span class="keyword">struct</span> &#123;</span><br><span class="line">	users []User</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Obj <span class="keyword">interface</span> &#123;</span><br><span class="line">	SendMsg(<span class="type">string</span>)</span><br><span class="line">	RevMsg(<span class="type">string</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Mediator <span class="keyword">interface</span> &#123;</span><br><span class="line">	SendMsg(msg <span class="type">string</span>, user Obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u User)</span></span> SendMsg(msg <span class="type">string</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;用户 %s 发了消息 %s\n&quot;</span>, u.Name, msg)</span><br><span class="line">	u.mediator.SendMsg(msg, u)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u User)</span></span> RevMsg(msg <span class="type">string</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;用户 %s 接收到消息 %s\n&quot;</span>, u.Name, msg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ChatRoom)</span></span> SendMsg(msg <span class="type">string</span>, user Obj) &#123;</span><br><span class="line">	<span class="keyword">for</span> _, u := <span class="keyword">range</span> c.users &#123;</span><br><span class="line">		<span class="keyword">if</span> u == user &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		u.RevMsg(msg)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ChatRoom)</span></span> Register(user User) &#123;</span><br><span class="line">	c.users = <span class="built_in">append</span>(c.users, user)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestSendMsg</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	room := ChatRoom&#123;&#125;</span><br><span class="line"></span><br><span class="line">	u1 := User&#123;Name: <span class="string">&quot;ff&quot;</span>, mediator: &amp;room&#125;</span><br><span class="line">	u2 := User&#123;Name: <span class="string">&quot;zs&quot;</span>, mediator: &amp;room&#125;</span><br><span class="line">	u3 := User&#123;Name: <span class="string">&quot;ls&quot;</span>, mediator: &amp;room&#125;</span><br><span class="line"></span><br><span class="line">	room.Register(u1)</span><br><span class="line">	room.Register(u2)</span><br><span class="line">	room.Register(u3)</span><br><span class="line"></span><br><span class="line">	u1.SendMsg(<span class="string">&quot;你好呀&quot;</span>)</span><br><span class="line">	u2.SendMsg(<span class="string">&quot;你吃了吗&quot;</span>)</span><br><span class="line">	u3.SendMsg(<span class="string">&quot;我吃了&quot;</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-备忘录模式"><a href="#行为型模式-备忘录模式" class="headerlink" title="行为型模式-备忘录模式"></a>行为型模式-备忘录模式</h1><p>允许在不破坏封装性的前提，捕获外部化一个内部状态，以便稍后可以将该对象恢复到之前的状态。</p>
+<p>核心思想是  将对象状态保存到备忘录中，并在需要时从备忘录恢复状态。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> memento</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Node <span class="keyword">interface</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TextNode <span class="keyword">struct</span> &#123;</span><br><span class="line">	state <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *TextNode)</span></span> SetState(state <span class="type">string</span>) &#123;</span><br><span class="line">	t.state = state</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *TextNode)</span></span> GetState() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> t.state</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *TextNode)</span></span> Save() Memento &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;TextMemento&#123;</span><br><span class="line">		state: t.state,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Memento <span class="keyword">interface</span> &#123;</span><br><span class="line">	GetState() <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TextMemento <span class="keyword">struct</span> &#123;</span><br><span class="line">	state <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *TextMemento)</span></span> GetState() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> t.state</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Manage <span class="keyword">struct</span> &#123;</span><br><span class="line">	states []Memento</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Manage)</span></span> Save(t Memento) &#123;</span><br><span class="line">	m.states = <span class="built_in">append</span>(m.states, t)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *Manage)</span></span> Back(index <span class="type">int</span>) Memento &#123;</span><br><span class="line">	<span class="keyword">return</span> m.states[index]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestTextNode</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	manage := Manage&#123;&#125;</span><br><span class="line">	text := TextNode&#123;&#125;</span><br><span class="line">	text.SetState(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">	manage.Save(text.Save())</span><br><span class="line">	text.SetState(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">	manage.Save(text.Save())</span><br><span class="line">	fmt.Println(text.GetState())</span><br><span class="line">	fmt.Println(manage.Back(<span class="number">0</span>).GetState())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-观察者模式"><a href="#行为型模式-观察者模式" class="headerlink" title="行为型模式-观察者模式"></a>行为型模式-观察者模式</h1><p>定义了对象之间一对多依赖关系，当一个对象（被观察者）的状态发生改变时，所有依赖它的对象（观察者）都会收到通知并自动更新。</p>
+<p>有个天气站（被观察者）， 天气数据更新了通知多个显示设备（观察者）更新显示内容</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> observer</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Observer <span class="keyword">interface</span> &#123;</span><br><span class="line">	RevMsg(wd <span class="type">int</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Subject <span class="keyword">interface</span> &#123;</span><br><span class="line">	SendMsg(wd <span class="type">int</span>)</span><br><span class="line">	Notify()</span><br><span class="line">	RegisterObserver(Observer)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u User)</span></span> RevMsg(wd <span class="type">int</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%s 现在温度 %d\n&quot;</span>, u.Name, wd)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> WeatherState <span class="keyword">struct</span> &#123;</span><br><span class="line">	observers []Observer</span><br><span class="line">	wd        <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *WeatherState)</span></span> SendMsg(wd <span class="type">int</span>) &#123;</span><br><span class="line">	w.wd = wd</span><br><span class="line">	w.Notify()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *WeatherState)</span></span> Notify() &#123;</span><br><span class="line">	<span class="keyword">for</span> _, observer := <span class="keyword">range</span> w.observers &#123;</span><br><span class="line">		observer.RevMsg(w.wd)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *WeatherState)</span></span> RegisterObserver(o Observer) &#123;</span><br><span class="line">	w.observers = <span class="built_in">append</span>(w.observers, o)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestObserver</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	zhan := WeatherState&#123;&#125;</span><br><span class="line">	u1 := User&#123;Name: <span class="string">&quot;ff&quot;</span>&#125;</span><br><span class="line">	u2 := User&#123;Name: <span class="string">&quot;zs&quot;</span>&#125;</span><br><span class="line">	zhan.RegisterObserver(u1)</span><br><span class="line">	zhan.RegisterObserver(u2)</span><br><span class="line"></span><br><span class="line">	zhan.SendMsg(<span class="number">8</span>)</span><br><span class="line">	zhan.SendMsg(<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-状态模式"><a href="#行为型模式-状态模式" class="headerlink" title="行为型模式-状态模式"></a>行为型模式-状态模式</h1><p>在对象内部状态改变时，改变其行为， 状态模式的核心思想是将对象的状态封装成独立的类，并将其对象的行为委托给当前状态对象。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> state</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> State <span class="keyword">interface</span> &#123;</span><br><span class="line">	Switch(context *Context)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	state State</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> SetState(state State) &#123;</span><br><span class="line">	c.state = state</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Switch() &#123;</span><br><span class="line">	c.state.Switch(c)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> OnState <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(OnState)</span></span> Switch(context *Context) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;开关关闭&quot;</span>)</span><br><span class="line">	context.SetState(&amp;OffState&#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> OffState <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(OffState)</span></span> Switch(context *Context) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;开关打开&quot;</span>)</span><br><span class="line">	context.SetState(&amp;OnState&#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestState</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	c := Context&#123;</span><br><span class="line">		state: &amp;OnState&#123;&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	c.Switch()</span><br><span class="line">	c.Switch()</span><br><span class="line">	c.Switch()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-策略模式"><a href="#行为型模式-策略模式" class="headerlink" title="行为型模式-策略模式"></a>行为型模式-策略模式</h1><p>定义了一系列算法，并将算法封装起来，是他们可以互相替换。</p>
+<p>核心思想是将算法的使用和算法的实现分离，从而使算法可以独立于客户端而变化。</p>
+<p>通过策略模式，可以运行时动态的选择算法，而不需要修改客户端代码</p>
+<p>优点：</p>
+<ol>
+<li>解耦，算法使用和算法分离</li>
+<li>易于扩展，添加策略类</li>
+<li>动态选择算法，不需要改客户端</li>
+</ol>
+<p>比如支付系统，支持多种支付方式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Pay <span class="keyword">interface</span> &#123;</span><br><span class="line">	Pay(money <span class="type">int64</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> AliPay <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> WeiPay <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(AliPay)</span></span> Pay(money <span class="type">int64</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;使用支付宝支付: %d 元\n&quot;</span>, money)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(WeiPay)</span></span> Pay(money <span class="type">int64</span>) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;使用微信支付: %d 元\n&quot;</span>, money)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PayStrategy <span class="keyword">struct</span> &#123;</span><br><span class="line">	pay Pay</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *PayStrategy)</span></span> SetPay(pay Pay) &#123;</span><br><span class="line">	p.pay = pay</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *PayStrategy)</span></span> Pay(money <span class="type">int64</span>) &#123;</span><br><span class="line">	p.pay.Pay(money)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestPay</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	aliPay := &amp;AliPay&#123;&#125;</span><br><span class="line">	weiPay := &amp;WeiPay&#123;&#125;</span><br><span class="line">	payStrategy := &amp;PayStrategy&#123;&#125;</span><br><span class="line">	payStrategy.SetPay(aliPay)</span><br><span class="line">	payStrategy.Pay(<span class="number">12</span>)</span><br><span class="line">	payStrategy.SetPay(weiPay)</span><br><span class="line">	payStrategy.Pay(<span class="number">10</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-模板方法模式"><a href="#行为型模式-模板方法模式" class="headerlink" title="行为型模式-模板方法模式"></a>行为型模式-模板方法模式</h1><p>定义算法骨架，将某些步骤延迟到子类实现。</p>
+<p>核心思想是将算法通用部分放到父类中，将可变部分交给子类实现。</p>
+<p>通过模板方法模式可以避免代码重复，确保算法结构不变</p>
+<p>使用场景：</p>
+<ol>
+<li>框架设计，web请求处理</li>
+<li>工作流引擎</li>
+<li>测试框架</li>
+<li>游戏开发</li>
+</ol>
+<p>假如有个饮料制作系统，支持制作咖啡，茶…  咖啡和茶制作过程有一些共同步骤，也有不同步骤</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> template</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Template <span class="keyword">interface</span> &#123;</span><br><span class="line">	BoilWater()</span><br><span class="line">	Brew()     <span class="comment">//冲泡</span></span><br><span class="line">	AddSugar() <span class="comment">//加糖</span></span><br><span class="line">	HasAddSugar() <span class="type">bool</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Coffee <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Coffee)</span></span> BoilWater() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;烧水&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Coffee)</span></span> Brew() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;冲泡&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Coffee)</span></span> AddSugar() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;加糖&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Coffee)</span></span> HasAddSugar() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tea <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Tea)</span></span> BoilWater() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;烧水&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Tea)</span></span> Brew() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;冲泡&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Tea)</span></span> AddSugar() &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;加糖&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Tea)</span></span> HasAddSugar() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MakeTemplate</span><span class="params">(tmp Template)</span></span> &#123;</span><br><span class="line">	tmp.BoilWater()</span><br><span class="line">	tmp.Brew()</span><br><span class="line">	<span class="keyword">if</span> tmp.HasAddSugar() &#123;</span><br><span class="line">		tmp.AddSugar()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestTemplate</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	tea := Tea&#123;&#125;</span><br><span class="line">	coffee := Coffee&#123;&#125;</span><br><span class="line">	MakeTemplate(&amp;tea)</span><br><span class="line">	MakeTemplate(&amp;coffee)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="行为型模式-访问者模式"><a href="#行为型模式-访问者模式" class="headerlink" title="行为型模式-访问者模式"></a>行为型模式-访问者模式</h1><p>将算法于对象结构分离。</p>
+<p>核心思想：将算法从对象结构中分离出来是的可以在不修改对象结构情况下定义新得操作</p>
+<p>通过访问者模式，可以将对象结构得元素和作用于这些元素得操作解耦，使得操作可以独立变化</p>
+<p>有点：</p>
+<ol>
+<li>解耦，操作和对象结构分离，操作可以独立变化</li>
+<li>扩展性，新增新的访问者即可</li>
+<li>符合开闭原则</li>
+</ol>
+<p>假如我们有个文档对象模型，DOM ，包含多种元素，文本，图片，表格等， 我们需要对这些元素进行不通得操作（如导出pdf， 导出html等）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> visitor</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Text <span class="keyword">struct</span> &#123;</span><br><span class="line">	content <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Element <span class="keyword">interface</span> &#123;</span><br><span class="line">	Accept(visitor Visitor)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Image <span class="keyword">struct</span> &#123;</span><br><span class="line">	src <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Text)</span></span> Accept(v Visitor) &#123;</span><br><span class="line">	v.VisitText(t)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(i *Image)</span></span> Accept(v Visitor) &#123;</span><br><span class="line">	v.VisitImage(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Visitor <span class="keyword">interface</span> &#123;</span><br><span class="line">	VisitText(*Text)</span><br><span class="line">	VisitImage(*Image)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> PDFVisitor <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(PDFVisitor)</span></span> VisitText(text *Text) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;pdf获取文本内容：&quot;</span>, text.content)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(PDFVisitor)</span></span> VisitImage(image *Image) &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;pdf获取图片得src：&quot;</span>, image.src)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Document <span class="keyword">struct</span> &#123;</span><br><span class="line">	elements []Element</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Document)</span></span> AddElement(element Element) &#123;</span><br><span class="line">	d.elements = <span class="built_in">append</span>(d.elements, element)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Document)</span></span> Accept(v Visitor) &#123;</span><br><span class="line">	<span class="keyword">for</span> _, element := <span class="keyword">range</span> d.elements &#123;</span><br><span class="line">		element.Accept(v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestVisitor</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	document := &amp;Document&#123;&#125;</span><br><span class="line">	document.AddElement(&amp;Text&#123;content: <span class="string">&quot;你好&quot;</span>&#125;)</span><br><span class="line">	document.AddElement(&amp;Text&#123;content: <span class="string">&quot;吃饭了么&quot;</span>&#125;)</span><br><span class="line">	document.AddElement(&amp;Text&#123;content: <span class="string">&quot;xxx&quot;</span>&#125;)</span><br><span class="line">	document.AddElement(&amp;Image&#123;src: <span class="string">&quot;abc.png&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">	pdf := &amp;PDFVisitor&#123;&#125;</span><br><span class="line">	document.Accept(pdf)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：再次通过行为型模式视角回顾Go</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2022-07-08 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2022_07_08_go_design_pattern/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2023_12_26_docker_hexo/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker安装Hexo编译环境</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022_07_02_go_design_pattern/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">再次通过结构型模式视角回顾Go</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-责任链模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-命令模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-解释器模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-迭代器模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-中介者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-备忘录模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-观察者模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-状态模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-策略模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-模板方法模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F-%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-text">行为型模式-访问者模式</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
