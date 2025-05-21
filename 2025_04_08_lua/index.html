@@ -175,7 +175,7 @@
                     <div class="author">
                         <span class="name">形而上</span>
                         
-                            <span class="author-label">Lv4</span>
+                            <span class="author-label">Lv5</span>
                         
                     </div>
                     <div class="meta-info">
@@ -228,7 +228,7 @@
         
 
         <div class="article-content markdown-body">
-            <p><img src="/%5C2025_04_08_lua%5C1.jpg"></p>
+            <p><img src="/2025_04_08_lua/1.jpg"></p>
 <p>Simple is beautiful</p>
 <p>(本文使用pdf-craft开源工具和大模型生成整理)</p>
 <h1 id="译序"><a href="#译序" class="headerlink" title="译序"></a>译序</h1><p>“袁承志知道若再谦逊,那就是瞧人不起,展开五行拳,发拳当胸打去。荣彩和旁观三人本来都以为他武功有独到之秘,哪知使出来的竟是武林中最寻常不过的五行拳。敌对三人登时意存轻视,温青脸上不自禁露出失望的神色。</p>
@@ -273,9 +273,9 @@
 <p>另外本书仅针对Lua 5.0,如果你的版本不同,请查阅Lua 手册或者比较版本间的差异。</p>
 <h2 id="0-4本书的体例"><a href="#0-4本书的体例" class="headerlink" title="0.4本书的体例"></a>0.4本书的体例</h2><p>&lt;1&gt;字符串使用双引号,比如”literal strings”；单字符使用单引号,比如’a’；模式串也是用单引号,比如’[%w_]*’。</p>
 <p>&lt;2&gt; 符号–&gt;表示语句的输出或者表达式的结果：</p>
-<p><img src="/%5C2025_04_08_lua%5C3.png"></p>
+<p><img src="/2025_04_08_lua/3.png"></p>
 <p>&lt;3&gt;符号&lt;–&gt;表示等价,即对于 Lua 来说,用 this 与 that 没有区别。</p>
-<p><img src="/%5C2025_04_08_lua%5Cc4cb33403a31074c79c7ba8c2882b6a6243e30cd4a1cc1f29d3b83444baa5fb2.png"></p>
+<p><img src="/2025_04_08_lua/c4cb33403a31074c79c7ba8c2882b6a6243e30cd4a1cc1f29d3b83444baa5fb2.png"></p>
 <h2 id="0-5关于本书"><a href="#0-5关于本书" class="headerlink" title="0.5关于本书"></a>0.5关于本书</h2><p>开始打算写这本书是1998 年冬天(南半球),那时候Lua 版本是3.1；2000 年v4.0;2003 年 v5.0。</p>
 <p>很明显的是,这些变化给本书带来很大的冲击,有些内容失去了它存在理由,比如关于超值(upvalues)的复杂的解释。一些章节被重写,比如CAPI,另外一些章节被增加进来,比如协同处理。</p>
 <p>不太明显的是,Lua 语言本身的发展对本书的完成也产生了很大的影响。一些语言的变化在本书中并没有被涵盖进来,这并非偶然的。在本书的创作过程中,有的时候在当你想尽力去解释清楚如何使用的前提是你应该觉得使用这个东西很容易,这表明Lua某些地方需要被改进。还有的时候,我顺利的写完某个章节,结果却是没有人能看得懂我写的或者没有人对我在这个章节内表达的观点达成一致。大部分情况下,这是我的过错因为我是个作家,偶尔我也会因此发现语言本身的一些需要改进的缺陷(举例来说,从upvalues 到lexical scoping 的转变是由无意义的尝试所带来的抱怨所引发的,在此书的先前的草稿里,把 upvalues 形容成是lexical scoping 的一种)。</p>
@@ -295,7 +295,7 @@
 <p>假定你把上面这句保存在 hello.lua 文件中,你在命令行只需要:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prompt&gt; lua hello.lua </span><br></pre></td></tr></table></figure>
 <p>让我们来看一个稍微复杂点的例子:</p>
-<p><img src="/%5C2025_04_08_lua%5C1ffa0092d9c846b769dc15b1acb93672527c3115745a09a6a37f9e5cc937bbd6.png"></p>
+<p><img src="/2025_04_08_lua/1ffa0092d9c846b769dc15b1acb93672527c3115745a09a6a37f9e5cc937bbd6.png"></p>
 <p>这个例子定义了一个函数,计算输入参数n 的阶乘；本例要求用户输入一个数字 n,然后打印 n 的阶乘。</p>
 <h2 id="1-1-Chunks"><a href="#1-1-Chunks" class="headerlink" title="1.1 Chunks"></a>1.1 Chunks</h2><p>Chunk 是一系列语句,Lua 执行的每一块语句,比如一个文件或者交互模式下的每-行都是一个Chunk。</p>
 <p>每个语句结尾的分号(;)是可选的,但如果同一行有多个语句最好用；分开</p>
@@ -330,11 +330,11 @@
 <p>这样变量 b 就好像从没被使用过一样.换句话说,当且仅当一个变量不等于 nil 时,这个变量存在。</p>
 <h2 id="1-3词法约定"><a href="#1-3词法约定" class="headerlink" title="1.3词法约定"></a>1.3词法约定</h2><p>标示符：字母(letter)或者下划线开头的字母、下划线、数字序列.最好不要使用下划线加大写字母的标示符,因为Lua 的保留字也是这样的。Lua 中,letter 的含义是依赖于本地环境的。</p>
 <p>保留字：以下字符为Lua 的保留字,不能当作标识符。</p>
-<p><img src="/%5C2025_04_08_lua%5C98a939c34fb84f1d49129a755e0fc0fc2d3fd26747f1b68c190096278257acec.png"></p>
+<p><img src="/2025_04_08_lua/98a939c34fb84f1d49129a755e0fc0fc2d3fd26747f1b68c190096278257acec.png"></p>
 <p>注意：Lua是大小写敏感的.</p>
 <p>注释：单行注释:–</p>
 <p>多行注释：–[[ –]]</p>
-<p><img src="/%5C2025_04_08_lua%5Ccd2f4c195c3adb35f05830071b512a52ef18f4a83654ae97d037661c0b17f345.png"></p>
+<p><img src="/2025_04_08_lua/cd2f4c195c3adb35f05830071b512a52ef18f4a83654ae97d037661c0b17f345.png"></p>
 <h2 id="1-4命令行方式"><a href="#1-4命令行方式" class="headerlink" title="1.4命令行方式"></a>1.4命令行方式</h2><p>lua [options] [script [args]]</p>
 <p>-e：直接将命令传入Lua</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prompt&gt; lua -e <span class="string">&quot;print(math.sin(12))&quot;</span> <span class="comment">--&gt; -0.53657291800043</span></span><br></pre></td></tr></table></figure>
@@ -355,36 +355,36 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">arg</span>[<span class="number">-3</span>] = <span class="string">&quot;lua&quot;</span> </span><br><span class="line"><span class="built_in">arg</span>[<span class="number">-2</span>] = <span class="string">&quot;-e&quot;</span> </span><br><span class="line"><span class="built_in">arg</span>[<span class="number">-1</span>] = <span class="string">&quot;sin=math.sin&quot;</span> </span><br><span class="line"><span class="built_in">arg</span>[<span class="number">0</span>] = <span class="string">&quot;script&quot;</span> </span><br><span class="line"><span class="built_in">arg</span>[<span class="number">1</span>] = <span class="string">&quot;a&quot;</span> </span><br><span class="line"><span class="built_in">arg</span>[<span class="number">2</span>] = <span class="string">&quot;b&quot;</span> </span><br></pre></td></tr></table></figure>
 
 <h1 id="第2章-类型和值"><a href="#第2章-类型和值" class="headerlink" title="第2章 类型和值"></a>第2章 类型和值</h1><p>Lua 是动态类型语言,变量不要类型定义。Lua 中有8个基本类型分别为:nil、boolean、number、string、userdata、function、thread 和 table。函数 type 可以测试给定变量或者值的类型。</p>
-<p><img src="/%5C2025_04_08_lua%5C2417542e9f91a709b8a4b36e9e3e4f0c9696fa372605cf8595d0287faa852cb7.png"></p>
+<p><img src="/2025_04_08_lua/2417542e9f91a709b8a4b36e9e3e4f0c9696fa372605cf8595d0287faa852cb7.png"></p>
 <p>变量没有预定义的类型,每一个变量都可能包含任一种类型的值。</p>
-<p><img src="/%5C2025_04_08_lua%5Cbc384ece86c9cfcc84830aac559d23f12e99854702e4d65050560d1f8bd47f42.png"></p>
+<p><img src="/2025_04_08_lua/bc384ece86c9cfcc84830aac559d23f12e99854702e4d65050560d1f8bd47f42.png"></p>
 <p>注意上面最后两行,我们可以使用 function 像使用其他值一样使用(更多的介绍参考第六章)。一般情况下同一变量代表不同类型的值会造成混乱,最好不要用,但是特殊情况下可以带来便利,比如nil。</p>
 <h2 id="2-1-Nil"><a href="#2-1-Nil" class="headerlink" title="2.1 Nil"></a>2.1 Nil</h2><p>Lua 中特殊的类型,他只有一个值：nil; ；一个全局变量没有被赋值以前默认值为 nil;给全局变量负 nil 可以删除该变量。</p>
 <h2 id="2-2-Booleans"><a href="#2-2-Booleans" class="headerlink" title="2.2 Booleans"></a>2.2 Booleans</h2><p>两个取值 false 和 true。但要注意Lua 中所有的值都可以作为条件。在控制结构的条件中除了false 和 nil为假,其他值都为真。所以Lua认为O和空串都是真。</p>
 <h2 id="2-3-Numbers"><a href="#2-3-Numbers" class="headerlink" title="2.3 Numbers"></a>2.3 Numbers</h2><p>表示实数,Lua 中没有整数。一般有个错误的看法CPU运算浮点数比整数慢。事实不是如此,用实数代替整数不会有什么误差(除非数字大于100,000,000,000,000)。Lua的 numbers 可以处理任何长整数不用担心误差。你也可以在编译Lua 的时候使用长整型或者单精度浮点型代替 numbers,在一些平台硬件不支持浮点数的情况下这个特性是非常有用的,具体的情况请参考Lua发布版所附的详细说明。和其他语言类似,数字常量的小数部分和指数部分都是可选的,数字常量的例子:</p>
-<p><img src="/%5C2025_04_08_lua%5C3bd71cb8f1dcca8142c15fc7dfda196787337d3f40884695c58347208c747cdb.png"></p>
+<p><img src="/2025_04_08_lua/3bd71cb8f1dcca8142c15fc7dfda196787337d3f40884695c58347208c747cdb.png"></p>
 <h2 id="2-4-Strings"><a href="#2-4-Strings" class="headerlink" title="2.4 Strings"></a>2.4 Strings</h2><p>指字符的序列。lua是8位字节,所以字符串可以包含任何数值字符,包括嵌入的0。这意味着你可以存储任意的二进制数据在一个字符串里。Lua 中字符串是不可以修改的,你可以创建一个新的变量存放你要的字符串,如下:</p>
-<p><img src="/%5C2025_04_08_lua%5Cc59792c975be49375d52c3e8bbc57110f9dc1ed6f828b2af6a333223c3fed2dc.png"></p>
+<p><img src="/2025_04_08_lua/c59792c975be49375d52c3e8bbc57110f9dc1ed6f828b2af6a333223c3fed2dc.png"></p>
 <p>string 和其他对象一样,Lua 自动进行内存分配和释放,一个 string 可以只包含一个字母也可以包含一本书,Lua 可以高效的处理长字符串,1M 的 string 在Lua 中是很常见的。可以使用单引号或者双引号表示字符串</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;a line&quot;</span></span><br><span class="line">b = <span class="string">&#x27;another line&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>为了风格统一,最好使用一种,除非两种引号嵌套情况。对于字符串中含有引号的情况还可以使用转义符来表示。Lua 中的转义序列有:</p>
-<p><img src="/%5C2025_04_08_lua%5Cbed1a43e861d77120dbef29dc1f2dcc2882bb3d47eda29af31a2623f7832cecf.png"><br><img src="/%5C2025_04_08_lua%5Cb02800e2c9da02f27e18e63b376f0721898a8bbac494a3498527c86e17342e66.png"></p>
+<p><img src="/2025_04_08_lua/bed1a43e861d77120dbef29dc1f2dcc2882bb3d47eda29af31a2623f7832cecf.png"><br><img src="/2025_04_08_lua/b02800e2c9da02f27e18e63b376f0721898a8bbac494a3498527c86e17342e66.png"></p>
 <p>例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">print</span>(<span class="string">&quot;one line\nnext line\n\&quot;in quotes\&quot;, &#x27;in quotes&#x27;&quot;</span>) </span><br><span class="line">one line </span><br><span class="line">next line </span><br><span class="line"><span class="string">&quot;in quotes&quot;</span>, <span class="string">&#x27;in quotes&#x27;</span> </span><br><span class="line">&gt; <span class="built_in">print</span>(<span class="string">&#x27;a backslash inside quotes: \&#x27;</span>\\\&#x27;<span class="string">&#x27;) </span></span><br><span class="line"><span class="string">a backslash inside quotes: &#x27;</span>\&#x27; </span><br><span class="line">&gt; <span class="built_in">print</span>(<span class="string">&quot;a simpler way: &#x27;\\&#x27;&quot;</span>) </span><br><span class="line">a simpler way: <span class="string">&#x27;\&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>还可以在字符串中使用\ddd(ddd 为三位十进制数字)方式表示字母。</p>
 <p>“alo\n123&quot;“和\97lo\10\04923”是相同的。</p>
 <p>还可以使用[[…]]表示字符串。这种形式的字符串可以包含多行也,可以嵌套且不会解释转义序列,如果第一个字符是换行符会被自动忽略掉。这种形式的字符串用来包含一段代码是非常方便的。</p>
-<p><img src="/%5C2025_04_08_lua%5Cbbe1109b4961d81f31afe93186841e8dfd897aaf0ff2ccff57011b149d0cf400.png"></p>
+<p><img src="/2025_04_08_lua/bbe1109b4961d81f31afe93186841e8dfd897aaf0ff2ccff57011b149d0cf400.png"></p>
 <p>运行时,Lua 会自动在 string 和 numbers 之间自动进行类型转换,当一个字符串使用算术操作符时,string 就会被转成数字。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;10&quot;</span> + <span class="number">1</span>)    <span class="comment">--&gt; 11 </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;10 + 1&quot;</span>)    <span class="comment">--&gt; 10 + 1 </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-5.3e - 10&quot;</span> * <span class="string">&quot;2&quot;</span>) <span class="comment">--&gt; -1.06e-09 </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello&quot;</span> + <span class="number">1</span>)   <span class="comment">-- ERROR (cannot convert &quot;hello&quot;) </span></span><br></pre></td></tr></table></figure>
 
 <p>反过来,当Lua 期望一个 string 而碰到数字时,会将数字转成 string。</p>
-<p><img src="/%5C2025_04_08_lua%5C287c301037b15ac318f435eb666ec9324c1a8bbce80488185248bcab4dc3f2f1.png"></p>
+<p><img src="/2025_04_08_lua/287c301037b15ac318f435eb666ec9324c1a8bbce80488185248bcab4dc3f2f1.png"></p>
 <p>..在Lua 中是字符串连接符,当在一个数字后面写..时,必须加上空格以防止被解释错。</p>
 <p>尽管字符串和数字可以自动转换,但两者是不同的,像10&#x3D;&#x3D;”10”这样的比较永远都是错的。如果需要显式将 string 转成数字可以使用函数tonumberO,如果 string 不是正确的数字该函数将返回 nil。</p>
-<p><img src="/%5C2025_04_08_lua%5Cb071c14851018b0f2ff71e8b45df256fde2cd6cd9d1a9583c26b58e988bec360.png"></p>
+<p><img src="/2025_04_08_lua/b071c14851018b0f2ff71e8b45df256fde2cd6cd9d1a9583c26b58e988bec360.png"></p>
 <p>反之,可以调用 tostring()将数字转成字符串,这种转换一直有效:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">tostring</span>(<span class="number">10</span>) == <span class="string">&quot;10&quot;</span>)  <span class="comment">--&gt; true </span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">10</span> .. <span class="string">&quot;&quot;</span> == <span class="string">&quot;10&quot;</span>)   <span class="comment">--&gt; true </span></span><br></pre></td></tr></table></figure>
 
@@ -402,7 +402,7 @@
 
 <p>Lua 比较数字按传统的数字大小进行,比较字符串按字母的顺序进行,但是字母顺序依赖于本地环境。</p>
 <p>当比较不同类型的值的时候要特别注意:</p>
-<p><img src="/%5C2025_04_08_lua%5C59db53d1fce1907fab25871fc67196ee3b4ef887dc82da8ae5644ae7cebb21a8.png"></p>
+<p><img src="/2025_04_08_lua/59db53d1fce1907fab25871fc67196ee3b4ef887dc82da8ae5644ae7cebb21a8.png"></p>
 <p>为了避免不一致的结果,混合比较数字和字符串,Lua 会报错,比如：2&lt;”15”</p>
 <h2 id="3-3逻辑运算符"><a href="#3-3逻辑运算符" class="headerlink" title="3.3逻辑运算符"></a>3.3逻辑运算符</h2><p>and or not </p>
 <p>逻辑运算符认为 false 和 nil是假(false),其他为真,O也是 true.</p>
@@ -428,14 +428,14 @@
 <h2 id="3-4连接运算符"><a href="#3-4连接运算符" class="headerlink" title="3.4连接运算符"></a>3.4连接运算符</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.. <span class="comment">--两个点</span></span><br></pre></td></tr></table></figure>
 
 <p>字符串连接,如果操作数为数字,Lua将数字转成字符串。</p>
-<p><img src="/%5C2025_04_08_lua%5C5641d9c46beb685cb54ee5c28cce00de7598e165f524f4dccd0a10e3c75d9e20.png"></p>
-<h2 id="3-5优先级"><a href="#3-5优先级" class="headerlink" title="3.5优先级"></a>3.5优先级</h2><p>从高到低的顺序:<br><img src="/%5C2025_04_08_lua%5Cyxj.png"></p>
+<p><img src="/2025_04_08_lua/5641d9c46beb685cb54ee5c28cce00de7598e165f524f4dccd0a10e3c75d9e20.png"></p>
+<h2 id="3-5优先级"><a href="#3-5优先级" class="headerlink" title="3.5优先级"></a>3.5优先级</h2><p>从高到低的顺序:<br><img src="/2025_04_08_lua/yxj.png"></p>
 <p>除了~和..外所有的二元运算符都是左连接的。</p>
-<p><img src="/%5C2025_04_08_lua%5Cc47247879166ca748be621445eb94e9c56ffbbc7f15e9b7857d716d46e80e0ca.png"></p>
+<p><img src="/2025_04_08_lua/c47247879166ca748be621445eb94e9c56ffbbc7f15e9b7857d716d46e80e0ca.png"></p>
 <h2 id="3-6表的构造"><a href="#3-6表的构造" class="headerlink" title="3.6表的构造"></a>3.6表的构造</h2><p>构造器是创建和初始化表的表达式。表是Lua特有的功能强大的东西。最简单的构造函数是,用来创建一个空表。可以直接初始化数组:</p>
-<p><img src="/%5C2025_04_08_lua%5Cf7c63f45cedb818d6fe945974d6dd4762b4713b656647ef5e471971a74111c7c.png"></p>
+<p><img src="/2025_04_08_lua/f7c63f45cedb818d6fe945974d6dd4762b4713b656647ef5e471971a74111c7c.png"></p>
 <p>不管用何种方式创建table,我们都可以向表中添加或者删除任何类型的域,构造函数仅仅影响表的初始化。</p>
-<p><img src="/%5C2025_04_08_lua%5Ce7309638b6f93ebff697fe15dbb3b38dc42fe546d7c62f19c772da3d6bd3eee0.png"></p>
+<p><img src="/2025_04_08_lua/e7309638b6f93ebff697fe15dbb3b38dc42fe546d7c62f19c772da3d6bd3eee0.png"></p>
 <p>每次调用构造函数,Lua 都会创建一个新的 table,可以使用 table 构造一个 list:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = <span class="literal">nil</span> </span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">io</span>.<span class="built_in">lines</span>() <span class="keyword">do</span> </span><br><span class="line"> list = &#123;<span class="built_in">next</span>=list, value=line&#125; </span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
 
@@ -466,7 +466,7 @@
 
 <h1 id="第4章基本语法"><a href="#第4章基本语法" class="headerlink" title="第4章基本语法"></a>第4章基本语法</h1><p>Lua 像C和PASCAL几乎支持所有的传统语句：赋值语句、控制结构语句、函数调用等,同时也支持非传统的多变量赋值、局部变量声明。</p>
 <h2 id="4-1赋值语句"><a href="#4-1赋值语句" class="headerlink" title="4.1赋值语句"></a>4.1赋值语句</h2><p>赋值是改变一个变量的值和改变表域的最基本的方法。</p>
-<p><img src="/%5C2025_04_08_lua%5C5bfa8886804f8486acddd3bdb4e4427234108d1f58a7d8ae8c6306d7eddd776e.png"></p>
+<p><img src="/2025_04_08_lua/5bfa8886804f8486acddd3bdb4e4427234108d1f58a7d8ae8c6306d7eddd776e.png"></p>
 <p>Lua 可以对多个变量同时赋值,变量列表和值列表的各个元素用逗号分开,赋值语句右边的值会依次赋给左边的变量。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = 10, 2*x  &lt;--&gt;  a=10; b=2*x</span><br></pre></td></tr></table></figure>
 
@@ -480,10 +480,10 @@
 
 <p>上面最后一个例子是一个常见的错误情况,注意：如果要对多个变量赋值必须依次对每个变量赋值。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, c = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> </span><br></pre></td></tr></table></figure>
-<p><img src="/%5C2025_04_08_lua%5C465d44a90ba7681fd6fe1b924c88fd0fed089e272f061100528bc79cb5566605.png"></p>
+<p><img src="/2025_04_08_lua/465d44a90ba7681fd6fe1b924c88fd0fed089e272f061100528bc79cb5566605.png"></p>
 <p>f()返回两个值，第一个赋给a，第二个赋给b。 </p>
 <h2 id="4-2局部变量与代码块-block"><a href="#4-2局部变量与代码块-block" class="headerlink" title="4.2局部变量与代码块(block)"></a>4.2局部变量与代码块(block)</h2><p>使用local 创建一个局部变量,与全局变量不同,局部变量只在被声明的那个代码块内有效。代码块：指一个控制结构内,一个函数体,或者一个chunk(变量被声明的那个文件或者文本串)。</p>
-<p><img src="/%5C2025_04_08_lua%5C460815dc70ed6298f125173d86bab49df05ae238ec5d76957dcf3323faef6b2c.png"></p>
+<p><img src="/2025_04_08_lua/460815dc70ed6298f125173d86bab49df05ae238ec5d76957dcf3323faef6b2c.png"></p>
 <p>注意,如果在交互模式下上面的例子可能不能输出期望的结果,因为第二句locali&#x3D;l第二句的i已经超出了他的有效范围。可以将这段代码放在 do.end(相当于c&#x2F;c++的{})块中。</p>
 <p>应该尽可能的使用局部变量,有两个好处：</p>
 <ol>
@@ -491,13 +491,13 @@
 <li>访问局部变量的速度比全局变量更快</li>
 </ol>
 <p>我们给 block 划定一个明确的界限：do..end 内的部分。当你想更好的控制局部变量的作用范围的时候这是很有用的。</p>
-<p><img src="/%5C2025_04_08_lua%5C1fdf45dceac8409d415966970c9cbe02e1abba0e119b15ea67f184f6fe3f339e.png"></p>
+<p><img src="/2025_04_08_lua/1fdf45dceac8409d415966970c9cbe02e1abba0e119b15ea67f184f6fe3f339e.png"></p>
 <h2 id="4-3控制结构语句"><a href="#4-3控制结构语句" class="headerlink" title="4.3控制结构语句"></a>4.3控制结构语句</h2><p>控制结构的条件表达式结果可以是任何值,Lua 认为 false 和 nil 为假,其他值为真。</p>
-<p>if语句,有三种形式:<br><img src="/%5C2025_04_08_lua%5Cif.png"></p>
+<p>if语句,有三种形式:<br><img src="/2025_04_08_lua/if.png"></p>
 <p>while 语句:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> condition <span class="keyword">do</span> </span><br><span class="line"> statements; </span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
 <p>repeat-until 语句:</p>
-<p><img src="/%5C2025_04_08_lua%5C7066ecacaa7e6d2c78b85878bd3729078fb6d769c7c06e705ce58a9e2c465f8c.png"></p>
+<p><img src="/2025_04_08_lua/7066ecacaa7e6d2c78b85878bd3729078fb6d769c7c06e705ce58a9e2c465f8c.png"></p>
 <p>for 语句有两大类:第一,数值 for 循环:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var=exp1,exp2,exp3 <span class="keyword">do</span> </span><br><span class="line"> loop-part </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -550,26 +550,26 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> i = <span class="number">1</span> </span><br><span class="line"><span class="keyword">while</span> a[i] <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> a[i] == v <span class="keyword">then</span> <span class="keyword">break</span> <span class="keyword">end</span> </span><br><span class="line">    i = i + <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>有时候为了调试或者其他目的需要在 block 的中间使用 return 或者 break,可以显式的使用 do..end 来实现:</p>
-<p><img src="/%5C2025_04_08_lua%5C87a3c51aa6bac5888ebb084c9b6294b677af2f38b2b86162b48e763da6e2186a.png"></p>
+<p><img src="/2025_04_08_lua/87a3c51aa6bac5888ebb084c9b6294b677af2f38b2b86162b48e763da6e2186a.png"></p>
 <h1 id="第5章函数"><a href="#第5章函数" class="headerlink" title="第5章函数"></a>第5章函数</h1><p>函数有两种用途：1.完成指定的任务,这种情况下函数作为调用语句使用；2.计算并返回值,这种情况下函数作为赋值语句的表达式使用。</p>
 <p>语法:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func_name</span> <span class="params">(arguments-list)</span></span> </span><br><span class="line"> statements-list; </span><br><span class="line"><span class="keyword">end</span>; </span><br></pre></td></tr></table></figure>
 
 <p>调用函数的时候,如果参数列表为空,必须使用()表明是函数调用。</p>
-<p><img src="/%5C2025_04_08_lua%5C380357cdf7be49ffeded738e0abf9717de4e403eb50a21ae2a61e7e16f352e68.png"></p>
+<p><img src="/2025_04_08_lua/380357cdf7be49ffeded738e0abf9717de4e403eb50a21ae2a61e7e16f352e68.png"></p>
 <p>上述规则有一个例外,当函数只有一个参数并且这个参数是字符串或者表构造的时候,()是可选的：</p>
-<p><img src="/%5C2025_04_08_lua%5Cf7403927312b86a11212413e98a0ab035a518d608b7fe6046784f35d6965c2f0.png"></p>
+<p><img src="/2025_04_08_lua/f7403927312b86a11212413e98a0ab035a518d608b7fe6046784f35d6965c2f0.png"></p>
 <p>Lua 也提供了面向对象方式调用函数的语法,比如 o:foo(x)与 o.foo(o,x)是等价的,后面的章节会详细介绍面向对象内容。</p>
 <p>Lua 使用的函数可以是Lua 编写也可以是其他语言编写,对于Lua程序员来说用什么语言实现的函数使用起来都一样。</p>
 <p>Lua 函数实参和形参的匹配与赋值语句类似,多余部分被忽略,缺少部分用 nil补足。</p>
-<p><img src="/%5C2025_04_08_lua%5C946900e79341aae641deb59de39c720336e9da57dca183d4dc05b42a4b296562.png"></p>
+<p><img src="/2025_04_08_lua/946900e79341aae641deb59de39c720336e9da57dca183d4dc05b42a4b296562.png"></p>
 <h2 id="5-1返回多个结果值"><a href="#5-1返回多个结果值" class="headerlink" title="5.1返回多个结果值"></a>5.1返回多个结果值</h2><p>Lua 函数可以返回多个结果值,比如 string.find,其返回匹配串“开始和结束的下标”(如果不存在匹配串返回 nil)。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s, e = <span class="built_in">string</span>.<span class="built_in">find</span>(<span class="string">&quot;hello Lua users&quot;</span>, <span class="string">&quot;Lua&quot;</span>) </span><br><span class="line"><span class="built_in">print</span>(s, e)  <span class="comment">--&gt; 7 9</span></span><br></pre></td></tr></table></figure>
 
 <p>Lua 函数中,在return 后列出要返回的值得列表即可返回多值,如:</p>
-<p><img src="/%5C2025_04_08_lua%5C47b96b33e8423f76dd08b652af01046c7178897f0ff10688e8e68f5a65e2080c.png"></p>
+<p><img src="/2025_04_08_lua/47b96b33e8423f76dd08b652af01046c7178897f0ff10688e8e68f5a65e2080c.png"></p>
 <p>Lua总是调整函数返回值的个数去适用调用环境,当作为一个语句调用函数时,所有返回值被忽略。假设有如下三个函数:</p>
-<p><img src="/%5C2025_04_08_lua%5Ced2fa320923f6364020bd9a2571bae132fcb423f2b340f6dc59d4343a9dab20f.png"></p>
+<p><img src="/2025_04_08_lua/ed2fa320923f6364020bd9a2571bae132fcb423f2b340f6dc59d4343a9dab20f.png"></p>
 <p>第一,当作为表达式调用函数时,有以下几种情况:</p>
 <ol>
 <li><p>当调用作为表达式最后一个参数或者仅有一个参数时,根据变量个数函数尽可能多地返回多个值,不足补 nil,超出舍去。</p>
@@ -578,7 +578,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x,y = foo2()    <span class="comment">-- x=&#x27;a&#x27;, y=&#x27;b&#x27; </span></span><br><span class="line">x = foo2()     <span class="comment">-- x=&#x27;a&#x27;, &#x27;b&#x27; is discarded </span></span><br><span class="line">x,y,z = <span class="number">10</span>,foo2()   <span class="comment">-- x=10, y=&#x27;a&#x27;, z=&#x27;b&#x27; </span></span><br><span class="line"> </span><br><span class="line">x,y = foo0()    <span class="comment">-- x=nil, y=nil </span></span><br><span class="line">x,y = foo1()    <span class="comment">-- x=&#x27;a&#x27;, y=nil </span></span><br><span class="line">x,y,z = foo2()   <span class="comment">-- x=&#x27;a&#x27;, y=&#x27;b&#x27;, z=nil </span></span><br><span class="line"></span><br><span class="line">x,y = foo2(), <span class="number">20</span>   <span class="comment">-- x=&#x27;a&#x27;, y=20 </span></span><br><span class="line">x,y = foo0(), <span class="number">20</span>, <span class="number">30</span>  <span class="comment">-- x=&#x27;nil&#x27;, y=20, 30 is discarded </span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>第二,函数调用作为函数参数被调用时,和多值赋值是相同。</p>
-<p><img src="/%5C2025_04_08_lua%5C9d3b6ba5bed4f8f5a1525c3487b8c7bf1761f5fb8bf851b65c7156ada91d50ef.png"></p>
+<p><img src="/2025_04_08_lua/9d3b6ba5bed4f8f5a1525c3487b8c7bf1761f5fb8bf851b65c7156ada91d50ef.png"></p>
 <p>第三,函数调用在表构造函数中初始化时,和多值赋值时相同。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;foo0()&#125;    <span class="comment">-- a = &#123;&#125;    (an empty table) </span></span><br><span class="line">a = &#123;foo1()&#125;    <span class="comment">-- a = &#123;&#x27;a&#x27;&#125; </span></span><br><span class="line">a = &#123;foo2()&#125;    <span class="comment">-- a = &#123;&#x27;a&#x27;, &#x27;b&#x27;&#125; </span></span><br><span class="line"> </span><br><span class="line">a = &#123;foo0(), foo2(), <span class="number">4</span>&#125; <span class="comment">-- a[1] = nil, a[2] = &#x27;a&#x27;, a[3] = 4 </span></span><br></pre></td></tr></table></figure>
 
@@ -592,12 +592,12 @@
 <p>函数多值返回的特殊函数unpack,接受一个数组作为输入参数,返回数组的所有元素。unpack被用来实现范型调用机制,在C语言中可以使用函数指针调用可变的函数,可以声明参数可变的函数,但不能两者同时可变。在Lua 中如果你想调用可变参数的可变函数只需要这样:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(<span class="built_in">unpack</span>(a)) </span><br></pre></td></tr></table></figure>
 <p>unpack返回a所有的元素作为f()的参数 </p>
-<p><img src="/%5C2025_04_08_lua%5Cc5831c8835d60e0eed62b4f366fb97ec415d406eef002e929946d8c4bf795757.png"></p>
+<p><img src="/2025_04_08_lua/c5831c8835d60e0eed62b4f366fb97ec415d406eef002e929946d8c4bf795757.png"></p>
 <p>预定义的 unpack 函数是用C语言实现的,我们也可以用 Lua来完成:</p>
-<p><img src="/%5C2025_04_08_lua%5C3d2747545d8f3d8ddb778d5e84aca45ae27e525b162c80d846e4b596eec9cd89.png"></p>
+<p><img src="/2025_04_08_lua/3d2747545d8f3d8ddb778d5e84aca45ae27e525b162c80d846e4b596eec9cd89.png"></p>
 <h2 id="5-2可变参数"><a href="#5-2可变参数" class="headerlink" title="5.2可变参数"></a>5.2可变参数</h2><p>Lua 函数可以接受可变数目的参数,和C语言类似在函数参数列表中使用三点(..)表示函数有可变的参数。Lua 将函数的参数放在一个叫 arg 的表中,除了参数以外,arg表中还有一个域n表示参数的个数。</p>
 <p>例如,我们可以重写 print 函数:</p>
-<p><img src="/%5C2025_04_08_lua%5C2f4d93568d186d765707dac441da4c1a49d6fa005b147f1fce891b36f6021d73.png"></p>
+<p><img src="/2025_04_08_lua/2f4d93568d186d765707dac441da4c1a49d6fa005b147f1fce891b36f6021d73.png"></p>
 <p>有时候我们可能需要几个固定参数加上可变参数 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function g (a, b, ...) end </span><br><span class="line"> </span><br><span class="line">CALL    PARAMETERS </span><br><span class="line"> </span><br><span class="line">g(3)    a=3, b=nil, arg=&#123;n=0&#125; </span><br><span class="line">g(3, 4)   a=3, b=4, arg=&#123;n=0&#125; </span><br><span class="line">g(3, 4, 5, 8)  a=3, b=4, arg=&#123;5, 8; n=2&#125;</span><br></pre></td></tr></table></figure>
 
@@ -606,7 +606,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">local _, x = string.find(s, p) </span><br><span class="line">-- now use  &#x27;x&#x27;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>还可以利用可变参数声明一个 select 函数:</p>
-<p><img src="/%5C2025_04_08_lua%5C7804faff906f48c7a64ccbdfa8f32f2648bb4baa88d17a7132bbadbb59e34750.png"></p>
+<p><img src="/2025_04_08_lua/7804faff906f48c7a64ccbdfa8f32f2648bb4baa88d17a7132bbadbb59e34750.png"></p>
 <p>有时候需要将函数的可变参数传递给另外的函数调用,可以使用前面我们说过的unpack(arg)返回 arg 表所有的可变参数,Lua 提供了一个文本格式化的函数 string.format(类似 C语言的 sprintf 函数):</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fwrite</span><span class="params">(fmt, ...)</span></span> </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(fmt, <span class="built_in">unpack</span>(<span class="built_in">arg</span>))) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -627,7 +627,7 @@
 <p>第一类值指：在Lua 中函数和其他值(数值、字符串)一样,函数可以被存放在变量中,也可以存放在表中,可以作为函数的参数,还可以作为函数的返回值。</p>
 <p>词法定界指：被嵌套的函数可以访问他外部函数中的变量。这一特性给Lua提供了强大的编程能力。</p>
 <p>Lua中关于函数稍微难以理解的是函数也可以没有名字,匿名的。当我们提到函数名(比如 print),实际上是说一个指向函数的变量,像持有其他类型值的变量一样:</p>
-<p><img src="/%5C2025_04_08_lua%5C0ca3819418e32198b7838ca375c24c76271f684c86a21ac6fcc45b593c442db6.png"></p>
+<p><img src="/2025_04_08_lua/0ca3819418e32198b7838ca375c24c76271f684c86a21ac6fcc45b593c442db6.png"></p>
 <p>既然函数是值,那么表达式也可以创建函数了,Lua中我们经常这样写:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> <span class="params">(x)</span></span> <span class="keyword">return</span> <span class="number">2</span>*x <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -661,27 +661,27 @@
 
 <p>例子中包含在 sortbygrade 函数内部的 sort 中的匿名函数可以访问 sortbygrade 的参数grades,在匿名函数内部 grades 不是全局变量也不是局部变量,我们称作外部的局部变量(externallocalvariable)或者upvalue。(upvalue 意思有些误导,然而在Lua 中他的存在有历史的根源,还有他比起 external local variable 简短)。</p>
 <p>看下面的代码:</p>
-<p><img src="/%5C2025_04_08_lua%5C0ed891814f8fed755b0649f875f8167201265ebe9d9524aab0344994b0a8179f.png"></p>
+<p><img src="/2025_04_08_lua/0ed891814f8fed755b0649f875f8167201265ebe9d9524aab0344994b0a8179f.png"></p>
 <p>匿名函数使用upvalue i保存他的计数，当我们调用匿名函数的时候i已经超出了作用范围,因为创建i的函数newCounter已经返回了。然而Lua 用闭包的思想正确处理了这种情况。简单的说闭包是一个函数加上它可以正确访问的upvalues。如果我们再次调用 newCounter,将创建一个新的局部变量i,因此我们得到了一个作用在新的变量i上的新闭包。</p>
-<p><img src="/%5C2025_04_08_lua%5Cbd9030e59ca9603bcb4b7c489e5b56bdbafeb225703ae9c23bbb63dba36e5ff2.png"></p>
+<p><img src="/2025_04_08_lua/bd9030e59ca9603bcb4b7c489e5b56bdbafeb225703ae9c23bbb63dba36e5ff2.png"></p>
 <p>cl、c2 是建立在同一个函数上,但作用在同一个局部变量的不同实例上的两个不同的闭包。</p>
 <p>技术上来讲,闭包指值而不是指函数,函数仅仅是闭包的一个原型声明；尽管如此,在不会导致混淆的情况下我们继续使用术语函数代指闭包。</p>
 <p>闭包在上下文环境中提供很有用的功能,如前面我们见到的可以作为高级函数(sort)的参数；作为函数嵌套的函数(newCounter)。这一机制使得我们可以在Lua 的函数世界里组合出奇幻的编程技术。闭包也可用在回调函数中,比如在GUI环境中你需要创建一系列button,但用户按下button 时回调函数被调用,可能不同的按钮被按下时需要处理的任务有点区别。具体来讲,一个十进制计算器需要10个相似的按钮,每个按钮对应一个数字,可以使用下面的函数创建他们:</p>
-<p><img src="/%5C2025_04_08_lua%5C14c0bf68207b206a1c230a516eceaf1f2934af3d55214eba170a7b4f735e7ce1.png"></p>
+<p><img src="/2025_04_08_lua/14c0bf68207b206a1c230a516eceaf1f2934af3d55214eba170a7b4f735e7ce1.png"></p>
 <p>这个例子中我们假定 Button 是一个用来创建新按钮的工具,label 是按钮的标签,action 是按钮被按下时调用的回调函数。(实际上是一个闭包,因为他访问 upvalue digit)。digitButton 完成任务返回后,局部变量 digit超出范围,回调函数仍然可以被调用并且可以访问局部变量 digit。</p>
 <p>闭包在完全不同的上下文中也是很有用途的。因为函数被存储在普通的变量内我们可以很方便的重定义或者预定义函数。通常当你需要原始函数有一个新的实现时可以重定义函数。例如你可以重定义 sin 使其接受一个度数而不是弧度作为参数:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">oldSin = <span class="built_in">math</span>.<span class="built_in">sin</span> </span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">sin</span> = <span class="function"><span class="keyword">function</span> <span class="params">(x)</span></span> </span><br><span class="line">    <span class="keyword">return</span> oldSin(x*<span class="built_in">math</span>.<span class="built_in">pi</span>/<span class="number">180</span>) </span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
 
 <p>更清楚的方式：</p>
-<p><img src="/%5C2025_04_08_lua%5Cbc021a019aa3c0d8dd7a655ae2b44d0b7e9f6d3808031693f85036b54613e411.png"></p>
+<p><img src="/2025_04_08_lua/bc021a019aa3c0d8dd7a655ae2b44d0b7e9f6d3808031693f85036b54613e411.png"></p>
 <p>这样我们把原始版本放在一个局部变量内,访问 sin 的唯一方式是通过新版本的函数。</p>
 <p>利用同样的特征我们可以创建一个安全的环境(也称作沙箱,和java 里的沙箱一样),当我们运行一段不信任的代码(比如我们运行网络服务器上获取的代码)时安全的环境是需要的,比如我们可以使用闭包重定义io 库的 open 函数来限制程序打开的文件。</p>
-<p><img src="/%5C2025_04_08_lua%5C3b0692c308701c91b9961fd5c58ee8057018306b3edda604d1fe187c718b396b.png"></p>
+<p><img src="/2025_04_08_lua/3b0692c308701c91b9961fd5c58ee8057018306b3edda604d1fe187c718b396b.png"></p>
 <h2 id="6-2非全局函数"><a href="#6-2非全局函数" class="headerlink" title="6.2非全局函数"></a>6.2非全局函数</h2><p>Lua 中函数可以作为全局变量也可以作为局部变量,我们已经看到一些例子：函数作为 table 的域(大部分 Lua 标准库使用这种机制来实现的比如 io.read、math.sin)。这种情况下,必须注意函数和表语法:</p>
 <ol>
 <li>表和函数放在一起</li>
 </ol>
-<p><img src="/%5C2025_04_08_lua%5Cd6300c1ae01b1557a098bd7028c9f1fcc8b53a16dbf77c6c05b6c1c90750e35b.png"></p>
+<p><img src="/2025_04_08_lua/d6300c1ae01b1557a098bd7028c9f1fcc8b53a16dbf77c6c05b6c1c90750e35b.png"></p>
 <ol start="2">
 <li>使用表构造函数</li>
 </ol>
@@ -703,16 +703,16 @@
 </ol>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span> <span class="params">(...)</span></span> </span><br><span class="line"> ... </span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
 <p>有一点需要注意的是在声明递归局部函数的方式:</p>
-<p><img src="/%5C2025_04_08_lua%5C7e2b9f4df8fa564b2cc95f3ebd0fdd23ad8523721c9108466c81fadc31eff84a.png"></p>
+<p><img src="/2025_04_08_lua/7e2b9f4df8fa564b2cc95f3ebd0fdd23ad8523721c9108466c81fadc31eff84a.png"></p>
 <p>上面这种方式导致 Lua 编译时遇到 fact(n-1)并不知道他是局部函数 fact,Lua 会去查找是否有这样的全局函数fact。为了解决这个问题我们必须在定义函数以前先声明:</p>
-<p><img src="/%5C2025_04_08_lua%5C8e1431f9ec1d2f27efeb1f412c596aa305d65586e1d903ee314be399e61845df.png"></p>
+<p><img src="/2025_04_08_lua/8e1431f9ec1d2f27efeb1f412c596aa305d65586e1d903ee314be399e61845df.png"></p>
 <p>这样在 fact 内部 fact(n-1)调用是一个局部函数调用,运行时 fact 就可以获取正确的值了。</p>
 <p>但是Lua扩展了他的语法使得可以在直接递归函数定义时使用两种方式都可以。</p>
 <p>在定义非直接递归局部函数时要先声明然后定义才可以:</p>
-<p><img src="/%5C2025_04_08_lua%5Cfc23f7f6b6f4bd1a6a9a7d8ac9b7b5ba639f6ad2903f17a48e965c60426fd532.png"></p>
+<p><img src="/2025_04_08_lua/fc23f7f6b6f4bd1a6a9a7d8ac9b7b5ba639f6ad2903f17a48e965c60426fd532.png"></p>
 <h2 id="6-3正确的尾调用-ProperTailCalls"><a href="#6-3正确的尾调用-ProperTailCalls" class="headerlink" title="6.3正确的尾调用(ProperTailCalls)"></a>6.3正确的尾调用(ProperTailCalls)</h2><p>Lua 中函数的另一个有趣的特征是可以正确的处理尾调用(proper tail recursion,些书使用术语“尾递归”,虽然并未涉及到递归的概念)。</p>
 <p>尾调用是一种类似在函数结尾的 goto 调用,当函数最后一个动作是调用另外一个函数时,我们称这种调用尾调用。例如:</p>
-<p><img src="/%5C2025_04_08_lua%5Cd624773f5cac3f5273b664bbae5be83f230165eba8bbe133d13673a8a214aa89.png"></p>
+<p><img src="/2025_04_08_lua/d624773f5cac3f5273b664bbae5be83f230165eba8bbe133d13673a8a214aa89.png"></p>
 <p>g 的调用是尾调用。</p>
 <p>例子中 f调用 g 后不会再做任何事情,这种情况下当被调用函数 g 结束时程序不需要返回到调用者 f；所以尾调用之后程序不需要在栈中保留关于调用者的任何信息。一些编译器比如Lua 解释器利用这种特性在处理尾调用时不使用额外的栈,我们称这种语言支持正确的尾调用。</p>
 <p>由于尾调用不需要使用栈空间,那么尾调用递归的层次可以无限制的。例如下面调用不论n为何值不会导致栈溢出。</p>
@@ -720,9 +720,9 @@
 
 <p>需要注意的是：必须明确什么是尾调用。</p>
 <p>一些调用者函数调用其他函数后也没有做其他的事情但不属于尾调用。比如:</p>
-<p><img src="/%5C2025_04_08_lua%5C452266b4a17b0c1f3ef8ee3a0b4a40122bed446ef5e96c8627bf67a36937d9f6.png"></p>
+<p><img src="/2025_04_08_lua/452266b4a17b0c1f3ef8ee3a0b4a40122bed446ef5e96c8627bf67a36937d9f6.png"></p>
 <p>上面这个例子中 f在调用 g 后,不得不丢弃 g 地返回值,所以不是尾调用,同样的下面几个例子也不时尾调用：</p>
-<p><img src="/%5C2025_04_08_lua%5C96ecb3394468ef4520a2400c597dc2a8f613f236d671450399cd4d24d59a78f4.png"></p>
+<p><img src="/2025_04_08_lua/96ecb3394468ef4520a2400c597dc2a8f613f236d671450399cd4d24d59a78f4.png"></p>
 <p>Lua 中类似 return g(..)这种格式的调用是尾调用。但是 g 和 g 的参数都可以是复杂表达式,因为Lua会在调用之前计算表达式的值。例如下面的调用是尾调用:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> x[i].foo(x[j] + a*b, i + j) </span><br></pre></td></tr></table></figure>
 
@@ -745,7 +745,7 @@
 
 <p>范性 for 为迭代循环处理所有的薄记(bookkeeping)：首先调用迭代工厂；内部保留迭代函数,因此我们不需要 iter 变量；然后在每一个新的迭代处调用迭代器函数；当迭代器返回 nil时循环结束(后面我们将看到范性 for 能胜任更多的任务)。</p>
 <p>下面看一个稍微高级一点的例子：我们写一个迭代器遍历一个文件内的所有匹配的单词。为了实现目的,我们需要保留两个值：当前行和在当前行的偏移量,我们使用两个外部局部变量 line、pos 保存这两个值。</p>
-<p><img src="/%5C2025_04_08_lua%5C7b5ec375662cf2b12adc9106e299c360048ec5e92141076732490a67b0957653.png"></p>
+<p><img src="/2025_04_08_lua/7b5ec375662cf2b12adc9106e299c360048ec5e92141076732490a67b0957653.png"></p>
 <p>迭代函数的主体部分调用了 string.find 函数,string.find 在当前行从当前位置开始查找匹配的单词,例子中匹配的单词使用模式’%w+’描述的；如果查找到一个单词,迭代函数更新当前位置 pos 为单词后的第一个位置,并且返回这个单词(string.sub 函数从 lineline 可读返回 nil 结束。</p>
 <p>尽管迭代函数有些复杂,但使用起来是很直观的:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> allwords() <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(word)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
@@ -754,9 +754,9 @@
 <h2 id="7-2范性for的语义"><a href="#7-2范性for的语义" class="headerlink" title="7.2范性for的语义"></a>7.2范性for的语义</h2><p>前面我们看到的迭代器有一个缺点：每次调用都需要创建一个闭包,大多数情况下这种做法都没什么问题,例如在 allwords 迭代器中创建一个闭包的代价比起读整个文件来说微不足道,然而在有些情况下创建闭包的代价是不能忍受的。在这些情况下我们可以使用范性 for 本身来保存迭代的状态。</p>
 <p>前面我们看到在循环过程中范性 for 在自己内部保存迭代函数,实际上它保存三个值:迭代函数,状态常量和控制变量.下面详细说明。</p>
 <p>范性 for 的文法如下:</p>
-<p><img src="/%5C2025_04_08_lua%5C0a7c8b63bc84524e9aed0631026c63827223ac5d3b8b1b1c5bb2b71af8da1457.png"></p>
+<p><img src="/2025_04_08_lua/0a7c8b63bc84524e9aed0631026c63827223ac5d3b8b1b1c5bb2b71af8da1457.png"></p>
 <p><var-list>是一个或多个以逗号分割的变量名列表,<exp-list>是一个或多个以逗号分割的表达式列表,通常情况下 exp-list 只有一个值：迭代工厂的调用。</p>
-<p><img src="/%5C2025_04_08_lua%5C478aa0cfa676ee5d1cc5f66a7a2b08aa6b255f6bb2fa4cd7f35f5e51caa8f7bf.png"></p>
+<p><img src="/2025_04_08_lua/478aa0cfa676ee5d1cc5f66a7a2b08aa6b255f6bb2fa4cd7f35f5e51caa8f7bf.png"></p>
 <p>变量列表k,v；表达式列表 pair(t),在很多情况下变量列表也只有一个变量,比如:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">io</span>.<span class="built_in">lines</span>() <span class="keyword">do</span> </span><br><span class="line"> <span class="built_in">io</span>.<span class="built_in">write</span>(line, <span class="string">&#x27;\n&#x27;</span>) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -768,26 +768,26 @@
 <p>第四,如果返回的第一个值为 nil循环结束,否则执行循环体。</p>
 <p>第五,回到第二步再次调用迭代函数。</p>
 <p>更精确的来说:</p>
-<p><img src="/%5C2025_04_08_lua%5C056a8312627be2480e6ebbb5e90c80d352f8020f768325959f5f2016596930b5.png"></p>
+<p><img src="/2025_04_08_lua/056a8312627be2480e6ebbb5e90c80d352f8020f768325959f5f2016596930b5.png"></p>
 <p>如果我们的迭代函数是f,状态常量是 s,控制变量的初始值是 a0,那么控制变量将循环：al&#x3D;f(s,a0)、a2&#x3D;f(s,al)、·..·,直到 ai&#x3D;nil。</p>
 <h2 id="7-3无状态的迭代器"><a href="#7-3无状态的迭代器" class="headerlink" title="7.3无状态的迭代器"></a>7.3无状态的迭代器</h2><p>无状态的迭代器是指不保留任何状态的迭代器,因此在循环中我们可以利用无状态迭代器避免创建闭包花费额外的代价。</p>
 <p>每一次迭代,迭代函数都是用两个变量(状态常量和控制变量)的值作为参数被调型的简单的例子是ipairs,他遍历数组的每一个元素。</p>
-<p><img src="/%5C2025_04_08_lua%5Cd68b6a2f202845a055da1b4c896583d63f60cde047cf0e0de43900c3d9360eed.png"></p>
+<p><img src="/2025_04_08_lua/d68b6a2f202845a055da1b4c896583d63f60cde047cf0e0de43900c3d9360eed.png"></p>
 <p>迭代的状态包括被遍历的表(循环过程中不会改变的状态常量)和当前的索引下标(控制变量),ipairs 和迭代函数都很简单,我们在Lua 中可以这样实现:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">iter</span> <span class="params">(a, i)</span></span> </span><br><span class="line"> i = i + <span class="number">1</span> </span><br><span class="line"> <span class="keyword">local</span> v = a[i] </span><br><span class="line"> <span class="keyword">if</span> v <span class="keyword">then</span> </span><br><span class="line">  <span class="keyword">return</span> i, v </span><br><span class="line"> <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ipairs</span> <span class="params">(a)</span></span> </span><br><span class="line">    <span class="keyword">return</span> iter, a, <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>当 Lua 调用 ipairs(a)开始循环时,他获取三个值:迭代函数 iter,状态常量 a 和控制变)非)返回 2,a[2]···直到第一个非nil 元素。</p>
 <p>Lua 库中实现的 pairs 是一个用 next实现的原始方法:</p>
-<p><img src="/%5C2025_04_08_lua%5Ca54fd24468ce4a3d90552b9818f8f0eba207e82eeadddfd5e6684e27721492e8.png"></p>
+<p><img src="/2025_04_08_lua/a54fd24468ce4a3d90552b9818f8f0eba207e82eeadddfd5e6684e27721492e8.png"></p>
 <p>还可以不使用ipairs直接使用next </p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">next</span>, t <span class="keyword">do</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>记住：exp-list 返回结果会被调整为三个,所以 Lua 获取 next、t、nil；确切地说当他调用 pairs 时获取。</p>
 <h2 id="7-4多状态的迭代器"><a href="#7-4多状态的迭代器" class="headerlink" title="7.4多状态的迭代器"></a>7.4多状态的迭代器</h2><p>很多情况下,迭代器需要保存多个状态信息而不是简单的状态常量和控制变量,最简单的方法是使用闭包,还有一种方法就是将所有的状态信息封装到 table 内,将 table作为迭代器的状态常量,因为这种情况下可以将所有的信息存放在 table 内,所以迭代函数通常不需要第二个参数。</p>
 <p>下面我们重写allwords迭代器,这一次我们不是使用闭包而是使用带有两个域(line,pos)的 table 。</p>
 <p>开始迭代的函数是很简单的,他必须返回迭代函数和初始状态:</p>
-<p><img src="/%5C2025_04_08_lua%5Cb44d60908eecbbe40833a43152afbac573956b72937b3d438d4f1d775256dc04.png"></p>
+<p><img src="/2025_04_08_lua/b44d60908eecbbe40833a43152afbac573956b72937b3d438d4f1d775256dc04.png"></p>
 <p>真正的处理工作是在迭代函数内完成:</p>
-<p><img src="/%5C2025_04_08_lua%5Ce87aab6252aecde833cbad644bf6b04da98e1ca03736fe4c8c9790df6901f887.png"></p>
+<p><img src="/2025_04_08_lua/e87aab6252aecde833cbad644bf6b04da98e1ca03736fe4c8c9790df6901f887.png"></p>
 <p>我们应该尽可能的写无状态的迭代器,因为这样循环的时候由 for 来保存状态,不需要创建对象花费的代价小；如果不能用无状态的迭代器实现,应尽可能使用闭包；尽可能不要使用 table 这种方式,因为创建闭包的代价要比创建 table 小,另外Lua 处理闭包要比处理table 速度快些。后面我们还将看到另一种使用协同来创建迭代器的方式,这种方式功能更强但更复杂。</p>
 <h2 id="7-5真正的迭代器"><a href="#7-5真正的迭代器" class="headerlink" title="7.5真正的迭代器"></a>7.5真正的迭代器</h2><p>迭代器的名字有一些误导,因为它并没有迭代,完成迭代功能的是 for 语句,也许更好的叫法应该是’生成器；但是在其他语言比如java、C++迭代器的说法已经很普遍了,我们也将沿用这种术语。</p>
 <p>有一种方式创建一个在内部完成迭代的迭代器。这样当我们使用迭代器的时候就不需要使用循环了；我们仅仅使用每一次迭代需要处理的任务作为参数调用迭代器即可,具体地说,迭代器接受一个函数作为参数,并且这个函数在迭代器内部被调用。</p>
@@ -795,7 +795,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">allwords</span> <span class="params">(f)</span></span> </span><br><span class="line"> <span class="comment">-- repeat for each line in the file </span></span><br><span class="line"> <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">io</span>.<span class="built_in">lines</span>() <span class="keyword">do</span> </span><br><span class="line">  <span class="comment">-- repeat for each word in the line </span></span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gfind</span>(l, <span class="string">&quot;%w+&quot;</span>) <span class="keyword">do</span> </span><br><span class="line">        <span class="comment">-- call the function </span></span><br><span class="line">        f(w) </span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>如果我们想要打印出单词,只需要</p>
-<p><img src="/%5C2025_04_08_lua%5C125a139ee208902c698bbf24cf394857b20bb8bdde2a236686f3686a765d1137.png"></p>
+<p><img src="/2025_04_08_lua/125a139ee208902c698bbf24cf394857b20bb8bdde2a236686f3686a765d1137.png"></p>
 <p>更一般的做法是我们使用匿名函数作为作为参数,下面的例子打印出单词hello’出现的次数：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> count = <span class="number">0</span> </span><br><span class="line">allwords(<span class="function"><span class="keyword">function</span> <span class="params">(w)</span></span> </span><br><span class="line">    <span class="keyword">if</span> w == <span class="string">&quot;hello&quot;</span> <span class="keyword">then</span> count = count + <span class="number">1</span> <span class="keyword">end</span> </span><br><span class="line">en ) </span><br><span class="line"> <span class="built_in">print</span>(count) </span><br></pre></td></tr></table></figure>
 
@@ -806,11 +806,11 @@
 <p>两种风格的写法相差不大,但也有区别：一方面,第二种风格更容易书写和理解;另一方面,for 结构更灵活,可以使用 break和 continue 语句；在真正的迭代器风格写法中return语句只是从匿名函数中返回而不是退出循环。</p>
 <h1 id="第8章编译·运行·调试"><a href="#第8章编译·运行·调试" class="headerlink" title="第8章编译·运行·调试"></a>第8章编译·运行·调试</h1><p>虽然我们把Lua 当作解释型语言,但是Lua 会首先把代码预编译成中间码然后再执行(很多解释型语言都是这么做的)。在解释型语言中存在编译阶段听起来不合适,然而,解释型语言的特征不在于他们是否被编译,而是编译器是语言运行时的一部分,所以,执行编译产生的中间码速度会更快。我们可以说函数 dofile 的存在就是说明可以将Lua作为一种解释型语言被调用。</p>
 <p>前面我们介绍过 dofile,把它当作Lua 运行代码的 chunk 的一种原始的操作。dofile实际上是一个辅助的函数。真正完成功能的函数是 loadfile；与 dofile 不同的是 loadfile不会抛出错误信息而是返回错误代。.我们可以这样定义dofile:</p>
-<p><img src="/%5C2025_04_08_lua%5C5fa21a38f9bd60bb1431dedf0630f9b9faeadccc52efc8acae1d27e8875fa7ab.png"></p>
+<p><img src="/2025_04_08_lua/5fa21a38f9bd60bb1431dedf0630f9b9faeadccc52efc8acae1d27e8875fa7ab.png"></p>
 <p>如果loadfile失败assert会抛出错误。</p>
 <p>完成简单的功能 dofile 比较方便,他读入文件编译并且执行。然而loadfile更加灵活。在发生错误的情况下,loadfile 返回 nil 和错误信息,这样我们就可以自定义错误处理。另外,如果我们运行一个文件多次的话,loadfile 只需要编译一次,但可多次运行。dofile却每次都要编译。</p>
 <p>loadstring与loadfile 相似,只不过它不是从文件里读入chunk,而是从一个串中读入。例如：</p>
-<p><img src="/%5C2025_04_08_lua%5C098bc218c974b6a65750580eb55e2c06eb2721d97b196ba142ebb24e7cd0f9a7.png"></p>
+<p><img src="/2025_04_08_lua/098bc218c974b6a65750580eb55e2c06eb2721d97b196ba142ebb24e7cd0f9a7.png"></p>
 <p>f将是一个函数,调用时执行i&#x3D;i+l。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">f(); <span class="built_in">print</span>(i)  <span class="comment">--&gt; 1 </span></span><br><span class="line">f(); <span class="built_in">print</span>(i)  <span class="comment">--&gt; 2 </span></span><br></pre></td></tr></table></figure>
 
@@ -820,7 +820,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">loadstring</span>(<span class="string">&quot;local a = 10; return a + 20&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(f())   <span class="comment">--&gt; 30 </span></span><br></pre></td></tr></table></figure>
 
 <p>loadfile 和loadstring都不会抛出错误,如果发生错误他们将返回 nil加上错误信息：</p>
-<p><img src="/%5C2025_04_08_lua%5Ceda629e4887275ad2c6e463301325dbeae114b40f6eeee3fbc7043190fe5d5bf.png"></p>
+<p><img src="/2025_04_08_lua/eda629e4887275ad2c6e463301325dbeae114b40f6eeee3fbc7043190fe5d5bf.png"></p>
 <p>另外,loadfile 和loadstring 都不会有边界效应产生,他们仅仅编译 chunk成为自己内部实现的一个匿名函数。通常对他们的误解是他们定义了函数。Lua中的函数定义是发生在运行时的赋值而不是发生在编译时。假如我们有一个文件foo.lua:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- file `foo.lua&#x27; </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> <span class="params">(x)</span></span></span><br><span class="line">    <span class="built_in">print</span>(x) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -890,7 +890,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> res = <span class="built_in">math</span>.<span class="built_in">sin</span>(x)</span><br><span class="line"> <span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span>  <span class="comment">-- error </span></span><br><span class="line"> ... </span><br></pre></td></tr></table></figure>
 <p>local res &#x3D; math.sin(x)</p>
 <p>然而我们可以在调用函数以前很容易的判断是否有异常：</p>
-<p><img src="/%5C2025_04_08_lua%5C33d6f07da71b8c11cc774b03911b8599bf2b22921768c191fe63b512a66ada0e.png"></p>
+<p><img src="/2025_04_08_lua/33d6f07da71b8c11cc774b03911b8599bf2b22921768c191fe63b512a66ada0e.png"></p>
 <p>然而通常情况下我们既不是检查参数也不是检查返回结果,因为参数错误可能意味着我们的程序某个地方存在问题,这种情况下,处理异常最简单最实际的方式是抛出错误并且终止代码的运行。</p>
 <p>再来看一个例子io.open 函数用来打开一个文件,如果文件不存在结果会怎么样呢?很多系统中,通过试着去打开文件来判断是否文件存在。所以如果io.open 不能打开文件(由于文件不存在或者没有权限),函数返回 nil和错误信息。以这种方式我们可以通过与用户交互(比如：是否要打开另一个文件)合理的处理问题:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> file, msg </span><br><span class="line"><span class="keyword">repeat</span> </span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;enter a file name:&quot;</span> </span><br><span class="line">    <span class="keyword">local</span> name = <span class="built_in">io</span>.<span class="built_in">read</span>() </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> name <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>  <span class="comment">-- no input </span></span><br><span class="line">    file, msg = <span class="built_in">io</span>.<span class="built_in">open</span>(name, <span class="string">&quot;r&quot;</span>) </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> file <span class="keyword">then</span> <span class="built_in">print</span>(msg) <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">until</span> file</span><br></pre></td></tr></table></figure>
@@ -899,7 +899,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">assert</span>(<span class="built_in">io</span>.<span class="built_in">open</span>(name, <span class="string">&quot;r&quot;</span>)) </span><br></pre></td></tr></table></figure>
 
 <p>Lua 中有一个习惯：如果io.open 失败,assert将抛出错误。</p>
-<p><img src="/%5C2025_04_08_lua%5C687d97a43b8ee2beff2be27c1822461a4b4aee6f72f8154e2374b8d6577d554b.png"></p>
+<p><img src="/2025_04_08_lua/687d97a43b8ee2beff2be27c1822461a4b4aee6f72f8154e2374b8d6577d554b.png"></p>
 <p>注意：io.open 返回的第二个结果(错误信息)作为 assert 的第二个参数。</p>
 <h2 id="8-4异常和错误处理"><a href="#8-4异常和错误处理" class="headerlink" title="8.4异常和错误处理"></a>8.4异常和错误处理</h2><p>很多应用中,不需要在Lua 进行错误处理,一般有应用来完成。通常应用要求Lua运行一段 chunk,如果发生异常,应用根据Lua 返回的错误代码进行处理。在控制台模式下的Lua解释器如果遇到异常,打印出错误然后继续显示提示符等待下一个命令。</p>
 <p>如果在Lua 中需要处理错误,需要使用 pcall 函数封装你的代码。</p>
@@ -911,7 +911,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">pcall</span>(foo) <span class="keyword">then</span> </span><br><span class="line"> <span class="comment">-- no errors while running `foo&#x27; </span></span><br><span class="line"> ... </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line"> <span class="comment">-- `foo&#x27; raised an error: take appropriate actions </span></span><br><span class="line"> ... </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>当然也可以用匿名函数的方式调用 pcall:</p>
-<p><img src="/%5C2025_04_08_lua%5C2903446d4a457d3cde3ce74983b18865093028e8d0f9afbc6cc92da08f26a273.png"></p>
+<p><img src="/2025_04_08_lua/2903446d4a457d3cde3ce74983b18865093028e8d0f9afbc6cc92da08f26a273.png"></p>
 <p>pcall在保护模式下调用他的第一个参数并运行,因此可以捕获所有的异常和错误。如果没有异常和错误,pcall 返回 true 和调用返回的任何值；否则返回 nil 加错误信息。</p>
 <p>错误信息不一定非要是一个字符串(下面的例子是一个 table),传递给 error 的任何信息都会被 pcall 返回:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="built_in">status</span>, err = <span class="built_in">pcall</span>(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span> <span class="built_in">error</span>(&#123;code=<span class="number">121</span>&#125;) <span class="keyword">end</span>) </span><br><span class="line"><span class="built_in">print</span>(err.code)  <span class="comment">--&gt;  121</span></span><br></pre></td></tr></table></figure>
@@ -928,27 +928,27 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo(&#123;x=<span class="number">1</span>&#125;) </span><br></pre></td></tr></table></figure>
 
 <p>Lua 会指出发生错误的是foo 而不是 error,实际的错误是调用 error 时产生的,为了纠正这个问题修改前面的代码让 error报告错误发生在第二级 (你自己的函数是第一级)如下:</p>
-<p><img src="/%5C2025_04_08_lua%5Cbf51357f978544fcbb2b1315c30d2f87ffe9970044a19346fd0f70f3fcd42d98.png"></p>
+<p><img src="/2025_04_08_lua/bf51357f978544fcbb2b1315c30d2f87ffe9970044a19346fd0f70f3fcd42d98.png"></p>
 <p>当错误发生的时候,我们常常需要更多的错误发生相关的信息,而不单单是错误发生的位置。至少期望有一个完整的显示导致错误发生的调用栈的 tracebacks,当 pcall 返回错误信息的时候他已经释放了保存错误发生情况的栈的信息。因此,如果我们想得到tracebacks 我们必须在 pcall 返回以前获取。Lua 提供了xpcall 来实现这个功能,xpcall误处理函数,因此可以使用 debug 库收集错误相关的信息。有两个常用的 debug 处理函数：debug。debug 和 debug.traceback,前者给出Lua 的提示符,你可以自己动手察看错误发生时的情况；后者通过 traceback 创建更多的错误信息,后者是控制台解释器用来构建错误信息的函数。你可以在任何时候调用 debug.traceback获取当前运行的traceback信息:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">debug</span>.<span class="built_in">traceback</span>())</span><br></pre></td></tr></table></figure>
 
 <h1 id="第9章-协同程序"><a href="#第9章-协同程序" class="headerlink" title="第9章 协同程序"></a>第9章 协同程序</h1><p>协同程序(coroutine)与多线程情况下的线程比较类似：有自己的堆栈,自己的局部变量,有自己的指令指针,但是和其他协同程序共享全局变量等很多信息。线程和协同程序的主要不同在于：在多处理器情况下,从概念上来讲多线程程序同时运行多个线程；而协同程序是通过协作来完成,在任一指定时刻只有一个协同程序在运行,并且这个正在运行的协同程序只有在明确的被要求挂起的时候才会被挂起。</p>
 <p>协同是非常强大的功能,但是用起来也很复杂。如果你第一次阅读本章时不理解本章中的例子请不要担心,你可以继续阅读本书的其他部分然后再回过头来阅读本章。</p>
 <h2 id="9-1协同的基础"><a href="#9-1协同的基础" class="headerlink" title="9.1协同的基础"></a>9.1协同的基础</h2><p>Lua 通过 table 提供了所有的协同函数,create 函数创建一个新的协同程序,create只有一个参数：协同程序将要运行的代码封装而成的函数,返回值为 thread类型的值表示创建了一个新的协同程序。通常情况下,create 的参数是一个匿名函数:</p>
-<p><img src="/%5C2025_04_08_lua%5C4d40341a151e1237f1f56a0fdfe6871832f29c083243b5478267f27f110cf6a7.png"></p>
+<p><img src="/2025_04_08_lua/4d40341a151e1237f1f56a0fdfe6871832f29c083243b5478267f27f110cf6a7.png"></p>
 <p>协同有三个状态：挂起态、运行态、停止态。当我们创建一个协同程序时他开始的状态为挂起态,也就是说我们创建协同程序的时候不会自动运行,可以使用 status 函数检查协同的状态：</p>
-<p><img src="/%5C2025_04_08_lua%5Cd68c48918bcecb0e5544b583ec64b630d46d30313efb1de0c0a6496486f6cc8a.png"></p>
+<p><img src="/2025_04_08_lua/d68c48918bcecb0e5544b583ec64b630d46d30313efb1de0c0a6496486f6cc8a.png"></p>
 <p>函数coroutine.resume 可以使程序由挂起状态变为运行态：</p>
-<p><img src="/%5C2025_04_08_lua%5C0e636d38ef414a0c5660b338aa7614920511d15a91200228d2d760e84e71d033.png"></p>
+<p><img src="/2025_04_08_lua/0e636d38ef414a0c5660b338aa7614920511d15a91200228d2d760e84e71d033.png"></p>
 <p>这个例子中,协同体仅仅打印出”hi”之后便进入终止状态:</p>
-<p><img src="/%5C2025_04_08_lua%5C2a05ca4ae282a3ab47cbb6e8721d34a7e9fc1f7c94cf9ee40e929f9cd86e3e15.png"></p>
+<p><img src="/2025_04_08_lua/2a05ca4ae282a3ab47cbb6e8721d34a7e9fc1f7c94cf9ee40e929f9cd86e3e15.png"></p>
 <p>当目前为止,协同看起来只是一种复杂的调用函数的方式,真正的强大之处体现在yield 函数,它可以将正在运行的代码挂起,看一个例子:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">co = <span class="built_in">coroutine</span>.<span class="built_in">create</span>(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span> </span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">10</span> <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;co&quot;</span>, i) </span><br><span class="line">        <span class="built_in">coroutine</span>.<span class="built_in">yield</span>() </span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
 
 <p>现在重新执行这个协同程序，程序将在第一个yield处被挂起：</p>
-<p><img src="/%5C2025_04_08_lua%5Cb7d35756ebace5997b3701d2131bf290445bf88e54466e16326d8cd84abac63c.png"></p>
+<p><img src="/2025_04_08_lua/b7d35756ebace5997b3701d2131bf290445bf88e54466e16326d8cd84abac63c.png"></p>
 <p>从协同的观点看：使用函数yield可以使程序挂起,当我们激活被挂起的程序时，yield<br>返回并继续程序的执行直到再次遇到yield或者程序结束。 </p>
-<p><img src="/%5C2025_04_08_lua%5C6187947fcacd1074a28d0266f901882f7432d1ddc8fb1d74c175cc0b41167cce.png"></p>
+<p><img src="/2025_04_08_lua/6187947fcacd1074a28d0266f901882f7432d1ddc8fb1d74c175cc0b41167cce.png"></p>
 <p>上面最后一次调用的时候,协同体已经结束,因此协同程序处于终止状态。如果我们仍然企图激活他,resume 将返回 false和错误信息。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co)) </span><br><span class="line">  <span class="comment">--&gt; false   cannot resume dead coroutine </span></span><br></pre></td></tr></table></figure>
 
@@ -964,7 +964,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">co = <span class="built_in">coroutine</span>.<span class="built_in">create</span> (<span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;co&quot;</span>, <span class="built_in">coroutine</span>.<span class="built_in">yield</span>()) </span><br><span class="line"><span class="keyword">end</span>) </span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co) </span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co, <span class="number">4</span>, <span class="number">5</span>)  <span class="comment">--&gt; co  4  5 </span></span><br></pre></td></tr></table></figure>
 
 <p>最后一个例子,当协同代码结束时主函数返回的值都会传给相应的resume:</p>
-<p><img src="/%5C2025_04_08_lua%5C219972b117c73a7df3ae9faa97168fbfed5ca9616b4477b519569cd0cb007e7b.png"></p>
+<p><img src="/2025_04_08_lua/219972b117c73a7df3ae9faa97168fbfed5ca9616b4477b519569cd0cb007e7b.png"></p>
 <p>我们很少在同一个协同程序中使用这几种特性,但每一种都有其用处</p>
 <p>现在已经了解了一些协同的内容,在我们继续学习以前,先要澄清两个概念：Lua提供的这种协同我们称为不对称的协同,就是说挂起一个正在执行的协同的函数与使一个被挂起的协同再次执行的函数是不同的,有些语言提供对称的协同,这种情况下,由执行到挂起之间状态转换的函数是相同的。</p>
 <p>有人称不对称的协同为半协同,另一些人使用同样的术语表示真正的协同,严格意义上的协同不论在什么地方只要它不是在其他的辅助代码内部的时候都可以并且只能使执行挂起,不论什么时候在其控制栈内都不会有不可决定的调用。(However,other peopleuse the same term semi-coroutine to denote a restricted implementation of coroutines, where acoroutine can only suspend its execution when it is not inside any auxiliary function, that is,when it has no pending calls in its control stack.)。只有半协同程序的主体中才可以 yield,python 中的产生器（generator）就是这种类型的半协同的例子。</p>
@@ -974,15 +974,15 @@
 
 <p>（例子中生产者和消费者都在不停的循环，修改一下使得没有数据的时候他们停下<br>来并不困难），问题在于如何使得receive和send协同工作。只是一个典型的谁拥有住循<br>环的情况，生产者和消费者都处在活动状态，都有自己的主循环，都认为另一方是可调<br>用的服务。对于这种特殊的情况，可以改变一个函数的结构解除循环，使其作为被动的<br>接受。然而这种改变在某些特定的实际情况下可能并不简单。 </p>
 <p>协同为解决这种问题提供了理想的方法,因为调用者与被调用者之间的resume-yield关系会不断颠倒。当一个协同调用 yield时并不会进入一个新的函数,取而代之的是返回一个未决的 resume 的调用。相似的,调用 resume 时也不会开始一个新的函数而是返回yield 的调用。这种性质正是我们所需要的,与使得 send-receive 协同工作的方式是一致的.receive 唤醒生产者生产新值,send把产生的值送给消费者消费。</p>
-<p><img src="/%5C2025_04_08_lua%5Ca88231ff668b1f2e0b53149f24c4694cc3450533a1383e5ccaaaa01106cc9ce7.png"></p>
+<p><img src="/2025_04_08_lua/a88231ff668b1f2e0b53149f24c4694cc3450533a1383e5ccaaaa01106cc9ce7.png"></p>
 <p>这种设计下,开始时调用消费者,当消费者需要值时他唤起生产者生产值,生产者生产值后停止直到消费者再次请求。我们称这种设计为消费者驱动的设计。</p>
 <p>我们可以使用过滤器扩展这个涉及,过滤器指在生产者与消费者之间,可以对数据进行某些转换处理。过滤器在同一时间既是生产者又是消费者,他请求生产者生产值并且转换格式后传给消费者,我们修改上面的代码加入过滤器(每一行前面加上行号)。完整的代码如下：</p>
-<p><img src="/%5C2025_04_08_lua%5C79ab6e7526e5286ec457312eb07a73c3a17a6939d084a0b394f9e1b887dbd1d7.png"></p>
+<p><img src="/2025_04_08_lua/79ab6e7526e5286ec457312eb07a73c3a17a6939d084a0b394f9e1b887dbd1d7.png"></p>
 <p>可以调用：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p = producer()</span><br><span class="line">f = filter(p) </span><br><span class="line">consumer(f)</span><br></pre></td></tr></table></figure>
 
 <p>或者：</p>
-<p><img src="/%5C2025_04_08_lua%5C8c1320466ce22aa0fbd0b7c4a1239bd6d363d74f442f9a8f36c22c6fdbfa4747.png"></p>
+<p><img src="/2025_04_08_lua/8c1320466ce22aa0fbd0b7c4a1239bd6d363d74f442f9a8f36c22c6fdbfa4747.png"></p>
 <p>看完上面这个例子你可能很自然的想到UNIX的管道,协同是一种非抢占式的多线程。管道的方式下,每一个任务在独立的进程中运行,而协同方式下,每个任务运行在独立的协同代码中。管道在读(consumer)与写(producer)之间提供了一个缓冲,因此两者相关的的速度没有什么限制,在上下文管道中这是非常重要的,因为在进程间的切换代价是很高的。协同模式下,任务间的切换代价较小,与函数调用相当,因此读写可以很好的协同处理。</p>
 <h2 id="9-3用作迭代器的协同"><a href="#9-3用作迭代器的协同" class="headerlink" title="9.3用作迭代器的协同"></a>9.3用作迭代器的协同</h2><p>我们可以将循环的迭代器看作生产者-消费者模式的特殊的例子。迭代函数产生值给循环体消费。所以可以使用协同来实现迭代器。协同的一个关键特征是它可以不断颠倒调用者与被调用者之间的关系,这样我们毫无顾虑的使用它实现一个迭代器,而不用保存迭代函数返回的状态。</p>
 <p>我们来完成一个打印一个数组元素的所有的排列来阐明这种应用。直接写这样一个迭代函数来完成这个任务并不容易,但是写一个生成所有排列的递归函数并不难。思路是这样的：将数组中的每一个元素放到最后,依次递归生成所有剩余元素的排列。代码如下:</p>
@@ -992,13 +992,13 @@
 <ol>
 <li>第一步 printResult 改为 yield</li>
 </ol>
-<p><img src="/%5C2025_04_08_lua%5Cc957421fd2272980f7f3734bc399f9b7de4eb7443b8434f6640e9f497f74fc1c.png"></p>
+<p><img src="/2025_04_08_lua/c957421fd2272980f7f3734bc399f9b7de4eb7443b8434f6640e9f497f74fc1c.png"></p>
 <ol start="2">
 <li>第二步,我们定义一个迭代工厂,修改生成器在生成器内创建迭代函数,并使生成器运行在一个协同程序内。迭代函数负责请求协同产生下一个可能的排列。</li>
 </ol>
-<p><img src="/%5C2025_04_08_lua%5Cd0cf427003b1af71be79963b4f8ac9a1c4286a22c51ec211dfb01b6e529b2cd6.png"></p>
+<p><img src="/2025_04_08_lua/d0cf427003b1af71be79963b4f8ac9a1c4286a22c51ec211dfb01b6e529b2cd6.png"></p>
 <p>这样我们就可以使用 for循环来打印出一个数组的所有排列情况了：</p>
-<p><img src="/%5C2025_04_08_lua%5C86ff4857fb44cfd1854855830e7df1594325f9c27c6a909bdd3a7453c93931c1.png"></p>
+<p><img src="/2025_04_08_lua/86ff4857fb44cfd1854855830e7df1594325f9c27c6a909bdd3a7453c93931c1.png"></p>
 <p>perm 函数使用了 Lua 中常用的模式：将一个对协同的 resume 的调用封装在一个函数内部,这种方式在Lua非常常见,所以Lua专门为此专门提供了一个函数coroutine.wrap。与 create 相同的是,wrap 创建一个协同程序；不同的是 wrap 不返回协同本身,而是返回一个函数,当这个函数被调用时将 resume 协同。wrap 中 resume 协同以使用 wrap 重写 perm:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">perm</span> <span class="params">(a)</span></span> </span><br><span class="line">    <span class="keyword">local</span> n = <span class="built_in">table</span>.<span class="built_in">getn</span>(a) </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">coroutine</span>.<span class="built_in">wrap</span>(<span class="function"><span class="keyword">function</span> <span class="params">()</span></span> permgen(a, n) <span class="keyword">end</span>) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -1007,7 +1007,7 @@
 <p>对非抢占式多线程来说,不管什么时候只要有一个线程调用一个阻塞操作(blocking)忍受的,这使得很多程序员离协同而去。下面我们将看到这个问题可以被有趣的解决。</p>
 <p>看一个多线程的例子：我们想通过http 协议从远程主机上下在一些文件。我们使用Diego Nehab 开发的LuaSocket 库来完成。我们先看下在一个文件的实现,大概步骤是打开一个到远程主机的连接,发送下载文件的请求,开始下载文件,下载完毕后关闭连接。</p>
 <p>第一,加载LuaSocket库</p>
-<p><img src="/%5C2025_04_08_lua%5Ce5160c94b87229c30f282a4ade370c494da8613b8dd28bd3c2dd617c7bb3509b.png"></p>
+<p><img src="/2025_04_08_lua/e5160c94b87229c30f282a4ade370c494da8613b8dd28bd3c2dd617c7bb3509b.png"></p>
 <p>第二,定义远程主机和需要下载的文件名</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">host = &quot;www.w3.org&quot; </span><br><span class="line">file = &quot;/TR/REC-html32.html&quot; </span><br></pre></td></tr></table></figure>
 
@@ -1023,21 +1023,21 @@
 
 <p>现在我们知道了如何下载一个文件,下面我们来看看如何下载多个文件。一种方法是我们在一个时刻只下载一个文件,这种顺序下载的方式必须等前一个文件下载完成后一个文件才能开始下载。实际上是,当我们发送一个请求之后有很多时间是在等待数据的到达,也就是说大部分时间浪费在调用receive上。如果同时可以下载多个文件,效率将会有很大提高。当一个连接没有数据到达时,可以从另一个连接读取数据。很显然,协同为这种同时下载提供了很方便的支持,我们为每一个下载任务创建一个线程,当一个线程没有数据到达时,他将控制权交给一个分配器,由分配器唤起另外的线程读取数据。</p>
 <p>使用协同机制重写上面的代码,在一个函数内：</p>
-<p><img src="/%5C2025_04_08_lua%5C4b0f80a91489b3a411721fc18a327036d7eb2b7cfe579fdf46dd848db033c35c.png"></p>
+<p><img src="/2025_04_08_lua/4b0f80a91489b3a411721fc18a327036d7eb2b7cfe579fdf46dd848db033c35c.png"></p>
 <p>由于我们不关心文件的内容,上面的代码只是计算文件的大小而不是将文件内容输出。(当有多个线程下载多个文件时,输出会混杂在一起),在新的函数代码中,我们使用receive从远程连接接收数据,在顺序接收数据的方式下代码如下:</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receive</span> <span class="params">(connection)</span></span> </span><br><span class="line">    <span class="keyword">return</span> connection:receive(<span class="number">2</span>^<span class="number">10</span>) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>在同步接受数据的方式下,函数接收数据时不能被阻塞,而是在没有数据可取时yield,代码如下:</p>
-<p><img src="/%5C2025_04_08_lua%5Cf64d16a850c7530ab6625473e40bc64666726c93a20ca2868d92dbdffe726944.png"></p>
+<p><img src="/2025_04_08_lua/f64d16a850c7530ab6625473e40bc64666726c93a20ca2868d92dbdffe726944.png"></p>
 <p>调用函数 timeout(O)使得对连接的任何操作都不会阻塞。当操作返回的状态为timeout 时意味着操作未完成就返回了。在这种情况下,线程 yield。非 false 的数值作为yield的参数告诉分配器线程仍在执行它的任务。(后面我们将看到分配器需要timeout连接的情况),注意:即使在 timeout 模式下,连接依然返回他接受到直到 timeout 为止,因此receive会一直返回 s给她的调用者。</p>
 <p>下面的函数保证每一个下载运行在自己独立的线程内：</p>
-<p><img src="/%5C2025_04_08_lua%5C1f522dae7d982de3a1da6b55f2184089223c31faf7f3a28ba49ec2c49aa7195f.png"></p>
+<p><img src="/2025_04_08_lua/1f522dae7d982de3a1da6b55f2184089223c31faf7f3a28ba49ec2c49aa7195f.png"></p>
 <p>代码中 table 中为分配器保存了所有活动的线程。</p>
 <p>分配器代码是很简单的,它是一个循环,逐个调用每一个线程。并且从线程列表中移除已经完成任务的线程。当没有线程可以运行时退出循环。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatcher</span> <span class="params">()</span></span> </span><br><span class="line"> <span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span> </span><br><span class="line">  <span class="keyword">local</span> n = <span class="built_in">table</span>.<span class="built_in">getn</span>(threads) </span><br><span class="line">  <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">break</span> <span class="keyword">end</span>  <span class="comment">-- no more threads to run </span></span><br><span class="line">  <span class="keyword">for</span> i=<span class="number">1</span>,n <span class="keyword">do</span> </span><br><span class="line">   <span class="keyword">local</span> <span class="built_in">status</span>, res = <span class="built_in">coroutine</span>.<span class="built_in">resume</span>(threads[i]) </span><br><span class="line">   <span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span> <span class="comment">-- thread finished its task? </span></span><br><span class="line">    <span class="built_in">table</span>.<span class="built_in">remove</span>(threads, i) </span><br><span class="line">    <span class="keyword">break</span> </span><br><span class="line">   <span class="keyword">end</span> </span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"> <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>最后,在主程序中创建需要的线程调用分配器,例如：从 W3C 站点上下载4个文件：</p>
-<p><img src="/%5C2025_04_08_lua%5Cb4ff3546af8fa747640fd03e0cf2b4c80cafc8669544d6afdcd90f89ba3bf4e7.png"></p>
+<p><img src="/2025_04_08_lua/b4ff3546af8fa747640fd03e0cf2b4c80cafc8669544d6afdcd90f89ba3bf4e7.png"></p>
 <p>使用协同方式下,我的机器花了6s下载完这几个文件；顺序方式下用了15s,大概2 倍的时间。</p>
 <p>尽管效率提高了,但距离理想的实现还相差甚远,当至少有一个线程有数据可读取的时候,这段代码可以很好的运行。否则,分配器将进入忙等待状态,从一个线程到另个线程不停的循环判断是否有数据可获取。结果协同实现的代码比顺序读取将花费30倍的CPU时间。</p>
 <p>为了避免这种情况出现,我们可以使用LuaSocket 库中的 select 函数。当程序在一组 socket中不断的循环等待状态改变时,它可以使程序被阻塞。我们只需要修改分配器,使用 select 函数修改后的代码如下:</p>
@@ -1071,11 +1071,11 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">END</span><span class="params">()</span></span> </span><br><span class="line">    fwrite(<span class="string">&#x27;&lt;/BODY&gt;&lt;/HTML&gt;\n&#x27;</span>) </span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
 
 <p>在主程序中,我们首先使用第一个 entry 运行数据文件输出工程名称的列表,然后再以第二个 entry 运行数据文件输出工程相关信息。</p>
-<p><img src="/%5C2025_04_08_lua%5Cfa3e6fe89033441a2e7cf92101cf9259bb24444f104a4af89d4e1aeb36f30281.png"></p>
+<p><img src="/2025_04_08_lua/fa3e6fe89033441a2e7cf92101cf9259bb24444f104a4af89d4e1aeb36f30281.png"></p>
 <h2 id="10-2马尔可夫链算法"><a href="#10-2马尔可夫链算法" class="headerlink" title="10.2马尔可夫链算法"></a>10.2马尔可夫链算法</h2><p>我们第二个例子是马尔可夫链算法的实现,我们的程序以前 n(n&#x3D;2)个单词串为基础随机产生一个文本串。</p>
 <p>程序的第一部分读出原文,并且对没两个单词的前缀建立一个表,这个表给出了具有那些前缀的单词的一个顺序。建表完成后，这个程序利用这张表生成一个随机的文本。在此文本中，每个单词都跟随着它的的前两个单词，这两个单词在文本中有相同的概率。这样，我们就产生了一个非常随机，但并不完全随机的文本。例如，当应用这个程序的输出结果会出现“构造器也可以通过表构造器，那么一下几行的插入语对于整个文件来说，不是来存储每个功能的内容，而是来展示它的结构。”如果你想在队列里找到最大元素并返回最大值，接着显示提示和运行代码。下面的单词是保留单词，不能用在度和弧度之间转换。</p>
 <p>我们编写一个函数用来将两个单词中间加上空个连接起来:</p>
-<p><img src="/%5C2025_04_08_lua%5C120d1c0c2972bcf76e19efc19ac33652944e5fd8035eb481d4b3f977ca94a7aa.png"></p>
+<p><img src="/2025_04_08_lua/120d1c0c2972bcf76e19efc19ac33652944e5fd8035eb481d4b3f977ca94a7aa.png"></p>
 <p>我们用 NOWORD（即\n）表示文件的结尾并且初始化前缀单词，例如，下面的文<br>本：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">the more we try the more we do</span><br></pre></td></tr></table></figure>
 
@@ -1112,6 +1112,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2025_04_25_claw_cloud/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">将本博客部署至境外服务器</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="零落成泥碾作尘，只有香如故！">
+    <meta name="author" content="形而上">
+    
+    <title>
+        
+            Letcode刷题记录 |
+        
+        Hanxd&#39;s Notes
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/pic/head.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yoursite.com","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true},"style":{"primary_color":"#FF7F00","avatar":"/pic/head.png","favicon":"/pic/head.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Still waters run deep."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Hanxd&#39;s Notes
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/books"
+                            >
+                                书单
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/books">书单</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Letcode刷题记录</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/pic/head.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">形而上</span>
+                        
+                            <span class="author-label">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2019-01-10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%85%B6%E4%BB%96%E7%AC%94%E8%AE%B0/">其他笔记</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Java/">Java</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Go/">Go</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Letcode/">Letcode</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Algothm/">Algothm</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>27 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="125-验证回文串"><a href="#125-验证回文串" class="headerlink" title="125. 验证回文串"></a>125. 验证回文串</h1><p>如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。则可以认为该短语是一个 回文串 。</p>
+<p>字母和数字都属于字母数字字符。</p>
+<p>给你一个字符串 s，如果它是 回文串 ，返回 true ；否则，返回 false 。</p>
+<p>示例 1：</p>
+<p>输入: s &#x3D; “A man, a plan, a canal: Panama”<br>输出：true<br>解释：”amanaplanacanalpanama” 是回文串。<br>示例 2：</p>
+<p>输入：s &#x3D; “race a car”<br>输出：false<br>解释：”raceacar” 不是回文串。<br>示例 3：</p>
+<p>输入：s &#x3D; “ “<br>输出：true<br>解释：在移除非字母数字字符之后，s 是一个空字符串 “” 。<br>由于空字符串正着反着读都一样，所以是回文串。</p>
+<p>提示：</p>
+<p>1 &lt;&#x3D; s.length &lt;&#x3D; 2 * 105<br>s 仅由可打印的 ASCII 字符组成</p>
+<p>注意点：<br>i–</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        s = s.replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;&quot;</span>).toLowerCase();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) &gt;=<span class="string">&#x27;a&#x27;</span> &amp;&amp; s.charAt(i) &lt;=<span class="string">&#x27;z&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; s.charAt(i) &lt;=<span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s = s.substring(<span class="number">0</span>,i) + s.substring(i+<span class="number">1</span>);</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(s.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">last</span> <span class="operator">=</span> s.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) != s.charAt(last))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= last) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            last--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="392-判断子序列"><a href="#392-判断子序列" class="headerlink" title="392. 判断子序列"></a>392. 判断子序列</h1><p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。</p>
+<p>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，”ace”是”abcde”的一个子序列，而”aec”不是）。</p>
+<p>进阶：</p>
+<p>如果有大量输入的 S，称作 S1, S2, … , Sk 其中 k &gt;&#x3D; 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？</p>
+<p>致谢：</p>
+<p>特别感谢 @pbrother 添加此问题并且创建所有测试用例。</p>
+<p>示例 1：</p>
+<p>输入：s &#x3D; “abc”, t &#x3D; “ahbgdc”<br>输出：true<br>示例 2：</p>
+<p>输入：s &#x3D; “axc”, t &#x3D; “ahbgdc”<br>输出：false</p>
+<p>思路：</p>
+<ul>
+<li>双指针法，一起喝成。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isSubsequence</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &gt; s.length()-<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(p2 &gt; t.length()-<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(p1) == t.charAt(p2))&#123;</span><br><span class="line">                p1++;</span><br><span class="line">                p2++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                p2++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h1><p>给你一个下标从 1 开始的整数数组 numbers ，该数组已按 非递减顺序排列  ，请你从数组中找出满足相加之和等于目标数 target 的两个数。如果设这两个数分别是 numbers[index1] 和 numbers[index2] ，则 1 &lt;&#x3D; index1 &lt; index2 &lt;&#x3D; numbers.length 。</p>
+<p>以长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2。</p>
+<p>你可以假设每个输入 只对应唯一的答案 ，而且你 不可以 重复使用相同的元素。</p>
+<p>你所设计的解决方案必须只使用常量级的额外空间。</p>
+<p>示例 1：</p>
+<p>输入：numbers &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[1,2]<br>解释：2 与 7 之和等于目标数 9 。因此 index1 &#x3D; 1, index2 &#x3D; 2 。返回 [1, 2] 。<br>示例 2：</p>
+<p>输入：numbers &#x3D; [2,3,4], target &#x3D; 6<br>输出：[1,3]<br>解释：2 与 4 之和等于目标数 6 。因此 index1 &#x3D; 1, index2 &#x3D; 3 。返回 [1, 3] 。<br>示例 3：</p>
+<p>输入：numbers &#x3D; [-1,0], target &#x3D; -1<br>输出：[1,2]<br>解释：-1 与 0 之和等于目标数 -1 。因此 index1 &#x3D; 1, index2 &#x3D; 2 。返回 [1, 2] 。</p>
+<p>思路：<br>双指针法，一气呵成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] numbers, <span class="type">int</span> target) &#123;</span><br><span class="line">        <span class="type">int</span> p1=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> p2= numbers.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(numbers[p1]+numbers[p2] &gt; target)&#123;</span><br><span class="line">                p2--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(numbers[p1]+numbers[p2] &lt; target)&#123;</span><br><span class="line">                p1++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;p1+<span class="number">1</span>,p2+<span class="number">1</span>&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="11-盛最多水的容器"><a href="#11-盛最多水的容器" class="headerlink" title="11. 盛最多水的容器"></a>11. 盛最多水的容器</h1><p>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。</p>
+<p>找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+<p>返回容器可以储存的最大水量。</p>
+<p>说明：你不能倾斜容器。</p>
+<p>示例 1：<br><img src="/2019_01_01_letcode/2.png"><br>输入：[1,8,6,2,5,4,8,3,7]<br>输出：49<br>解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。<br>示例 2：</p>
+<p>输入：height &#x3D; [1,1]<br>输出：1</p>
+<p>思路：<br>双指针法，一气呵成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxArea</span><span class="params">(<span class="type">int</span>[] height)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> height.length-<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">newMax</span> <span class="operator">=</span> (p2-p1)*(height[p1]&lt;height[p2]?height[p1]:height[p2]);</span><br><span class="line">            max = max &gt; newMax?max:newMax;</span><br><span class="line">            <span class="keyword">if</span>(height[p1]&lt;height[p2])&#123;</span><br><span class="line">                p1++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                p2--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(p1&gt;=p2) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a>15. 三数之和</h1><p>给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i !&#x3D; j、i !&#x3D; k 且 j !&#x3D; k ，同时还满足 nums[i] + nums[j] + nums[k] &#x3D;&#x3D; 0 。请你返回所有和为 0 且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [-1,0,1,2,-1,-4]<br>输出：[[-1,-1,2],[-1,0,1]]<br>解释：<br>nums[0] + nums[1] + nums[2] &#x3D; (-1) + 0 + 1 &#x3D; 0 。<br>nums[1] + nums[2] + nums[4] &#x3D; 0 + 1 + (-1) &#x3D; 0 。<br>nums[0] + nums[3] + nums[4] &#x3D; (-1) + 2 + (-1) &#x3D; 0 。<br>不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。<br>注意，输出的顺序和三元组的顺序并不重要。<br>示例 2：</p>
+<p>输入：nums &#x3D; [0,1,1]<br>输出：[]<br>解释：唯一可能的三元组和不为 0 。<br>示例 3：</p>
+<p>输入：nums &#x3D; [0,0,0]<br>输出：[[0,0,0]]<br>解释：唯一可能的三元组和为 0 。</p>
+<p>思路：</p>
+<ol>
+<li>先排序 ，排序复杂度 nlogn</li>
+<li>三指针法,最左指针从左往右暴力走</li>
+<li>第二三指针，参考二指针法，左右移动，复杂度N</li>
+<li>重复问题，最左指针，跟前指针比较，相同则跳过</li>
+<li>重复问题，第二指针第三指针，重复问题。如果第三指针重复，理应跳过，再次向左。</li>
+<li>如果第二指针重复，理应跳过，再次向右。</li>
+<li>但是，第三指针重复并非一定要跳过，因为不一定满足和为0的条件，</li>
+<li>所以只需要考虑和为0的时候</li>
+<li>和为0则向右移，所以只需要考虑和为0的时候需要不需要跳过即可。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; rst = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length-<span class="number">2</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span>&amp;&amp;nums[i] == nums[i-<span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> i+<span class="number">1</span>; <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(left &gt;= right) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] + nums[left] + nums[right] &lt;<span class="number">0</span>)&#123;</span><br><span class="line">                    left++;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i] + nums[left] + nums[right] ==<span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(left-i&gt;<span class="number">1</span> &amp;&amp; nums[left]==nums[left-<span class="number">1</span>])&#123;</span><br><span class="line">                        left++;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    List&lt;Integer&gt; d = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">                    d.add(nums[i]);d.add(nums[left]);d.add(nums[right]);</span><br><span class="line">                    rst.add(d);</span><br><span class="line">                    left++;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    right--;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209. 长度最小的子数组"></a>209. 长度最小的子数组</h1><p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
+<p>找出该数组中满足其总和大于等于 target 的长度最小的 子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
+<p>示例 1：</p>
+<p>输入：target &#x3D; 7, nums &#x3D; [2,3,1,2,4,3]<br>输出：2<br>解释：子数组 [4,3] 是该条件下的长度最小的子数组。<br>示例 2：</p>
+<p>输入：target &#x3D; 4, nums &#x3D; [1,4,4]<br>输出：1<br>示例 3：</p>
+<p>输入：target &#x3D; 11, nums &#x3D; [1,1,1,1,1,1,1,1]<br>输出：0</p>
+<p>思路： </p>
+<ol>
+<li>双指针滑动窗口法</li>
+<li>左右指针之间窗口求和，</li>
+<li>如果大于target，则右左指针滑动，窗口减左值</li>
+<li>如果小于target，则右指针滑动，窗口加右值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minSubArrayLen</span><span class="params">(<span class="type">int</span> target, <span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;<span class="type">int</span> right=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">minLen</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> count=nums[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// if(count &gt;= target) return 1;</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(count&gt;=target) &#123;</span><br><span class="line">                minLen = minLen &lt; right-left+<span class="number">1</span>? minLen:right-left+<span class="number">1</span>;</span><br><span class="line">                count-=nums[left];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(count&lt;target)&#123;</span><br><span class="line">                right++;</span><br><span class="line">                <span class="keyword">if</span>(right &gt; nums.length-<span class="number">1</span> &amp;&amp; count&lt;target) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">if</span>(right &gt; nums.length-<span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                count+=nums[right];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minLen == Integer.MAX_VALUE?<span class="number">0</span>:minLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a>3. 无重复字符的最长子串</h1><p>给定一个字符串 s ，请你找出其中不含有重复字符的 最长 子串 的长度。</p>
+<p>示例 1:</p>
+<p>输入: s &#x3D; “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。<br>示例 2:</p>
+<p>输入: s &#x3D; “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。<br>示例 3:</p>
+<p>输入: s &#x3D; “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。<br>     请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。</p>
+<p>解题思路：</p>
+<ol>
+<li>左右双指针法，滑动窗口</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLongestSubstring</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;&quot;</span>.equals(s)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> left=<span class="number">0</span>;<span class="type">int</span> right=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">maxLen</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(right &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(right == left)&#123;</span><br><span class="line">                right++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (left &lt; right)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> left;</span><br><span class="line">                <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(s.charAt(tmp) == s.charAt(right))&#123;</span><br><span class="line">                        maxLen = maxLen &gt; right-left?maxLen:right-left;</span><br><span class="line">                        left = tmp+<span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tmp == right-<span class="number">1</span>)&#123;</span><br><span class="line">                        right++;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tmp &lt; right)&#123;</span><br><span class="line">                        tmp++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maxLen = maxLen &gt; right-left? maxLen:right-left;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="36-有效的数独"><a href="#36-有效的数独" class="headerlink" title="36. 有效的数独"></a>36. 有效的数独</h1><p>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
+<p>数字 1-9 在每一行只能出现一次。<br>数字 1-9 在每一列只能出现一次。<br>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</p>
+<p>注意：</p>
+<p>一个有效的数独（部分已被填充）不一定是可解的。<br>只需要根据以上规则，验证已经填入的数字是否有效即可。<br>空白格用 ‘.’ 表示。</p>
+<p>示例 1：<br><img src="/2019_01_01_letcode/3.png"><br>输入：board &#x3D;<br>[[“5”,”3”,”.”,”.”,”7”,”.”,”.”,”.”,”.”]<br>,[“6”,”.”,”.”,”1”,”9”,”5”,”.”,”.”,”.”]<br>,[“.”,”9”,”8”,”.”,”.”,”.”,”.”,”6”,”.”]<br>,[“8”,”.”,”.”,”.”,”6”,”.”,”.”,”.”,”3”]<br>,[“4”,”.”,”.”,”8”,”.”,”3”,”.”,”.”,”1”]<br>,[“7”,”.”,”.”,”.”,”2”,”.”,”.”,”.”,”6”]<br>,[“.”,”6”,”.”,”.”,”.”,”.”,”2”,”8”,”.”]<br>,[“.”,”.”,”.”,”4”,”1”,”9”,”.”,”.”,”5”]<br>,[“.”,”.”,”.”,”.”,”8”,”.”,”.”,”7”,”9”]]<br>输出：true<br>示例 2：</p>
+<p>输入：board &#x3D;<br>[[“8”,”3”,”.”,”.”,”7”,”.”,”.”,”.”,”.”]<br>,[“6”,”.”,”.”,”1”,”9”,”5”,”.”,”.”,”.”]<br>,[“.”,”9”,”8”,”.”,”.”,”.”,”.”,”6”,”.”]<br>,[“8”,”.”,”.”,”.”,”6”,”.”,”.”,”.”,”3”]<br>,[“4”,”.”,”.”,”8”,”.”,”3”,”.”,”.”,”1”]<br>,[“7”,”.”,”.”,”.”,”2”,”.”,”.”,”.”,”6”]<br>,[“.”,”6”,”.”,”.”,”.”,”.”,”2”,”8”,”.”]<br>,[“.”,”.”,”.”,”4”,”1”,”9”,”.”,”.”,”5”]<br>,[“.”,”.”,”.”,”.”,”8”,”.”,”.”,”7”,”9”]]<br>输出：false<br>解释：除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。</p>
+<p>提示：</p>
+<p>board.length &#x3D;&#x3D; 9<br>board[i].length &#x3D;&#x3D; 9<br>board[i][j] 是一位数字（1-9）或者 ‘.’</p>
+<p>思路：<br>朴素的按按照逻辑走，用三个数组来存放状态，三个数组都没有，则满足条件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValidSudoku</span><span class="params">(<span class="type">char</span>[][] board)</span> &#123;</span><br><span class="line">    </span><br><span class="line">        <span class="type">int</span>[][] line = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">9</span>][<span class="number">128</span>];</span><br><span class="line">        <span class="type">int</span>[][] row = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">9</span>][<span class="number">128</span>];</span><br><span class="line">        <span class="type">int</span>[][] panel = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">9</span>][<span class="number">128</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;<span class="number">9</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(board[i][j] == <span class="string">&#x27;.&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(row[i][board[i][j]] !=<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                row[i][board[i][j]] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(line[j][board[i][j]] !=<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                line[j][board[i][j]] = <span class="number">1</span>;</span><br><span class="line">                <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> (i/<span class="number">3</span>)*<span class="number">3</span>+(j/<span class="number">3</span>);</span><br><span class="line">                <span class="keyword">if</span>(panel[p][board[i][j]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                panel[p][board[i][j]] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="290-单词规律"><a href="#290-单词规律" class="headerlink" title="290. 单词规律"></a>290. 单词规律</h1><p>给定一种规律 pattern 和一个字符串 s ，判断 s 是否遵循相同的规律。</p>
+<p>这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 s 中的每个非空单词之间存在着双向连接的对应规律。</p>
+<p>示例1:</p>
+<p>输入: pattern &#x3D; “abba”, s &#x3D; “dog cat cat dog”<br>输出: true<br>示例 2:</p>
+<p>输入:pattern &#x3D; “abba”, s &#x3D; “dog cat cat fish”<br>输出: false<br>示例 3:</p>
+<p>输入: pattern &#x3D; “aaaa”, s &#x3D; “dog cat cat dog”<br>输出: false</p>
+<p>注意点：<br>string比较用equals<br>char 比较用 &#x3D;&#x3D;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">wordPattern</span><span class="params">(String pattern, String s)</span> &#123;</span><br><span class="line">        Map&lt;Character,String&gt; dic1= <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        Map&lt;String,Character&gt; dic2 = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">char</span>[] ca = pattern.toCharArray();</span><br><span class="line">        String[] sa = s.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(ca.length !=sa.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ca.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(dic1.get(ca[i])==<span class="literal">null</span>)&#123;</span><br><span class="line">                dic1.put(ca[i],sa[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dic2.get(sa[i]) == <span class="literal">null</span>)&#123;</span><br><span class="line">                dic2.put(sa[i],ca[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!dic1.get(ca[i]).equals(sa[i])) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(dic2.get(sa[i]) != ca[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242. 有效的字母异位词"></a>242. 有效的字母异位词</h1><p>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的 字母异位词。</p>
+<p>示例 1:</p>
+<p>输入: s &#x3D; “anagram”, t &#x3D; “nagaram”<br>输出: true<br>示例 2:</p>
+<p>输入: s &#x3D; “rat”, t &#x3D; “car”<br>输出: false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAnagram</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">        <span class="type">char</span>[] ca = s.toCharArray();</span><br><span class="line">        <span class="type">char</span>[] ta = t.toCharArray();</span><br><span class="line">        <span class="keyword">if</span>(ca.length != ta.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        Map&lt;Character,Integer&gt; dic = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ca.length;i++)&#123;</span><br><span class="line">            dic.put(ca[i],dic.getOrDefault(ca[i],<span class="number">0</span>) +<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ta.length;i++)&#123;</span><br><span class="line">            dic.put(ta[i],dic.getOrDefault(ta[i],<span class="number">0</span>) -<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(dic.get(ta[i]) &lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="49-字母异位词分组"><a href="#49-字母异位词分组" class="headerlink" title="49. 字母异位词分组"></a>49. 字母异位词分组</h1><p>给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。</p>
+<p>字母异位词 是由重新排列源单词的所有字母得到的一个新单词。</p>
+<p>示例 1:</p>
+<p>输入: strs &#x3D; [“eat”, “tea”, “tan”, “ate”, “nat”, “bat”]<br>输出: [[“bat”],[“nat”,”tan”],[“ate”,”eat”,”tea”]]<br>示例 2:</p>
+<p>输入: strs &#x3D; [“”]<br>输出: [[“”]]<br>示例 3:</p>
+<p>输入: strs &#x3D; [“a”]<br>输出: [[“a”]]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="title function_">groupAnagrams</span><span class="params">(String[] strs)</span> &#123;</span><br><span class="line">        Map&lt;String,List&lt;String&gt;&gt; dic = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">0</span>;i&lt;strs.length;i++)&#123;</span><br><span class="line">            <span class="type">char</span>[] tmp = strs[i].toCharArray();</span><br><span class="line">            Arrays.sort(tmp);</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(tmp);</span><br><span class="line">            List&lt;String&gt; l =  dic.getOrDefault(key,<span class="keyword">new</span> <span class="title class_">ArrayList</span>());</span><br><span class="line">            l.add(strs[i]);</span><br><span class="line">            dic.put(key,l);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; rst = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">for</span>(List&lt;String&gt; s :dic.values())&#123;</span><br><span class="line">            rst.add(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a>1. 两数之和</h1><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [2,7,11,15], target &#x3D; 9<br>输出：[0,1]<br>解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。<br>示例 2：</p>
+<p>输入：nums &#x3D; [3,2,4], target &#x3D; 6<br>输出：[1,2]<br>示例 3：</p>
+<p>输入：nums &#x3D; [3,3], target &#x3D; 6<br>输出：[0,1]</p>
+<p>接题思路：</p>
+<ol>
+<li>hash存放数组的值，和角标， 复杂度N</li>
+<li>核心原理，利用了hash的  唯一性  set  ，同时比set还多一个存储空间value</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; dic = <span class="keyword">new</span> <span class="title class_">HashMap</span>();  <span class="comment">// key 是值，  value是 脚标</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">val</span> <span class="operator">=</span> dic.get(target-nums[i]);</span><br><span class="line">            <span class="keyword">if</span> (val != <span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, val&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            dic.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202. 快乐数"></a>202. 快乐数</h1><p>编写一个算法来判断一个数 n 是不是快乐数。</p>
+<p>「快乐数」 定义为：</p>
+<p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>如果这个过程 结果为 1，那么这个数就是快乐数。<br>如果 n 是 快乐数 就返回 true ；不是，则返回 false 。</p>
+<p>示例 1：</p>
+<p>输入：n &#x3D; 19<br>输出：true<br>解释：<br>12 + 92 &#x3D; 82<br>82 + 22 &#x3D; 68<br>62 + 82 &#x3D; 100<br>12 + 02 + 02 &#x3D; 1<br>示例 2：</p>
+<p>输入：n &#x3D; 2<br>输出：false</p>
+<p>思路：</p>
+<ol>
+<li>借助set结构不重复特性，存储已经出现过的<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">//2     4</span></span><br><span class="line">    <span class="comment">// 4*4   16</span></span><br><span class="line">    <span class="comment">// 1+36   37</span></span><br><span class="line">    <span class="comment">// 9+ 49   58</span></span><br><span class="line">    <span class="comment">// 25 64    89</span></span><br><span class="line">    <span class="comment">// 64 81     145</span></span><br><span class="line">    <span class="comment">//  1 16 25    42</span></span><br><span class="line">    <span class="comment">//  16 4      20</span></span><br><span class="line">    <span class="comment">// 2       4</span></span><br><span class="line">    <span class="comment">//         16</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isHappy</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> d=<span class="number">0</span>;</span><br><span class="line">            <span class="comment">// 3 9 81 65 61 37 58 89 145 42 20 4 </span></span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(n==<span class="number">0</span>) &#123;</span><br><span class="line">                    n = key;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                d = n%<span class="number">10</span>;</span><br><span class="line">                key+=d*d;</span><br><span class="line">                n = n/<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(set.contains(key))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            set.add(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="219-存在重复元素-II"><a href="#219-存在重复元素-II" class="headerlink" title="219. 存在重复元素 II"></a>219. 存在重复元素 II</h1><p>给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] &#x3D;&#x3D; nums[j] 且 abs(i - j) &lt;&#x3D; k 。如果存在，返回 true ；否则，返回 false 。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [1,2,3,1], k &#x3D; 3<br>输出：true<br>示例 2：</p>
+<p>输入：nums &#x3D; [1,0,1,1], k &#x3D; 1<br>输出：true<br>示例 3：</p>
+<p>输入：nums &#x3D; [1,2,3,1,2,3], k &#x3D; 2<br>输出：false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">containsNearbyDuplicate</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        Map&lt;Integer,List&lt;Integer&gt;&gt; dic = <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            List&lt;Integer&gt; val = dic.getOrDefault(nums[i], <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;());</span><br><span class="line">            <span class="keyword">for</span>(Integer index:val)&#123;</span><br><span class="line">                <span class="keyword">if</span>(Math.abs(index-i)&lt;= k) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            val.add(i);</span><br><span class="line">            dic.put(nums[i],val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="128-最长连续序列"><a href="#128-最长连续序列" class="headerlink" title="128. 最长连续序列"></a>128. 最长连续序列</h1><p>给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</p>
+<p>请你设计并实现时间复杂度为 O(n) 的算法解决此问题。</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [100,4,200,1,3,2]<br>输出：4<br>解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。<br>示例 2：</p>
+<p>输入：nums &#x3D; [0,3,7,2,5,8,4,6,0,1]<br>输出：9<br>示例 3：</p>
+<p>输入：nums &#x3D; [1,0,1,2]<br>输出：3</p>
+<p>思路：</p>
+<ol>
+<li>利用set唯一性，o(1)复杂度记录有的数字</li>
+<li>每个节点向前向后找连续的，找不到为止，记录连续长度</li>
+<li>统计最长长度</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">longestConsecutive</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            set.add(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">maxLen</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> nums[i];</span><br><span class="line">            set.remove(cur);</span><br><span class="line">            <span class="type">int</span> <span class="variable">curLen</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">curLeft</span> <span class="operator">=</span> cur-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(set.contains(curLeft))&#123;</span><br><span class="line">                curLen++;</span><br><span class="line">                set.remove(curLeft);</span><br><span class="line">                curLeft-=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">curRight</span> <span class="operator">=</span> cur+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(set.contains(curRight))&#123;</span><br><span class="line">                curLen++;</span><br><span class="line">                set.remove(curRight);</span><br><span class="line">                curRight+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            maxLen = maxLen&gt;curLen?maxLen:curLen;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="228-汇总区间"><a href="#228-汇总区间" class="headerlink" title="228. 汇总区间"></a>228. 汇总区间</h1><p>给定一个  无重复元素 的 有序 整数数组 nums 。</p>
+<p>返回 恰好覆盖数组中所有数字 的 最小有序 区间范围列表 。也就是说，nums 的每个元素都恰好被某个区间范围所覆盖，并且不存在属于某个范围但不属于 nums 的数字 x 。</p>
+<p>列表中的每个区间范围 [a,b] 应该按如下格式输出：</p>
+<p>“a-&gt;b” ，如果 a !&#x3D; b<br>“a” ，如果 a &#x3D;&#x3D; b</p>
+<p>示例 1：</p>
+<p>输入：nums &#x3D; [0,1,2,4,5,7]<br>输出：[“0-&gt;2”,”4-&gt;5”,”7”]<br>解释：区间范围是：<br>[0,2] –&gt; “0-&gt;2”<br>[4,5] –&gt; “4-&gt;5”<br>[7,7] –&gt; “7”<br>示例 2：</p>
+<p>输入：nums &#x3D; [0,2,3,4,6,8,9]<br>输出：[“0”,”2-&gt;4”,”6”,”8-&gt;9”]<br>解释：区间范围是：<br>[0,0] –&gt; “0”<br>[2,4] –&gt; “2-&gt;4”<br>[6,6] –&gt; “6”<br>[8,9] –&gt; “8-&gt;9”</p>
+<p>注意：<br>case里面有个边界，要注意</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">summaryRanges</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            set.add(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;String&gt; rst = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">cur</span> <span class="operator">=</span> nums[i];</span><br><span class="line">            <span class="keyword">if</span>(!set.contains(cur)) <span class="keyword">continue</span>;</span><br><span class="line">            set.remove(cur);</span><br><span class="line">            <span class="type">int</span> <span class="variable">curLeft</span> <span class="operator">=</span> cur;</span><br><span class="line">            <span class="type">int</span> <span class="variable">curRight</span> <span class="operator">=</span> cur;</span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(curLeft == Integer.MIN_VALUE) &#123;</span><br><span class="line">                    set.remove(curLeft);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(set.contains(curLeft-<span class="number">1</span>))&#123;</span><br><span class="line">                    curLeft = curLeft-<span class="number">1</span>;</span><br><span class="line">                    set.remove(curLeft);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(curRight == Integer.MAX_VALUE)&#123;</span><br><span class="line">                    set.remove(curRight);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(set.contains(curRight+<span class="number">1</span>))&#123;</span><br><span class="line">                    curRight = curRight+<span class="number">1</span>;</span><br><span class="line">                    set.remove(curRight);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">               </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(curLeft == curRight)&#123;</span><br><span class="line">                rst.add(<span class="string">&quot;&quot;</span>+curLeft);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                rst.add(curLeft+<span class="string">&quot;-&gt;&quot;</span>+curRight);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="56-合并区间"><a href="#56-合并区间" class="headerlink" title="56. 合并区间"></a>56. 合并区间</h1><p>以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] &#x3D; [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。</p>
+<p>示例 1：</p>
+<p>输入：intervals &#x3D; [[1,3],[2,6],[8,10],[15,18]]<br>输出：[[1,6],[8,10],[15,18]]<br>解释：区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].<br>示例 2：</p>
+<p>输入：intervals &#x3D; [[1,4],[4,5]]<br>输出：[[1,5]]<br>解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。</p>
+<p>解题思路：</p>
+<ol>
+<li>Array.sort(Comparetor) 对首位排序，然后合并</li>
+<li>注意类名是 Comparator， 方法名是compare  别写错了</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[][] merge(<span class="type">int</span>[][] intervals) &#123;</span><br><span class="line">        Arrays.sort(intervals, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;<span class="type">int</span>[]&gt;()&#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(<span class="type">int</span>[] a,<span class="type">int</span>[] b)</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a[<span class="number">0</span>] - b[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> intervals[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">stop</span> <span class="operator">=</span> intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        List&lt;<span class="type">int</span>[]&gt; rst = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;intervals.length;i++)&#123;</span><br><span class="line">           <span class="keyword">if</span>(stop &lt; intervals[i][<span class="number">0</span>])&#123;</span><br><span class="line">                rst.add(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;start,stop&#125;);</span><br><span class="line">                start=intervals[i][<span class="number">0</span>];</span><br><span class="line">                stop = intervals[i][<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           stop = stop &gt; intervals[i][<span class="number">1</span>]? stop: intervals[i][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        rst.add(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;start,stop&#125;);</span><br><span class="line">        <span class="type">int</span>[][] ans = <span class="keyword">new</span> <span class="title class_">int</span>[rst.size()][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;rst.size();i++)&#123;</span><br><span class="line">            ans[i] = rst.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="57-插入区间"><a href="#57-插入区间" class="headerlink" title="57. 插入区间"></a>57. 插入区间</h1><p>给你一个 无重叠的 ，按照区间起始端点排序的区间列表 intervals，其中 intervals[i] &#x3D; [starti, endi] 表示第 i 个区间的开始和结束，并且 intervals 按照 starti 升序排列。同样给定一个区间 newInterval &#x3D; [start, end] 表示另一个区间的开始和结束。</p>
+<p>在 intervals 中插入区间 newInterval，使得 intervals 依然按照 starti 升序排列，且区间之间不重叠（如果有必要的话，可以合并区间）。</p>
+<p>返回插入之后的 intervals。</p>
+<p>注意 你不需要原地修改 intervals。你可以创建一个新数组然后返回它。</p>
+<p>示例 1：</p>
+<p>输入：intervals &#x3D; [[1,3],[6,9]], newInterval &#x3D; [2,5]<br>输出：[[1,5],[6,9]]<br>示例 2：</p>
+<p>输入：intervals &#x3D; [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval &#x3D; [4,8]<br>输出：[[1,2],[3,10],[12,16]]<br>解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。</p>
+<p>提示：</p>
+<p>0 &lt;&#x3D; intervals.length &lt;&#x3D; 104<br>intervals[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; starti &lt;&#x3D; endi &lt;&#x3D; 105<br>intervals 根据 starti 按 升序 排列<br>newInterval.length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; start &lt;&#x3D; end &lt;&#x3D; 105</p>
+<p>解题思路：</p>
+<ol>
+<li>朴素的按照思路来，  合并的过程中，无非在左边，在右边，或者重叠合并</li>
+<li>needLast标记最后一个是否需要添加进来，这里为了保持有序，break的时候，先添加了leftright数组，其他情况需要补充left right数组</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[][] insert(<span class="type">int</span>[][] intervals, <span class="type">int</span>[] newInterval) &#123;</span><br><span class="line">        List&lt;<span class="type">int</span>[]&gt; tmp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> newInterval[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> newInterval[<span class="number">1</span>];</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">needLast</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;intervals.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(intervals[i][<span class="number">1</span>] &lt; left)&#123;</span><br><span class="line">                <span class="comment">//没交集，在右边</span></span><br><span class="line">                tmp.add(intervals[i]);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &gt; right)&#123;</span><br><span class="line">                <span class="comment">//没交集，在左边</span></span><br><span class="line">                tmp.add(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;left,right&#125;);</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j=i;j&lt;intervals.length;j++)&#123;</span><br><span class="line">                    tmp.add(intervals[j]);</span><br><span class="line">                &#125;</span><br><span class="line">                needLast = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//有交集,合并交集</span></span><br><span class="line">            <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &lt; left)&#123;</span><br><span class="line">                left = intervals[i][<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            right = intervals[i][<span class="number">1</span>] &gt; right? intervals[i][<span class="number">1</span>]:right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(needLast)&#123;</span><br><span class="line">            tmp.add(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;left,right&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[][] rst = <span class="keyword">new</span> <span class="title class_">int</span>[tmp.size()][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;tmp.size();i++)&#123;</span><br><span class="line">            rst[i] = tmp.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：Letcode刷题记录</li>
+        <li>本文作者：形而上</li>
+        <li>创建时间：2019-01-10 00:00:00</li>
+        <li>
+            本文链接：https://deepter.gitee.io/2019_01_10_letcode/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019_01_20_letcode/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Letcode刷题记录</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019_01_01_letcode/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Letcode刷题记录</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2017</span>&nbsp;-&nbsp;
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">形而上</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#125-%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="nav-text">125. 验证回文串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#392-%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-text">392. 判断子序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#167-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C-II-%E8%BE%93%E5%85%A5%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84"><span class="nav-text">167. 两数之和 II - 输入有序数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-text">11. 盛最多水的容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">15. 三数之和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-text">209. 长度最小的子数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-text">3. 无重复字符的最长子串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#36-%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC"><span class="nav-text">36. 有效的数独</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#290-%E5%8D%95%E8%AF%8D%E8%A7%84%E5%BE%8B"><span class="nav-text">290. 单词规律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#242-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D"><span class="nav-text">242. 有效的字母异位词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#49-%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84"><span class="nav-text">49. 字母异位词分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">1. 两数之和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#202-%E5%BF%AB%E4%B9%90%E6%95%B0"><span class="nav-text">202. 快乐数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#219-%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0-II"><span class="nav-text">219. 存在重复元素 II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#128-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97"><span class="nav-text">128. 最长连续序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#228-%E6%B1%87%E6%80%BB%E5%8C%BA%E9%97%B4"><span class="nav-text">228. 汇总区间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4"><span class="nav-text">56. 合并区间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#57-%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4"><span class="nav-text">57. 插入区间</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
